@@ -1,11 +1,11 @@
-function publicIsLoggedIn(req)
+function isLoggedIn(req)
 {
     return !!req.session.name;
 }
 
 
-function authenticated(req, res, next){
-    if(publicIsLoggedIn(req))
+function handleAuthenticate(req, res, next){
+    if(isLoggedIn(req))
     {
         next();
     }
@@ -21,4 +21,4 @@ function currentUser(req)
 }
 
 
-module.exports = {isLoggedIn : publicIsLoggedIn, handleAuthenticate :authenticated , current : currentUser};
+module.exports = {isLoggedIn : isLoggedIn, handleAuthenticate :handleAuthenticate , current : currentUser};

@@ -85,7 +85,7 @@ function handleLogin(req,res)
                     },
                     'application/json': function () {
                         res.json(createSessionToken(req.body.email));
-                    },
+                    }
                 });
             }
             else{
@@ -95,7 +95,7 @@ function handleLogin(req,res)
                     },
                     'application/json': function () {
                         res.status("401").json(false);
-                    },
+                    }
                 });
             }
         });
