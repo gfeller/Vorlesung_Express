@@ -1,0 +1,15 @@
+<html>
+    <p>Order-Informationen</p>
+    {{#if pizzaName}}
+        <p>Bestellte Pizza: {{pizzaName}}</p>
+        <p>Bestellt am: {{orderDate}}</p>
+        <p>Ihre Nummer: {{_id}}</p>
+        <p>State: {{state}}</p>
+        {{#if_eq state "OK"}}
+            <form action='/orders/{{_id}}' method='post'><input type='hidden' name='_method'  value='delete'><input type='submit' value='Delete order'></form>
+        {{/if_eq}}
+    {{/if}}
+    <form action='/' method='get'>
+        <input type='submit' value='Zurueck zum start'>
+    </form>
+</html>

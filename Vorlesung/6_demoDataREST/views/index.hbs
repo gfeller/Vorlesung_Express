@@ -1,0 +1,16 @@
+<html>
+    <p>Beste pizza auf de Welte</p>
+    <img src='/images/pizza.jpg'>
+    {{#if isLoggedIn}}
+        <form action='/login' method='post'>
+            <input placeholder="mail" type="email" name="email" required>
+            <input placeholder="password" type="password"  name="pwd" required>
+            <input type="submit" value="Login oder registrieren um einzukaufen">
+        </form>
+    {{else}}
+        <form action='/orders' method='get'><input type='submit' value='Order a Pizza'></form>
+        <form action='/logout' method='post'>
+            <input type="submit" value="logout">
+        </form>
+    {{/if}}
+</html>
