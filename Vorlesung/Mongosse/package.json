@@ -1,0 +1,18 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "CAS FEE Demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mgfeller",
+  "license": "ISC",
+  "dependencies": {
+    "express": "3.x",
+    "jade": "1.1.x",
+    "marked": "*",
+    "mongoose": "~3.8.4",
+    "mongoose-validate": "latest"
+  }
+}

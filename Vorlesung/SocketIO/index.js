@@ -34,6 +34,6 @@ http.listen(3000, function(){
         <hotel info="http://example/hotel/0928374" price="200"/> 
         <guest-house info="http://example/guest-h/7082" price="87"/>
 		<links>
-			<link rel="book" href='https://example/book/0928374' method='post'/>
+			<link rel="book" href='https://example/book/0928374' method='post'/>			
 		<links>
 </accomodation>
