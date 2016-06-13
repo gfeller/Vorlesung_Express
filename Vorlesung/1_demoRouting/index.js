@@ -7,12 +7,10 @@ var app = express();
 var router = express.Router();
 
 // middlewares
-
 function notFound(req,res, next) {
-    res.setHeader("Content-Type", 'text/html')
+    res.setHeader("Content-Type", 'text/html');
     res.send(404, "Confound it all!  We could not find ye's page! ")
 }
-
 
 function errorHandler(err, req, res, next) {
     res.status(500).end(err.message);
@@ -37,13 +35,12 @@ function myDummyLogger( options ){
 }
 
 //
-
-app.use(bodyParser.urlencoded());
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(require("method-override")(methodOverride));
 app.use(myDummyLogger());
 app.use(router);
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/public'));
 app.use(notFound);
 app.use(errorHandler);
 
@@ -105,7 +102,6 @@ function generateError(req, res, next)
     next(new Error("Hier gibts ein Fehler!"));
 }
 
-
 router.all("/*", myDummyLogger());
 router.get("/", showIndex);
 router.get("/error", generateError);
@@ -114,8 +110,7 @@ router.post("/orders", createPizza);
 router.get("/orders/:id/", showOrder);
 router.delete("/orders/:id/", deleteOrder);
 
-
-
-
-http.createServer(app).listen(3000);
+const hostname = '127.0.0.1';
+const port = 3001;
+app.listen(port, hostname, () => {  console.log(`Server running at http://${hostname}:${port}/`); });
 

@@ -1,4 +1,3 @@
-var http = require('http');
 var express = require('express');
 var bodyParser = require('body-parser');
 var hbs = require('express-hbs');
@@ -11,9 +10,9 @@ app.set('views', __dirname + '/views');
 
 var router = express.Router();
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.use(bodyParser.urlencoded());
-app.use(bodyParser.json())
 app.use(require("method-override")(function(req, res){
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
         var method = req.body._method;
@@ -23,12 +22,7 @@ app.use(require("method-override")(function(req, res){
 }));
 
 app.use(require('./routes/orderRoutes.js'));
-app.use(express.static(__dirname + '/public'))
-
-
-http.createServer(app).listen(3000);
-
-
+app.use(express.static(__dirname + '/public'));
 
 hbs.registerHelper('if_eq', function(a, b, opts) {
     if(a == b) // Or === depending on your needs
@@ -36,3 +30,7 @@ hbs.registerHelper('if_eq', function(a, b, opts) {
     else
         return opts.inverse(this);
 });
+
+const hostname = '127.0.0.1';
+const port = 3001;
+app.listen(port, hostname, () => {  console.log(`Server running at http://${hostname}:${port}/`); });

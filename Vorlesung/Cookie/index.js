@@ -5,7 +5,7 @@ app.use(require("cookie-parser")());
 
 
 app.get("/*", function(req,res){
-    console.log(JSON.stringify(req.cookies))
+    console.log(JSON.stringify(req.cookies));
     res.cookie("url", req.url);
     if(req.cookies.url)
     {
