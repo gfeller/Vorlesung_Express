@@ -21,7 +21,7 @@ module.exports.logout = function(req, res)
         },
         'application/json': function () {
             res.send(true);
-        },
+        }
     });
 };
 

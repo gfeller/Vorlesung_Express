@@ -9,7 +9,7 @@ module.exports.showIndex = function(req, res){
         },
         'application/json': function(){
             res.send({});
-        },
+        }
     });
 };
 
@@ -21,7 +21,7 @@ module.exports.createOrder = function(req, res)
         },
         'application/json': function(){
             res.send({});
-        },
+        }
     });
 
 };
@@ -35,7 +35,7 @@ module.exports.createPizza = function(req, res)
             },
             'application/json': function(){
                 res.json(order);
-            },
+            }
         });
     });
 };
@@ -49,7 +49,7 @@ module.exports.showOrder = function(req, res)
             },
             'application/json': function(){
                 res.json(order);
-            },
+            }
         });
     });
 };
@@ -63,7 +63,7 @@ module.exports.deleteOrder =  function (req, res)
             },
             'application/json': function(){
                 res.json(order);
-            },
+            }
         });
     });
 };
