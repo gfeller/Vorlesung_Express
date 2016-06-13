@@ -9,10 +9,7 @@
   "author": "mgfeller",
   "license": "ISC",
   "dependencies": {
-    "express": "3.x",
-    "jade": "1.1.x",
-    "marked": "*",
-    "mongoose": "~3.8.4",
-    "mongoose-validate": "latest"
+    "express": "latest",
+    "mongoose": "latest"
   }
 }

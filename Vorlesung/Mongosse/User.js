@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var validate = require('mongoose-validate');
 var crypto = require('crypto');
 
 var REQUIRED_PASSWORD_LENGTH = 8;
@@ -9,9 +8,10 @@ function validateStringLength(value) {
 }
 
 var schema = mongoose.Schema({
-      email: {type: String, required: true, unique: true, validate: [validate.email, 'is not a valid email address']}
+      email: {type: String, required: true, unique: true}
     , passwordHash: {type: String, required: true, validate: [validateStringLength, 'is too short (minimum is ' + REQUIRED_PASSWORD_LENGTH + ' characters']}
 });
+
 
 schema.pre('save', function(next) {
     var self = this;
@@ -19,7 +19,6 @@ schema.pre('save', function(next) {
     if (!self.isModified('passwordHash')){
         return next();
     }
-
     self.passwordHash = crypto.createHash('md5').update(self.passwordHash).digest('hex'); //besser wenn asynchrone
     next();
 });
@@ -40,6 +39,6 @@ schema.statics.findByEmailAndPassword = function findByEmailAndPassword(email,pa
     });
 };
 
-var Model = mongoose.model('User', schema)
+var Model = mongoose.model('User', schema);
 
-module.exports = Model
+module.exports = Model;
