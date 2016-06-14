@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+<body>
+<div id="container">
+
+</div>
+<script>
+    $.getJSON("http://lvh.me:3000/data").done(function(data){
+        $("#container").text(JSON.stringify(data));
+    }).fail(function(jqxhr, textStatus, error){
+        var err = textStatus + ", " + error;
+        $("#container").text(err);
+    })
+</script>
+</body>
+</html>

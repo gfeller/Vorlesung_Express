@@ -11,3 +11,5 @@
 {"orderedBy":"unkown","pizzaName":"dsaf","orderDate":"\"2015-06-12T17:06:30.318Z\"","state":"DELETED","_id":"sCanB5mCSEbghuQc"}
 {"orderedBy":"unkown","pizzaName":"asdfasd","orderDate":"\"2015-06-12T14:22:30.161Z\"","state":"OK","_id":"ulTGuUkDFR8GqBUU"}
 {"orderedBy":"unkown","pizzaName":"asdfasdf","orderDate":"\"2015-06-12T14:21:45.406Z\"","state":"OK","_id":"yCDdZxOTs8s4CTF7"}
+{"orderedBy":"test@test.ch","pizzaName":"hallo","orderDate":"\"2016-06-14T08:01:01.317Z\"","state":"OK","_id":"b7eYFbMCGQcauyoa"}
+{"orderedBy":"test@test.ch","pizzaName":"hallo","orderDate":"\"2016-06-14T08:01:01.317Z\"","state":"DELETED","_id":"b7eYFbMCGQcauyoa"}

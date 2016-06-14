@@ -28,7 +28,7 @@ function authenticated(req, res, next){
             },
             'application/json': function () {
                 res.status(401).send(false);
-            },
+            }
         });
     }
 }
