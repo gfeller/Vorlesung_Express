@@ -21,7 +21,7 @@ module.exports.createOrder = function(req, res)
 
 module.exports.createPizza = function(req, res)
 {
-    var order = store.add(req.body.name, "unkown", function(err, order) {
+     store.add(req.body.name, "unkown", function(err, order) {
         res.type('text/html');
         res.write("<html>");
         res.write("<p>Erfolgreich!</p>");

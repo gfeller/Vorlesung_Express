@@ -12,7 +12,7 @@ function Order(pizzaName, orderedBy)
 
 function publicAddOrder(pizzaName, orderedBy)
 {
-    var order = new Order(pizzaName, orderedBy)
+    var order = new Order(pizzaName, orderedBy);
     orders.push(order);
     return order;
 }
