@@ -9,6 +9,6 @@
   "author": "mgfeller",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.13.4"
+
   }
 }
