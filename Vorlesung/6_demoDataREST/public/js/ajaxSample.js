@@ -1,43 +1,37 @@
 ;(function($) {
+    var client = window.restClient;
     $(function(){
         var output = $("#output");
-        var token = undefined;
+        
+        var pizzaContainer = $(".new-pizza-container");
+        var btnNewPizza = $("#createPizza");
+        var btnLogin = $("#login");
+        var btnLogout = $("#logout");
+        var inputPizza = $("#pizzaName");
 
-        $("#createPizza").click(function(){
-            $.ajax({
-                dataType:  "json",
-                method: "POST",
-                url: "/orders/",
-                data: { name: "hawaii", token : token }
-            }).done(function( msg ) {
+        btnNewPizza.click(function (event) {
+            client.createPizza(inputPizza.val()).done(function (msg) {
                 output.text(JSON.stringify(msg));
             }).fail(function( msg ) {
                 output.text(JSON.stringify(msg));
             });
+            inputPizza.val("");
+            event.preventDefault();
         });
 
-        $("#login").click(function(){
-            $.ajax({
-                dataType:  "json",
-                method: "POST",
-                url: "/login",
-                data: { email: "mgfeller@hsr.ch", pwd: "1234" }
-            }).done(function( msg, err ) {
-                token = msg;
-                output.text(JSON.stringify(msg));
-            });
+        btnLogin.click(function () {
+            client.login("admin@admin.ch", "123456").then(updateStatus);
         });
 
-        $("#logout").click(function(){
-            $.ajax({
-                dataType:  "json",
-                method: "POST",
-                url: "/logout",
-                data: { token : token }
-            }).done(function( msg, err ) {
-                token = undefined;
-                output.text(JSON.stringify(msg));
-            });
+        btnLogout.click(function () {
+            client.logout().then(updateStatus);
         });
+        
+        function updateStatus() {
+                btnLogin.toggle(!client.isLogin());
+                btnLogout.toggle(client.isLogin());
+                pizzaContainer.toggle(client.isLogin());
+        }
+        updateStatus();
     });
 }(jQuery));

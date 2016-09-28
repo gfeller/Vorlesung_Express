@@ -23,7 +23,7 @@ app.use(require("method-override")(function(req, res){
 app.use("/", require('./routes/indexRoutes.js'));
 app.use("/orders", require('./routes/orderRoutes.js'));
 app.get("/ajax", function(req, res){
-    res.sendFile("./public/html/ajaxSample.html")
+    res.sendFile("/html/ajaxSample.html",  {root: __dirname + '/public/'});
 });
 
 app.use(express.static(__dirname + '/public'));

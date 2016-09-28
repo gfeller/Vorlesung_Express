@@ -3,6 +3,7 @@
     ajaxUtil = window.ajax;
     var token = undefined;
 
+
     function login(userName, pwd) {
         return ajaxUtil.ajax("POST", "/login/", { email: userName, pwd: pwd }).done(function (msg) {
             token = msg;
@@ -18,6 +19,10 @@
     function createPizza(pizzeName) {
         return ajaxUtil.ajax("POST", "/orders/", {name: pizzeName, token: token});
     }
+   
+    function isLoggedIn() {
+        return !!token;
+    }
 
-    window.restClient = { login : login, logout : logout, createPizza : createPizza };
+    window.restClient = { login: login, logout: logout, createPizza: createPizza, isLogin: isLoggedIn };
 }(jQuery));
