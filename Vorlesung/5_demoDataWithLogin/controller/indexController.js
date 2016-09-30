@@ -14,6 +14,9 @@ module.exports.login = function(req, res)
                     res.redirect("/");
                 }
             }
+            else  {
+                res.render("login", { backref : req.body._backref || (req.method == "GET" && req.originalUrl ? req.originalUrl : "")});
+            }
         });
     }
     else {
