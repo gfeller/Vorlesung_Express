@@ -6,10 +6,9 @@
 {"orderedBy":"unkown","pizzaName":"asdf","orderDate":"\"2015-06-12T18:18:38.806Z\"","state":"DELETED","_id":"F66cCNpTwktDXabP"}
 {"orderedBy":"unkown","pizzaName":"","orderDate":"\"2015-06-12T18:40:12.378Z\"","state":"OK","_id":"MMTEfGvjv0vQxl82"}
 {"orderedBy":"unkown","pizzaName":"asdfasf","orderDate":"\"2015-06-12T17:12:29.319Z\"","state":"DELETED","_id":"Qw1RgaIOX2KvKrnQ"}
+{"orderedBy":"test@test.ch","pizzaName":"hallo","orderDate":"\"2016-06-14T08:01:01.317Z\"","state":"DELETED","_id":"b7eYFbMCGQcauyoa"}
 {"orderedBy":"unkown","pizzaName":"3424","orderDate":"\"2015-06-12T18:37:59.801Z\"","state":"DELETED","_id":"mkEvZop4NihYO6TD"}
 {"orderedBy":"unkown","pizzaName":"asdfasdf","orderDate":"\"2015-06-12T17:12:37.272Z\"","state":"DELETED","_id":"qUajFuOJwtFvtDnE"}
 {"orderedBy":"unkown","pizzaName":"dsaf","orderDate":"\"2015-06-12T17:06:30.318Z\"","state":"DELETED","_id":"sCanB5mCSEbghuQc"}
 {"orderedBy":"unkown","pizzaName":"asdfasd","orderDate":"\"2015-06-12T14:22:30.161Z\"","state":"OK","_id":"ulTGuUkDFR8GqBUU"}
 {"orderedBy":"unkown","pizzaName":"asdfasdf","orderDate":"\"2015-06-12T14:21:45.406Z\"","state":"OK","_id":"yCDdZxOTs8s4CTF7"}
-{"orderedBy":"test@test.ch","pizzaName":"hallo","orderDate":"\"2016-06-14T08:01:01.317Z\"","state":"OK","_id":"b7eYFbMCGQcauyoa"}
-{"orderedBy":"test@test.ch","pizzaName":"hallo","orderDate":"\"2016-06-14T08:01:01.317Z\"","state":"DELETED","_id":"b7eYFbMCGQcauyoa"}

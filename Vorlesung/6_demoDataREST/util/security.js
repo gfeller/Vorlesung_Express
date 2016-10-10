@@ -1,5 +1,5 @@
-var crypto = require('crypto');
 var userService = require('../services/userStore.js');
+var crypto = require('crypto');
 
 var tokens = {};
 var tokensBack = {};
@@ -118,5 +118,6 @@ function clearLoginInformation(req)
         req.session.name = null;
     }
 }
+
 
 module.exports = {isLoggedIn : publicIsLoggedIn, handleAuthenticate :authenticated , current : currentUser, createToken : createSessionToken, handleLogin : handleLogin, clearLogin : clearLoginInformation};
