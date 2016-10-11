@@ -1,20 +1,13 @@
 const crypto = require('crypto');
+const cryptoUtil = require('../util/cryptoUtil');
 var Datastore = require('nedb');
 var db = new Datastore({ filename: './data/user.db', autoload: true });
-
-
-
-function hashPwd(pwd){
-    return crypto.createHmac('sha256', "secret!") //more information: https://nodejs.org/api/crypto.html
-        .update(pwd)
-        .digest('hex');
-}
 
 
 function User(email, passwort)
 {
     this.email = email;
-    this.passwortHash = hashPwd(passwort);
+    this.passwortHash = cryptoUtil.hashPwd(passwort);
 }
 
 
@@ -39,7 +32,7 @@ function publicAuthentication(email, passwort, callback){
             publicRegisterUser(email, passwort, callback);
         }
         else {
-            callback(err, doc && doc.passwortHash == hashPwd(passwort));
+            callback(err, doc && doc.passwortHash == cryptoUtil.hashPwd(passwort));
         }
     });
 }
