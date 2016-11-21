@@ -15,10 +15,5 @@ module.exports = {
                 }
             }
         ]
-    },
-    resolve: {
-        alias: {
-            $: "js/lib/jquery/src/jquery"
-        }
     }
 };
