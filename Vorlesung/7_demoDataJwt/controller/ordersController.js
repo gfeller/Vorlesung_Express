@@ -2,9 +2,16 @@ const store = require("../services/orderStore.js");
 const util = require("../util/security");
 
 
+module.exports.getOrders = function(req, res)
+{
+    store.all(util.current(req), function (err, orders) {
+        res.json(orders || {});
+    })
+};
+
 module.exports.createPizza = function(req, res)
 {
-    var order = store.add(req.body.name, util.current(req), function(err, order) {
+    let order = store.add(req.body.name, util.current(req), function(err, order) {
         res.json(order);
     });
 };
