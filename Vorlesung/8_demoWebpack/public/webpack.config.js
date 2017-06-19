@@ -1,8 +1,11 @@
 module.exports = {
-    entry: "./src/ajaxSample.js",
+    entry: {
+        index: './js/controllers/indexController.js',
+        order: './js/controllers/orderController.js'
+    },
     output: {
         path: __dirname,
-        filename: "./js/bundle.js"
+        filename: "./[name].bundle.js"
     },
     module: {
         loaders: [
@@ -15,5 +18,10 @@ module.exports = {
                 }
             }
         ]
+    },
+    resolve: {
+        alias: {
+            handlebars: 'handlebars/dist/handlebars.min.js'
+        }
     }
 };

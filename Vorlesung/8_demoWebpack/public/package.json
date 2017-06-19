@@ -5,8 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build" : "webpack --optimize-minimize",
-    "watch":   "webpack --optimize-minimize --watch"
+    "build": "webpack --optimize-minimize",
+    "watch": "webpack  --watch"
   },
   "author": "",
   "license": "ISC",

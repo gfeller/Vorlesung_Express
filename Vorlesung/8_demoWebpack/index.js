@@ -4,6 +4,7 @@ const jwt = require('express-jwt');
 
 const app = express();
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public/html'));
 
 app.use(bodyParser.json());
 const jwtSecret =  'aklsdjfklöasjdcma8sd90mcklasdföasdf$ädasöfü pi340qkrlöam,dflöäasf';
@@ -13,7 +14,7 @@ app.set("jwt-sign", {expiresIn: "1d", audience :"self", issuer : "pizza"});
 app.set("jwt-validate", {secret: jwtSecret, audience :"self", issuer : "pizza"});
 
 app.get("/", function(req, res){
-    res.sendFile("/html/ajaxSample.html",  {root: __dirname + '/public/'});
+    res.sendFile("/html/index.html",  {root: __dirname + '/public/'});
 });
 
 app.use("/", require('./routes/indexRoutes.js'));

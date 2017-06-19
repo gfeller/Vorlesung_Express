@@ -5,7 +5,7 @@ function Order(pizzaName, orderedBy)
 {
     this.orderedBy = orderedBy;
     this.pizzaName = pizzaName;
-    this.orderDate = JSON.stringify(new Date());
+    this.orderDate = new Date();
     this.state = "OK";
 }
 
@@ -33,9 +33,9 @@ function publicGet(id, currentUser, callback)
     });
 }
 
-function publicAll()
+function publicAll(currentUser, callback)
 {
-    db.find({}, function (err, docs) {
+    db.find({orderedBy : currentUser}).sort({ orderDate: -1 }).exec(function (err, docs) {
         callback( err, docs);
     });
 }

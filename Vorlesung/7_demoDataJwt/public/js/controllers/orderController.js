@@ -7,7 +7,7 @@
         let orderRenderer = Handlebars.compile($("#order-template").html());
 
         let orderId = window.location.hash.substring(1);
-        if(!(orderId && client.isLogin))
+        if(!(orderId && client.isLogin()))
         {
             window.location.replace("./index.html");
             return;
