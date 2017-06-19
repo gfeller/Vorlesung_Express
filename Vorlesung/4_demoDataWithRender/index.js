@@ -1,14 +1,14 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var hbs = require('express-hbs');
+const express = require('express');
+const bodyParser = require('body-parser');
+const hbs = require('express-hbs');
 
-var app = express();
+const app = express();
 //app.engine('hbs', hbs.express4({ partialsDir: __dirname + '/views/partials'}));
 app.engine('hbs', hbs.express4());
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
 
-var router = express.Router();
+const router = express.Router();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

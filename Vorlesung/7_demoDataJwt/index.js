@@ -1,12 +1,12 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var jwt = require('express-jwt');
+const express = require('express');
+const bodyParser = require('body-parser');
+const jwt = require('express-jwt');
 
-var app = express();
+const app = express();
 app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.json());
-var jwtSecret =  'aklsdjfklöasjdcma8sd90mcklasdföasdf$ädasöfü pi340qkrlöam,dflöäasf';
+const jwtSecret =  'aklsdjfklöasjdcma8sd90mcklasdföasdf$ädasöfü pi340qkrlöam,dflöäasf';
 
 app.set("jwt-secret", jwtSecret); //secret should be in a config file - or better be a private key!
 app.set("jwt-sign", {expiresIn: "1d", audience :"self", issuer : "pizza"});

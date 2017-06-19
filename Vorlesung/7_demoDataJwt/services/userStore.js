@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const cryptoUtil = require('../util/cryptoUtil');
-var Datastore = require('nedb');
-var db = new Datastore({ filename: './data/user.db', autoload: true });
+const Datastore = require('nedb');
+const db = new Datastore({ filename: './data/user.db', autoload: true });
 
 
 function User(email, passwort)
@@ -15,7 +15,7 @@ function publicRegisterUser(email, passwort, callback)
 {
     if(!(email && passwort)) {  callback("no user", null); }
 
-    var user = new User(email, passwort);
+    let user = new User(email, passwort);
     db.insert(user, function(err, newDoc){
         if(callback){
             callback(err, newDoc);

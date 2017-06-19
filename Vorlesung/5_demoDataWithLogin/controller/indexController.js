@@ -1,5 +1,5 @@
-var store = require("../services/orderStore.js");
-var userService = require('../services/userStore.js');
+const store = require("../services/orderStore.js");
+const userService = require('../services/userStore.js');
 
 module.exports.login = function(req, res)
 {

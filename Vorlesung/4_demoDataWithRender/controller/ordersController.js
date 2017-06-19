@@ -1,4 +1,4 @@
-var store = require("../services/orderStore.js");
+const store = require("../services/orderStore.js");
 
 module.exports.showIndex = function(req, res)
 {
@@ -12,7 +12,7 @@ module.exports.createOrder = function(req, res)
 
 module.exports.createPizza = function(req, res)
 {
-    var order = store.add(req.body.name, "unkown", function(err, order) {
+    let order = store.add(req.body.name, "unkown", function(err, order) {
         res.render("succeeded", order);
     });
 };

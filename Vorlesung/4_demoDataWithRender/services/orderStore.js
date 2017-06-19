@@ -1,5 +1,5 @@
-var Datastore = require('nedb');
-var db = new Datastore({ filename: './data/order.db', autoload: true });
+const Datastore = require('nedb');
+const db = new Datastore({ filename: './data/order.db', autoload: true });
 
 function Order(pizzaName, orderedBy)
 {
@@ -12,7 +12,7 @@ function Order(pizzaName, orderedBy)
 
 function publicAddOrder(pizzaName, orderedBy, callback)
 {
-    var order = new Order(pizzaName, orderedBy);
+    let order = new Order(pizzaName, orderedBy);
 
     db.insert(order, function(err, newDoc){
         if(callback){

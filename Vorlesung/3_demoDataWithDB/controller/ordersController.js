@@ -1,4 +1,4 @@
-var store = require("../services/orderStore.js");
+const store = require("../services/orderStore.js");
 
 module.exports.showIndex = function(req, res)
 {
@@ -40,7 +40,7 @@ module.exports.showOrder = function(req, res)
         if (order) {
             res.write("<p>Order-Number: " + order._id + "</p>");
             res.write("<p>Status: " + order.state + "</p>");
-            if (order.state == "OK") {
+            if (order.state === "OK") {
                 res.write("<form action='/orders/" + order._id + "' method='post'><input type='hidden' name='_method'  value='delete'><input type='submit' value='Delete order'></form>");
             }
         }

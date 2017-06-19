@@ -1,6 +1,6 @@
-var express = require('express');
-var router = express.Router();
-var orders = require('../controller/ordersController.js');
+const express = require('express');
+const router = express.Router();
+const orders = require('../controller/ordersController.js');
 
 router.get("/", orders.showIndex);
 router.get("/orders", orders.createOrder);

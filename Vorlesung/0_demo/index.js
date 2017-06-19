@@ -1,6 +1,6 @@
-var express = require('express');
-var app = express();
-var router = express.Router();
+const express = require('express');
+const app = express();
+const router = express.Router();
 
 
 

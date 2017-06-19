@@ -1,4 +1,4 @@
-var util = require('../util/security');
+const util = require('../util/security');
 
 
 module.exports.login = function(req, res) {

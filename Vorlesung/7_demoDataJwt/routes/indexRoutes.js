@@ -1,7 +1,7 @@
-var express = require('express');
-var indexController = require('../controller/indexController');
+const express = require('express');
+const indexController = require('../controller/indexController');
 
-var router = express.Router();
+const router = express.Router();
 
 router.post("/login", function(req, res){
     indexController.login(req,res);

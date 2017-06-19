@@ -1,4 +1,4 @@
-var store = require("../services/orderStore.js");
+const store = require("../services/orderStore.js");
 
 module.exports.showIndex = function(req, res)
 {
@@ -21,7 +21,7 @@ module.exports.createOrder = function(req, res)
 
 module.exports.createPizza = function(req, res)
 {
-    var order = store.add(req.body.name, "unkown");
+    let order = store.add(req.body.name, "unkown");
     res.type('text/html');
     res.write("<html>");
     res.write("<p>Erfolgreich!</p>");
@@ -33,7 +33,7 @@ module.exports.createPizza = function(req, res)
 
 module.exports.showOrder = function(req, res)
 {
-    var order = store.get( Number( req.params.id ) );
+    let order = store.get( Number( req.params.id ) );
     res.type('text/html');
     res.write("<html>");
     if(order) {
@@ -49,7 +49,7 @@ module.exports.showOrder = function(req, res)
 
 module.exports.deleteOrder =  function (req, res)
 {
-    var order = store.delete( Number( req.params.id ) );
+    let order = store.delete( Number( req.params.id ) );
     res.type('text/html');
     res.write("<html>");
     res.write("<p>Order-Number: "+ order.id+"</p>");
