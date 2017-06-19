@@ -1,6 +1,6 @@
-var store = require("../services/orderStore.js");
-var userService = require('../services/userStore.js');
-var util = require('../util/security');
+const store = require("../services/orderStore.js");
+const userService = require('../services/userStore.js');
+const util = require('../util/security');
 
 
 module.exports.login = function(req, res) {

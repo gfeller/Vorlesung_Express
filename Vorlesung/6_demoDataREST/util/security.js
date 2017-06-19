@@ -1,8 +1,8 @@
-var userService = require('../services/userStore.js');
-var crypto = require('crypto');
+const userService = require('../services/userStore.js');
+const crypto = require('crypto');
 
-var tokens = {};
-var tokensBack = {};
+const tokens = {};
+const tokensBack = {};
 
 
 function publicIsLoggedIn(req)
@@ -50,7 +50,7 @@ function createSessionToken(name)
     }
 
     if(!tokens[name]){
-        var token= crypto.randomBytes(48).toString('hex'); //Sync!!
+        let token= crypto.randomBytes(48).toString('hex'); //Sync!!
         tokens[name] = token;
         tokensBack[token] = name;
     }
@@ -107,7 +107,7 @@ function clearLoginInformation(req)
 {
     if(req.body.token)
     {
-        var name = tokensBack[req.body.token];
+        let name = tokensBack[req.body.token];
         if(name)
         {
             delete tokensBack[req.body.token];

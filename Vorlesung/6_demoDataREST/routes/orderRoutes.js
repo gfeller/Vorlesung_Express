@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var orders = require('../controller/ordersController.js');
-var util = require('../util/security');
+const express = require('express');
+const router = express.Router();
+const orders = require('../controller/ordersController.js');
+const util = require('../util/security');
 
 
 router.all("/*", util.handleAuthenticate);

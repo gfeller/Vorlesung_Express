@@ -1,9 +1,9 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var hbs = require('express-hbs');
-var session = require("express-session");
+const express = require('express');
+const bodyParser = require('body-parser');
+const hbs = require('express-hbs');
+const session = require("express-session");
 
-var app = express();
+const app = express();
 app.engine('hbs', hbs.express4());
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(require("method-override")(function(req, res){
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-        var method = req.body._method;
+        let method = req.body._method;
         delete req.body._method;
         return method;
     }

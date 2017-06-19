@@ -1,5 +1,5 @@
-var store = require("../services/orderStore.js");
-var util = require("../util/security");
+const store = require("../services/orderStore.js");
+const util = require("../util/security");
 
 
 module.exports.showIndex = function(req, res){
@@ -28,7 +28,7 @@ module.exports.createOrder = function(req, res)
 
 module.exports.createPizza = function(req, res)
 {
-    var order = store.add(req.body.name, util.current(req), function(err, order) {
+    let order = store.add(req.body.name, util.current(req), function(err, order) {
         res.format({
             'text/html': function(){
                 res.render("succeeded", order);
