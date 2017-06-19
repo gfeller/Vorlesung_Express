@@ -1,5 +1,5 @@
 ;(function($) {
-    let client = window.restClient;
+    let client = window.services.restClient;
     $(function(){
         var output = $("#output");
 
@@ -9,7 +9,7 @@
         let orderId = window.location.hash.substring(1);
         if(!(orderId && client.isLogin))
         {
-            window.location.replace("./ajaxSample.html");
+            window.location.replace("./index.html");
             return;
         }
 

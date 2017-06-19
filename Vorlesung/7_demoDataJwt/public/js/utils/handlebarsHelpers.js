@@ -26,14 +26,11 @@ Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
     }
 });
 
-
 Handlebars.registerHelper('formatDate', function (data) {
     options = {
         year: 'numeric', month: 'numeric', day: 'numeric',
         hour: 'numeric', minute: 'numeric', second: 'numeric',
         hour12: true
     };
-    debugger;
-    return new Date(data).toLocaleString('de-DE', options);
-
+    return new Date(data).toLocaleString('de-DE', options); //ES6
 });

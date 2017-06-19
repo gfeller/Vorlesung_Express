@@ -1,7 +1,6 @@
-;(function() {
-
+;(function(services) {
     function setItem(name, value) {
-        if(value) {
+        if (value) {
             localStorage.setItem(name, JSON.stringify(value));
         }
         else {
@@ -13,6 +12,5 @@
         return JSON.parse(localStorage.getItem(name) || null);
     }
 
-
-    window.valueStorage = { getItem, setItem};
-}());
+    services.valueStorage = {getItem, setItem};
+}(window.services = window.services || { }));

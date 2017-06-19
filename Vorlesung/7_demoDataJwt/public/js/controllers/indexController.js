@@ -1,22 +1,20 @@
 ;(function($) {
-    var client = window.restClient;
+    const client = window.services.restClient;
+
     $(function(){
-        var output = $("#output");
+        const btnNewPizza = $("#createPizza");
+        const btnLogin = $("#login");
+        const btnLogout = $("#logout");
+        const inputPizza = $("#pizzaName");
+        const ordersContainer = $("#ordersContainer");
 
-        var btnNewPizza = $("#createPizza");
-        var btnLogin = $("#login");
-        var btnLogout = $("#logout");
-        var inputPizza = $("#pizzaName");
-        var ordersContainer = $("#ordersContainer");
-
-        let ordersRenderer = Handlebars.compile($("#orders-template").html());
+        const ordersRenderer = Handlebars.compile($("#orders-template").html());
 
         btnNewPizza.click(function (event) {
             client.createPizza(inputPizza.val()).done(function (msg) {
                 renderOrders();
-                output.text(JSON.stringify(msg));
             }).fail(function( msg ) {
-                output.text(JSON.stringify(msg));
+                //nothing!
             });
             inputPizza.val("");
             event.preventDefault();
@@ -33,7 +31,6 @@
         function renderOrders()
         {
             client.getOrders().done(function(orders){
-                debugger;
                 ordersContainer.html(ordersRenderer({orders : orders}));
             })
         }

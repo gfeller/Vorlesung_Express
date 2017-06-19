@@ -1,5 +1,4 @@
-;(function($) {
-
+;(function(util, $) {
     function ajax(metod, url, data, headers) {
         return $.ajax({
             dataType: "json",
@@ -10,5 +9,6 @@
             data: JSON.stringify(data)
         });
     }
-    window.ajax = { ajax : ajax };
-}(jQuery));
+    util.ajax = { ajax : ajax };
+
+}(window.util = window.util || { }, jQuery));

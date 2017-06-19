@@ -1,7 +1,7 @@
-;(function($) {
+;(function(services, $) {
 
-    const ajaxUtil = window.ajax;
-    const valueStorage = window.valueStorage;
+    const ajaxUtil = window.util.ajax;
+    const valueStorage = window.services.valueStorage;
     const tokenKey = "token";
 
     function login(userName, pwd) {
@@ -35,7 +35,7 @@
         return ajaxUtil.ajax("DELETE", `/orders/${id}`, {}, {authorization: "Bearer " + valueStorage.getItem(tokenKey)});
     }
 
-    window.restClient = {
+    services.restClient = {
         login: login,
         logout: logout,
         createPizza: createPizza,
@@ -44,4 +44,4 @@
         getOrder,
         deleteOrder
     };
-}(jQuery));
+}(window.services = window.services || { }, jQuery));
