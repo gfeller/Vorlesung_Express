@@ -28,7 +28,7 @@ app.use(function (err, req, res, next) {
     }
     else
     {
-        next(error);
+        next(err);
     }
 });
 
