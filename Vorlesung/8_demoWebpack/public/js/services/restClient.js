@@ -26,15 +26,15 @@ class RestClient {
     }
 
     getOrders() {
-        return ajaxUtil.ajax("GET", "/orders/", {}, {authorization: "Bearer " + valueStorage.getItem(tokenKey)});
+        return ajaxUtil.ajax("GET", "/orders/", undefined, {authorization: "Bearer " + valueStorage.getItem(tokenKey)});
     }
 
     getOrder(id) {
-        return ajaxUtil.ajax("GET", `/orders/${id}`, {}, {authorization: "Bearer " + valueStorage.getItem(tokenKey)});
+        return ajaxUtil.ajax("GET", `/orders/${id}`, undefined, {authorization: "Bearer " + valueStorage.getItem(tokenKey)});
     }
 
     deleteOrder(id) {
-        return ajaxUtil.ajax("DELETE", `/orders/${id}`, {}, {authorization: "Bearer " + valueStorage.getItem(tokenKey)});
+        return ajaxUtil.ajax("DELETE", `/orders/${id}`, undefined, {authorization: "Bearer " + valueStorage.getItem(tokenKey)});
     }
 }
 export default new RestClient();

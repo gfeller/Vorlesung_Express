@@ -24,15 +24,15 @@
     }
 
     function getOrders() {
-        return ajaxUtil.ajax("GET", "/orders/", {}, {authorization: "Bearer " + valueStorage.getItem(tokenKey)});
+        return ajaxUtil.ajax("GET", "/orders/", undefined, {authorization: "Bearer " + valueStorage.getItem(tokenKey)});
     }
 
     function getOrder(id) {
-        return ajaxUtil.ajax("GET", `/orders/${id}`, {}, {authorization: "Bearer " + valueStorage.getItem(tokenKey)});
+        return ajaxUtil.ajax("GET", `/orders/${id}`, undefined, {authorization: "Bearer " + valueStorage.getItem(tokenKey)});
     }
 
     function deleteOrder(id) {
-        return ajaxUtil.ajax("DELETE", `/orders/${id}`, {}, {authorization: "Bearer " + valueStorage.getItem(tokenKey)});
+        return ajaxUtil.ajax("DELETE", `/orders/${id}`, undefined, {authorization: "Bearer " + valueStorage.getItem(tokenKey)});
     }
 
     services.restClient = {

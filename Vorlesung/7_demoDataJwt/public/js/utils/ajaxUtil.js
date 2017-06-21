@@ -6,7 +6,7 @@
             headers: headers,
             method: metod,
             url: url,
-            data: JSON.stringify(data)
+            data: data ?  JSON.stringify(data) : undefined
         });
     }
     util.ajax = { ajax : ajax };
