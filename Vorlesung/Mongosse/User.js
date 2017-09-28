@@ -1,20 +1,20 @@
-var mongoose = require('mongoose');
-var crypto = require('crypto');
+const mongoose = require('mongoose');
+const crypto = require('crypto');
 
-var REQUIRED_PASSWORD_LENGTH = 8;
+const REQUIRED_PASSWORD_LENGTH = 8;
 
 function validateStringLength(value) {
     return value && value.length >= REQUIRED_PASSWORD_LENGTH
 }
 
-var schema = mongoose.Schema({
+const schema = mongoose.Schema({
       email: {type: String, required: true, unique: true}
     , passwordHash: {type: String, required: true, validate: [validateStringLength, 'is too short (minimum is ' + REQUIRED_PASSWORD_LENGTH + ' characters']}
 });
 
 
 schema.pre('save', function(next) {
-    var self = this;
+    let self = this;
 
     if (!self.isModified('passwordHash')){
         return next();
@@ -33,12 +33,11 @@ schema.statics.findByEmailAndPassword = function findByEmailAndPassword(email,pa
             return cb();
         }
 
-        var pwdHash = crypto.createHash('md5').update(password).digest('hex'); //besser wenn asynchrone
+        let pwdHash = crypto.createHash('md5').update(password).digest('hex'); //besser wenn asynchrone
 
         return cb(err, pwdHash == user.passwordHash ? user : null)
     });
 };
 
-var Model = mongoose.model('User', schema);
-
+const Model = mongoose.model('User', schema);
 module.exports = Model;

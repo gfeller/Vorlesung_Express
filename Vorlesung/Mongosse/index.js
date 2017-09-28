@@ -1,10 +1,11 @@
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/demo2');
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/demo2', {useMongoClient: true});
 
-var User = require('./User.js');
+const User = require('./User.js');
 
 function createUser(mail, pwd){
-    var u = new User({email: mail, passwordHash: pwd, dummy: "1234"});
+    const u = new User({email: mail, passwordHash: pwd, dummy: "1234"});
     return u.save(function(err) {
         if (err) {
             console.log('Problem: ' + err.message);
