@@ -21,8 +21,8 @@ function publicAddOrder(pizzaName, orderedBy, callback)
 }
 
 function publicRemove(id, callback) {
-    db.update({_id: id}, {$set: {"state": "DELETED"}}, {}, function (err, doc) {
-        publicGet(id,callback);
+    db.update({_id: id}, {$set: {"state": "DELETED"}}, {returnUpdatedDocs:true}, function (err, numDocs, doc) {
+        callback(err, doc);
     });
 }
 

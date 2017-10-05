@@ -15,6 +15,6 @@
     "express-hbs": "^0.8.4",
     "express-session": "^1.11.3",
     "method-override": "^2.3.3",
-    "nedb": "^1.1.2"
+    "nedb": "^1.8.0"
   }
 }
