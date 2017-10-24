@@ -10,7 +10,7 @@
 
 </div>
 <script>
-    $.getJSON("http://lvh.me:3000/data").done(function(data){
+    $.getJSON("http://localhost:3000/data").done(function(data){
         $("#container").text(JSON.stringify(data));
     }).fail(function(jqxhr, textStatus, error){
         var err = textStatus + ", " + error;
