@@ -1,17 +1,15 @@
+const jwt = require('jsonwebtoken');
 const userService = require('../services/userStore.js');
-const crypto = require('crypto');
-
-const tokens = {};
-const tokensBack = {};
-
 
 function publicIsLoggedIn(req)
 {
-    if( req.body.token)
-    {
-        return !!tokensBack[req.body.token];
+    return Boolean(req.session.token || req.user);
+}
+
+function clearLogin(req){
+    if(req.session) {
+        req.session.token = null;
     }
-    return !!req.session.name;
 }
 
 function authenticated(req, res, next){
@@ -35,89 +33,44 @@ function authenticated(req, res, next){
 
 function currentUser(req)
 {
-    if( req.body.token)
-    {
-        return tokensBack[req.body.token];
-    }
-    return req.session.name;
+    return req.user.name;
 }
 
 
-function createSessionToken(name)
+function createSessionToken(name, secret, options, callback)
 {
     if(!name){
         return "";
     }
-
-    if(!tokens[name]){
-        let token= crypto.randomBytes(48).toString('hex'); //Sync!!
-        tokens[name] = token;
-        tokensBack[token] = name;
-    }
-    return tokens[name];
+    jwt.sign({ name }, secret, options, (err, token) => callback(token));
 }
 
-function handleLogin(req,res)
-{
-    if (publicIsLoggedIn(req))
-    {
-        res.format({
-            'text/html': function () {
-                res.redirect("/");
-            },
-            'application/json': function () {
-                res.send(true);
-            },
-        });
-    }
-    else {
-        userService.authenticate(req.body.email, req.body.pwd, function (err, valid) {
-            if (valid) {
-                res.format({
-                    'text/html': function () {
-                        req.session.name = req.body.email;
-                        if (req.body._backref) {
-                            res.redirect(req.body._backref);
+function handleLogin(req,res) {
+    userService.authenticate(req.body.email, req.body.pwd, function (err, valid) {
+        if (valid) {
+            createSessionToken(req.body.email, req.app.get("jwt-secret"), req.app.get("jwt-sign"), (token) => {
+                    res.format({
+                        'text/html': function () {
+                            req.session.token = token;
+                            if (req.body._backref) {
+                                res.redirect(req.body._backref);
+                            }
+                            else {
+                                res.redirect("/");
+                            }
+                        },
+                        'application/json': function () {
+                            res.json(token)
                         }
-                        else {
-                            res.redirect("/");
-                        }
-                    },
-                    'application/json': function () {
-                        res.json(createSessionToken(req.body.email));
-                    }
-                });
-            }
-            else{
-                res.format({
-                    'text/html': function () {
-                        res.status("401").redirect("/");
-                    },
-                    'application/json': function () {
-                        res.status("401").json(false);
-                    }
-                });
-            }
-        });
-    }
-}
-
-
-function clearLoginInformation(req)
-{
-    if(req.body.token)
-    {
-        let name = tokensBack[req.body.token];
-        if(name)
-        {
-            delete tokensBack[req.body.token];
-            delete tokens[name];
+                    });
+                }
+            );
         }
-    }
-    if(req.session.name) {
-        req.session.name = null;
-    }
+        else {
+            res.status("401").json(false);
+        }
+
+    });
 }
 
-
-module.exports = {isLoggedIn : publicIsLoggedIn, handleAuthenticate :authenticated , current : currentUser, createToken : createSessionToken, handleLogin : handleLogin, clearLogin : clearLoginInformation};
+module.exports = {clearLogin : clearLogin, isLoggedIn : publicIsLoggedIn, handleAuthenticate :authenticated , current : currentUser, createToken : createSessionToken, handleLogin : handleLogin};

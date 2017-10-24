@@ -1,8 +1,7 @@
 ;(function($) {
 
     ajaxUtil = window.ajax;
-    var token = undefined;
-
+    let token = undefined;
 
     function login(userName, pwd) {
         return ajaxUtil.ajax("POST", "/login/", { email: userName, pwd: pwd }).done(function (msg) {
@@ -11,13 +10,12 @@
     }
 
     function logout() {
-        return ajaxUtil.ajax("POST", "/logout/", { token : token } ).done(function (msg) {
-            token = undefined;
-        });
+        token = undefined;
+        return $.Deferred().resolve().promise();
     }
 
     function createPizza(pizzeName) {
-        return ajaxUtil.ajax("POST", "/orders/", {name: pizzeName, token: token});
+        return ajaxUtil.ajax("POST", "/orders/", {name: pizzeName}, {authorization: "Bearer "+token});
     }
    
     function isLoggedIn() {

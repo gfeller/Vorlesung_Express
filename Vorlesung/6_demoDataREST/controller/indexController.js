@@ -27,5 +27,5 @@ module.exports.logout = function(req, res)
 
 module.exports.index = function(req, res)
 {
-    res.render("index", {isLoggedIn : !req.session.name});
+    res.render("index", {isLoggedIn : util.isLoggedIn(req)});
 };
