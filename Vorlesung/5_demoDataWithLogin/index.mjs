@@ -2,6 +2,9 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import hbs from 'express-hbs';
 import path from 'path';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import {indexRoutes} from './routes/indexRoutes';
 import {orderRoutes} from './routes/orderRoutes';
 import {registerHelpers} from './utils/handlebar-util'
 import {overrideMiddleware} from "./utils/method-override";
@@ -15,11 +18,16 @@ registerHelpers(hbs);
 
 const router = express.Router();
 
+app.use(express.static(path.resolve('public')));
+
+app.use(cookieParser());
+app.use(session({ secret: 'casduichasidbnuwezrfinasdcvjkadfhsuilfuzihfioda', resave: false, saveUninitialized: true}));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(overrideMiddleware);
-app.use(orderRoutes);
-app.use(express.static(path.resolve('public')));
+
+app.use("/orders", orderRoutes);
+app.use("/", indexRoutes);
 
 const hostname = '127.0.0.1';
 const port = 3001;

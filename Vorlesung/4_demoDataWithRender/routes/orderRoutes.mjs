@@ -2,10 +2,10 @@ import express from 'express';
 const router = express.Router();
 import {ordersController} from '../controller/ordersController.mjs';
 
-router.get("/", ordersController.showIndex);
-router.get("/orders", ordersController.createOrder);
-router.post("/orders", ordersController.createPizza);
-router.get("/orders/:id/", ordersController.showOrder);
-router.delete("/orders/:id/", ordersController.deleteOrder);
+router.get("/", ordersController.showIndex.bind(ordersController));
+router.get("/orders", ordersController.createOrder.bind(ordersController));
+router.post("/orders", ordersController.createPizza.bind(ordersController));
+router.get("/orders/:id/", ordersController.showOrder.bind(ordersController));
+router.delete("/orders/:id/", ordersController.deleteOrder.bind(ordersController));
 
 export const orderRoutes = router;
