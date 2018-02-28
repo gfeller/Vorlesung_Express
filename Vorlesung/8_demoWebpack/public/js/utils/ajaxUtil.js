@@ -1,7 +1,5 @@
-import $ from "jquery";
-
-class AjaxUtil {
-    ajax(metod, url, data, headers) {
+;(function(util, $) {
+    function ajax(metod, url, data, headers) {
         return $.ajax({
             dataType: "json",
             contentType: "application/json",
@@ -11,6 +9,6 @@ class AjaxUtil {
             data: data ?  JSON.stringify(data) : undefined
         });
     }
-}
+    util.ajax = { ajax : ajax };
 
-export default new AjaxUtil();
+}(window.util = window.util || { }, jQuery));

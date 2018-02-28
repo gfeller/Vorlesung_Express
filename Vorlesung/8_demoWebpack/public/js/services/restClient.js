@@ -1,40 +1,47 @@
-import $ from "jquery";
-import ajaxUtil from "../utils/ajaxUtil"
-import valueStorage from "../services/valueStorage"
+;(function(services, $) {
 
-const tokenKey = "token";
+    const ajaxUtil = window.util.ajax;
+    const valueStorage = window.services.valueStorage;
+    const tokenKey = "token";
 
-
-class RestClient {
-    login(userName, pwd) {
+    function login(userName, pwd) {
         return ajaxUtil.ajax("POST", "/login/", {email: userName, pwd: pwd}).done(function (token) {
             valueStorage.setItem(tokenKey, token);
         });
     }
 
-    logout() {
+    function logout() {
         valueStorage.setItem(tokenKey, undefined);
         return $.Deferred().resolve().promise();
     }
 
-    createPizza(pizzeName) {
+    function createPizza(pizzeName) {
         return ajaxUtil.ajax("POST", "/orders/", {name: pizzeName,}, {authorization: "Bearer " + valueStorage.getItem(tokenKey)});
     }
 
-    isLogin() {
+    function isLoggedIn() {
         return !!valueStorage.getItem(tokenKey);
     }
 
-    getOrders() {
+    function getOrders() {
         return ajaxUtil.ajax("GET", "/orders/", undefined, {authorization: "Bearer " + valueStorage.getItem(tokenKey)});
     }
 
-    getOrder(id) {
+    function getOrder(id) {
         return ajaxUtil.ajax("GET", `/orders/${id}`, undefined, {authorization: "Bearer " + valueStorage.getItem(tokenKey)});
     }
 
-    deleteOrder(id) {
+    function deleteOrder(id) {
         return ajaxUtil.ajax("DELETE", `/orders/${id}`, undefined, {authorization: "Bearer " + valueStorage.getItem(tokenKey)});
     }
-}
-export default new RestClient();
+
+    services.restClient = {
+        login: login,
+        logout: logout,
+        createPizza: createPizza,
+        isLogin: isLoggedIn,
+        getOrders,
+        getOrder,
+        deleteOrder
+    };
+}(window.services = window.services || { }, jQuery));

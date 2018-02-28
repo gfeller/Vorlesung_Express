@@ -1,30 +1,29 @@
-import $ from "jquery";
-import client from "../services/restClient";
+;(function($) {
+    let client = window.services.restClient;
+    $(function(){
+        var output = $("#output");
 
-import handlebars from "handlebars";
-import x from "../utils/handlebarsHelpers";
+        var orderContainer = $("#orderContainer");
+        let orderRenderer = Handlebars.compile($("#order-template").html());
 
+        let orderId = window.location.hash.substring(1);
+        if(!(orderId && client.isLogin()))
+        {
+            window.location.replace("./index.html");
+            return;
+        }
 
-$(function () {
+        function renderOrder()
+        {
+            client.getOrder(orderId).done(function(order){
+                orderContainer.html(orderRenderer(order));
+            })
+        }
 
-    let orderContainer = $("#orderContainer");
-    let orderRenderer = handlebars.compile($("#order-template").html());
+        $(orderContainer).on("click", ".js-delete", function(event){
+            client.deleteOrder($(event.currentTarget).data("id")).done(renderOrder);
+        });
 
-    let orderId = window.location.hash.substring(1);
-    if (!(orderId && client.isLogin())) {
-        window.location.replace("./index.html");
-        return;
-    }
-
-    function renderOrder() {
-        client.getOrder(orderId).done(function (order) {
-            orderContainer.html(orderRenderer(order));
-        })
-    }
-
-    $(orderContainer).on("click", ".js-delete", function (event) {
-        client.deleteOrder($(event.currentTarget).data("id")).done(renderOrder);
+        renderOrder();
     });
-
-    renderOrder();
-});
+}(jQuery));

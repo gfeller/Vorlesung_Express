@@ -1,7 +1,4 @@
-import handlebars from "handlebars";
-
-
-handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
 
     switch (operator) {
         case '==':
@@ -29,7 +26,7 @@ handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
     }
 });
 
-handlebars.registerHelper('formatDate', function (data) {
+Handlebars.registerHelper('formatDate', function (data) {
     let options = {
         year: 'numeric', month: 'numeric', day: 'numeric',
         hour: 'numeric', minute: 'numeric', second: 'numeric',

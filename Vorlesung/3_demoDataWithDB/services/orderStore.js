@@ -5,7 +5,7 @@ function Order(pizzaName, orderedBy)
 {
     this.orderedBy = orderedBy;
     this.pizzaName = pizzaName;
-    this.orderDate = JSON.stringify(new Date());
+    this.orderDate = new Date();
     this.state = "OK";
 }
 
