@@ -1,7 +1,7 @@
-var express = require('express');
-var session = require('express-session');
+const express = require('express');
+const session = require('express-session');
 
-var app = express();
+const app = express();
 
 app.use(require("cookie-parser")());
 app.use(session({ secret: 'casduichasidbnuwezrfinasdcvjkadfhsuilfuzihfioda', resave: false, saveUninitialized: true }));
