@@ -1,24 +1,17 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/demo2', {useMongoClient: true});
+mongoose.connect('mongodb://localhost/demo2');
 
 const User = require('./User.js');
 
-function createUser(mail, pwd){
+function createUser(mail, pwd) {
+
     const u = new User({email: mail, passwordHash: pwd, dummy: "1234"});
-    return u.save(function(err) {
-        if (err) {
-            console.log('Problem: ' + err.message);
-        } else {
-            console.log('Kein Problem');
-        }
-    });
+    return u.save().then(() => console.log("Kein Problem")).catch(err => console.log('Problem: ' + err.message));
 }
 
 createUser("mgfeller@hsr.ch", "123");
-createUser("mgfeller@hsr.ch", "123456789").then(checkUser,checkUser);
-
-
+createUser("mgfeller@hsr.ch", "123456789").then(checkUser, checkUser);
 
 function checkUser() {
     return User.findByEmailAndPassword("mgfeller@hsr.ch", "123456789", function (err, user) {
@@ -32,7 +25,4 @@ function checkUser() {
 }
 
 
-//createUser("mgfeller@hsr.ch", 123456789);
-
 //"C:\Program Files (x86)\MongoDB\Server\3.0\bin\mongod.exe" --dbpath c:\temp\mongodb
-// --expose_debug_as=v8debug
