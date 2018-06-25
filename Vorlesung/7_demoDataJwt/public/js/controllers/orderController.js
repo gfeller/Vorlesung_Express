@@ -1,29 +1,26 @@
-;(function($) {
-    let client = window.services.restClient;
-    $(function(){
-        var output = $("#output");
+import {restClient as client} from '../services/restClient.js'
 
-        var orderContainer = $("#orderContainer");
-        let orderRenderer = Handlebars.compile($("#order-template").html());
+$(function () {
+    const output = $("#output");
 
-        let orderId = window.location.hash.substring(1);
-        if(!(orderId && client.isLogin()))
-        {
-            window.location.replace("./index.html");
-            return;
-        }
+    const orderContainer = $("#orderContainer");
+    const orderRenderer = Handlebars.compile($("#order-template").html());
 
-        function renderOrder()
-        {
-            client.getOrder(orderId).done(function(order){
-                orderContainer.html(orderRenderer(order));
-            })
-        }
+    const orderId = window.location.hash.substring(1);
+    if (!(orderId && client.isLoggedIn())) {
+        window.location.replace("./index.html");
+        return;
+    }
 
-        $(orderContainer).on("click", ".js-delete", function(event){
-            client.deleteOrder($(event.currentTarget).data("id")).done(renderOrder);
-        });
+    function renderOrder() {
+        client.getOrder(orderId).done(function (order) {
+            orderContainer.html(orderRenderer(order));
+        })
+    }
 
-        renderOrder();
+    $(orderContainer).on("click", ".js-delete", function (event) {
+        client.deleteOrder($(event.currentTarget).data("id")).done(renderOrder);
     });
-}(jQuery));
+
+    renderOrder();
+});

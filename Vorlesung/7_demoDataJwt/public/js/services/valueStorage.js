@@ -1,5 +1,5 @@
-;(function(services) {
-    function setItem(name, value) {
+class ValueStorage {
+    setItem(name, value) {
         if (value) {
             localStorage.setItem(name, JSON.stringify(value));
         }
@@ -8,9 +8,9 @@
         }
     }
 
-    function getItem(name) {
+    getItem(name) {
         return JSON.parse(localStorage.getItem(name) || null);
     }
+}
 
-    services.valueStorage = {getItem, setItem};
-}(window.services = window.services || { }));
+export const valueStorage = new ValueStorage();
