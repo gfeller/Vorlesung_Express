@@ -1,7 +1,6 @@
 const store = require("../services/orderStore.js");
 
-module.exports.showIndex = function(req, res)
-{
+module.exports.showIndex = function (req, res) {
     res.type('text/html');
     res.write("<html>");
     res.write("<p>Willkommen! Zu der besten Pizzaria auf der Welt!</p>");
@@ -10,8 +9,7 @@ module.exports.showIndex = function(req, res)
     res.end("</html>");
 };
 
-module.exports.createOrder = function(req, res)
-{
+module.exports.createOrder = function (req, res) {
     res.type('text/html');
     res.write("<html>");
     res.write("<p>Was fuer eine Pizze haetten Sie den gerne?</p>");
@@ -19,9 +17,11 @@ module.exports.createOrder = function(req, res)
     res.end("</html>");
 };
 
-module.exports.createPizza = function(req, res)
-{
-     store.add(req.body.name, "unkown", function(err, order) {
+module.exports.createPizza = function (req, res) {
+    console.log("createPizza start");
+    store.add(req.body.name, "unkown", function (err, order) {
+        console.log("      callback start");
+
         res.type('text/html');
         res.write("<html>");
         res.write("<p>Erfolgreich!</p>");
@@ -29,12 +29,14 @@ module.exports.createPizza = function(req, res)
         res.write("<p>Ihre Nummer: " + order._id + " !</p>");
         res.write("<p><a href='/orders/" + order._id + "/'>Zeige order an</a></p>");
         res.end("</html>");
+
+        console.log("      callback end");
     });
+    console.log("createPizza end");
 };
 
-module.exports.showOrder = function(req, res)
-{
-     store.get(req.params.id, function(err, order) {
+module.exports.showOrder = function (req, res) {
+    store.get(req.params.id, function (err, order) {
         res.type('text/html');
         res.write("<html>");
         if (order) {
@@ -49,9 +51,8 @@ module.exports.showOrder = function(req, res)
     });
 };
 
-module.exports.deleteOrder =  function (req, res)
-{
-    store.delete(  req.params.id , function(err, order) {
+module.exports.deleteOrder = function (req, res) {
+    store.delete(req.params.id, function (err, order) {
         res.type('text/html');
         res.write("<html>");
         res.write("<p>Order-Number: " + order._id + "</p>");

@@ -12,12 +12,15 @@ function Order(pizzaName, orderedBy)
 
 function publicAddOrder(pizzaName, orderedBy, callback)
 {
+    console.log("  publicAddOrder start");
     let order = new Order(pizzaName, orderedBy);
     db.insert(order, function(err, newDoc){
+        console.log("    insert");
         if(callback){
             callback(err, newDoc);
         }
     });
+    console.log("  publicAddOrder end");
 }
 
 function publicRemove(id, callback) {
