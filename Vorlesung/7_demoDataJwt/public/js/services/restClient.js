@@ -5,7 +5,7 @@ const tokenKey = "token";
 
 class RestClient {
     login(userName, pwd) {
-        return ajaxUtil.ajax("POST", "/login/", {email: userName, pwd: pwd}).done(function (token) {
+        return ajaxUtil.ajax("POST", "/login/", {email: userName, pwd: pwd}).then(function (token) {
             valueStorage.setItem(tokenKey, token);
         });
     }

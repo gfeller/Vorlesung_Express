@@ -10,9 +10,9 @@ $(function () {
     const ordersRenderer = Handlebars.compile($("#orders-template").html());
 
     btnNewPizza.click(function (event) {
-        client.createPizza(inputPizza.val()).done(function (msg) {
+        client.createPizza(inputPizza.val()).then(function (msg) {
             renderOrders();
-        }).fail(function (msg) {
+        }).catch(function (msg) {
             //nothing!
         });
         inputPizza.val("");
@@ -28,13 +28,13 @@ $(function () {
     });
 
     function renderOrders() {
-        client.getOrders().done(function (orders) {
+        client.getOrders().then(function (orders) {
             ordersContainer.html(ordersRenderer({orders: orders}));
         })
     }
 
     $(ordersContainer).on("click", ".js-delete", function (event) {
-        client.deleteOrder($(event.currentTarget).data("id")).done(renderOrders);
+        client.deleteOrder($(event.currentTarget).data("id")).then(renderOrders);
     });
 
     function updateStatus() {

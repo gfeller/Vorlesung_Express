@@ -13,13 +13,13 @@ $(function () {
     }
 
     function renderOrder() {
-        client.getOrder(orderId).done(function (order) {
+        client.getOrder(orderId).then(function (order) {
             orderContainer.html(orderRenderer(order));
         })
     }
 
     $(orderContainer).on("click", ".js-delete", function (event) {
-        client.deleteOrder($(event.currentTarget).data("id")).done(renderOrder);
+        client.deleteOrder($(event.currentTarget).data("id")).then(renderOrder);
     });
 
     renderOrder();

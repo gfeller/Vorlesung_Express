@@ -1,14 +1,11 @@
 class Util {
-    ajax(metod, url, data, headers) {
-        return $.ajax({
-            dataType: "json",
-            contentType: "application/json",
-            headers: headers,
-            method: metod,
-            url: url,
-            data: data ? JSON.stringify(data) : undefined
+    ajax(method, url, data, headers) {
+        const fetchHeaders = new Headers({'content-type': 'application/json', ...(headers || {})})
+        return fetch(url, {method: method, headers: fetchHeaders, body: JSON.stringify(data)}).then(x => {
+            return x.json();
         });
     }
 }
+
 
 export const ajaxUtil = new Util();
