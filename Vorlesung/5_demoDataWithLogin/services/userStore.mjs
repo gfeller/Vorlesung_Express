@@ -21,13 +21,13 @@ export class UserStore {
         return await this.db.insert(user);
     }
 
-    async authenticate(email, passwort, callback) {
+    async authenticate(email, passwort) {
         if (!(email && passwort)) {
             return false;
         }
         let user = await this.db.findOne({email: email});
         if (user == null) {
-            await this.register(email, passwort, callback);
+            await this.register(email, passwort);
             return true;
         }
         else {
