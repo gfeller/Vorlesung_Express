@@ -20,8 +20,7 @@ const router = express.Router();
 
 app.use(express.static(path.resolve('public')));
 
-app.use(cookieParser());
-app.use(session({ secret: 'casduichasidbnuwezrfinasdcvjkadfhsuilfuzihfioda', resave: false, saveUninitialized: true}));
+app.use(session({secret: 'casduichasidbnuwezrfinasdcvjkadfhsuilfuzihfioda', resave: false, saveUninitialized: true}));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(overrideMiddleware);
