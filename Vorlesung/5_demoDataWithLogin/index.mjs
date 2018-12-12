@@ -2,7 +2,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import hbs from 'express-hbs';
 import path from 'path';
-import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import {indexRoutes} from './routes/indexRoutes';
 import {orderRoutes} from './routes/orderRoutes';
