@@ -1,5 +1,5 @@
-import {ajaxUtil} from '../utils/ajaxUtil.js'
-import {valueStorage} from './valueStorage.js'
+import {ajaxUtil} from '../utils/ajax-util.js'
+import {valueStorage} from './value-storage.js'
 
 const tokenKey = "token";
 
