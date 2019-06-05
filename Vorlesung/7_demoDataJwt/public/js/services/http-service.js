@@ -1,6 +1,13 @@
-class Util {
+import {valueStorage} from './value-storage.js'
+
+export const tokenKey = "token";
+class HttpService {
     ajax(method, url, data, headers) {
         const fetchHeaders = new Headers({'content-type': 'application/json', ...(headers || {})});
+        
+        if(valueStorage.getItem(tokenKey)){
+            fetchHeaders.append("authorization", "Bearer "+ valueStorage.getItem(tokenKey))
+        }        
 
         return fetch(url, {
             method: method,
@@ -11,5 +18,4 @@ class Util {
     }
 }
 
-
-export const ajaxUtil = new Util();
+export const httpService = new HttpService();

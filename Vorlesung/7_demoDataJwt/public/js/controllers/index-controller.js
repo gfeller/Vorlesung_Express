@@ -1,4 +1,5 @@
-import {restClient as client} from '../services/rest-client.js'
+import { authService } from '../services/auth-service.js'
+import { orderService } from '../services/order-service.js'
 
 
 const btnNewPizza = document.querySelector("#createPizza");
@@ -9,43 +10,41 @@ const ordersContainer = document.querySelector("#ordersContainer");
 
 const ordersRenderer = Handlebars.compile(document.querySelector("#orders-template").innerHTML);
 
-btnNewPizza.addEventListener("click", event => {
+btnNewPizza.addEventListener("click", async event => {
     event.preventDefault();
     
-    client.createPizza(inputPizza.value).then(function (msg) {
-        renderOrders();
-    }).catch(function (msg) {
-        //nothing!
-    });
+    await orderService.createPizza(inputPizza.value)
+    renderOrders();
     inputPizza.value = "";    
 });
 
-btnLogin.addEventListener("click", () => {
-    client.login("admin@admin.ch", "123456").then(updateStatus);
+btnLogin.addEventListener("click", async () => {
+    await authService.login("admin@admin.ch", "123456");
+    updateStatus();
 });
 
 btnLogout.addEventListener("click", ()  => {
-    client.logout().then(updateStatus);
+    authService.logout();
+    updateStatus();
 });
 
-function renderOrders() {
-    client.getOrders().then(function (orders) {
-        ordersContainer.innerHTML = ordersRenderer({orders: orders});
-    })
+async function renderOrders() {
+    ordersContainer.innerHTML = ordersRenderer({orders: await orderService.getOrders()});
 }
 
-ordersContainer.addEventListener("click", function (event) {
+ordersContainer.addEventListener("click", async function (event) {
     if(event.target.classList.contains("js-delete")){   
         
-        client.deleteOrder(event.target.dataset.id).then(renderOrders);
+        await orderService.deleteOrder(event.target.dataset.id);
+        await renderOrders()
     }
 });
 
 function updateStatus() {
-    Array.from(document.querySelectorAll(".js-non-user")).forEach(x=>x.classList.toggle("hidden", client.isLoggedIn()))
-    Array.from(document.querySelectorAll(".js-user")).forEach(x=>x.classList.toggle("hidden", !client.isLoggedIn()))
+    Array.from(document.querySelectorAll(".js-non-user")).forEach(x=>x.classList.toggle("hidden", authService.isLoggedIn()))
+    Array.from(document.querySelectorAll(".js-user")).forEach(x=>x.classList.toggle("hidden", !authService.isLoggedIn()))
 
-    if (client.isLoggedIn()) {
+    if (authService.isLoggedIn()) {
         renderOrders();
     }
 }
