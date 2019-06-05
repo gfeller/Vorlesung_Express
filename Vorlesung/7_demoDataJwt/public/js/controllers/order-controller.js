@@ -20,5 +20,4 @@ orderContainer.addEventListener("click", async event => {
     }
 });
 
-
 renderOrder();

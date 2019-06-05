@@ -1,19 +1,18 @@
-import { httpService, tokenKey } from './http-service.js'
-import { valueStorage } from './value-storage.js'
+import { httpService } from './http-service.js'
 
 class AuthService {
     async login(userName, pwd) {
         const token = await httpService.ajax("POST", "/login/", { email: userName, pwd: pwd });
-        valueStorage.setItem(tokenKey, token);
+        httpService.setAuthToken(token)
         return token;
     }
 
     logout() {
-        valueStorage.setItem(tokenKey, undefined);
+        httpService.removeAuthToken();
     }
 
     isLoggedIn() {
-        return !!valueStorage.getItem(tokenKey);
+        return httpService.hasAuthToken();
     }  
 }
 
