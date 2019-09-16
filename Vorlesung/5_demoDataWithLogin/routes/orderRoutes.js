@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import {ordersController} from '../controller/ordersController.mjs';
+import {ordersController} from '../controller/ordersController';
 import {SecurityUtil} from "../utils/security";
 
 router.all("/*", SecurityUtil.handleAuthenticate);

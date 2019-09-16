@@ -4,9 +4,10 @@
   "description": "CAS FEE Demo",
   "main": "index.js",
   "scripts": {
-    "start": "node --experimental-modules index.mjs",
+    "start": "node --experimental-modules --es-module-specifier-resolution=node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "type": "module",
   "author": "mgfeller",
   "license": "ISC",
   "dependencies": {
