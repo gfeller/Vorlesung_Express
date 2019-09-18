@@ -35,7 +35,7 @@ schema.statics.findByEmailAndPassword = function findByEmailAndPassword(email,pa
 
         let pwdHash = crypto.createHash('md5').update(password).digest('hex'); //besser wenn asynchrone
 
-        return cb(err, pwdHash == user.passwordHash ? user : null)
+        return cb(err, pwdHash === user.passwordHash ? user : null)
     });
 };
 
