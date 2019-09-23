@@ -1,40 +1,42 @@
-const orders = [];
-
-function Order(pizzaName, orderedBy)
-{
-    this.id = orders.length;
-    this.orderedBy = orderedBy;
-    this.pizzaName = pizzaName;
-    this.orderDate = new Date();
-    this.state = "OK";
-}
-
-
-function publicAddOrder(pizzaName, orderedBy)
-{
-    let order = new Order(pizzaName, orderedBy);
-    orders.push(order);
-    return order;
-}
-
-function publicRemove(id)
-{
-    let order = publicGet(id);
-    if(order)
-    {
-        order.state = "DELETED";
+class Order{
+    constructor(id, pizzaName, orderedBy){
+        this.id = id;
+        this.orderedBy = orderedBy;
+        this.pizzaName = pizzaName;
+        this.orderDate = new Date();
+        this.state = "OK";
     }
-    return order;
 }
 
-function publicGet(id)
-{
-    return orders[id];
+
+class OrderStore {
+    constructor() {
+        this.orders = [];
+    }
+
+    add(pizzaName, orderedBy) {
+        let order = new Order(this.orders.length, pizzaName, orderedBy);
+        this.orders.push(order);
+        return order;
+
+    }
+
+    delete(id) {
+        let order = this.get(id);
+        if(order)
+        {
+            order.state = "DELETED";
+        }
+        return order;
+    }
+
+    get(id) {
+        return this.orders[id];
+    }
+
+    all() {
+        return this.orders;
+    }
 }
 
-function publicAll()
-{
-    return orders;
-}
-
-module.exports = {add : publicAddOrder, delete : publicRemove, get : publicGet, all : publicAll};
+module.exports = new OrderStore();
