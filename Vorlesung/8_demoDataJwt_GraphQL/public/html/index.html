@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <script src="../libs/handlebars-v4.0.5.js" defer></script>
+    <script src="../js/utils/handlebars-helpers.js" defer></script>
+    <script src="../js/controllers/index-controller.js" type="module" defer></script>
+</head>
+<body>
+
+<header class="page-header">
+    <h1>
+        <img src="../images/pizza.jpg" style="height: 1em"/>Pizza Shop!
+        <input class="btn btn-default js-non-user" type="button" value="Login" id="login">
+        <input class="btn btn-default js-user" type="button" value="Logout" id="logout">
+    </h1>
+</header>
+
+<form class="js-user">
+    <label>
+        <input id="pizzaName" placeholder="Pizza-Name"/>
+    </label>
+    <input class="btn btn-default" type="submit" value="Bestellung abschicken" id="createPizza">
+</form>
+
+<div id="ordersContainer" class="js-user"></div>
+
+<script id="orders-template" type="text/x-handlebars-template">
+    <table class="table table-striped">
+        <caption>
+            Ihre Bestellungen:
+        </caption>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Pizza-Name</th>
+            <th>State</th>
+            <th>Order Date</th>
+            <th>Aktionen</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each orders}}
+        <tr>
+            <th scope="row"><a href="order.html#{{_id}}">{{_id}}</a></th>
+            <td>{{pizzaName}}</td>
+            <td>{{state}}</td>
+            <td>{{formatDate orderDate}}</td>
+            <td>{{#ifCond state '===' 'OK'}}
+                <button data-id="{{_id}}" class="btn btn-default js-delete">Löschen</button>
+                {{/ifCond}}
+            </td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</script>
+</body>
+</html>
