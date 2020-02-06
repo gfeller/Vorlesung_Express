@@ -1,4 +1,5 @@
 import apollo from "apollo-server-express";
+
 const {gql} = apollo;
 
 import {orderTypeDef} from "./order/typeDef";

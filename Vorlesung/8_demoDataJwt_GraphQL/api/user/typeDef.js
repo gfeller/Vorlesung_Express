@@ -6,16 +6,22 @@ const {gql} = apollo;
 
 export const userTypeDefs = gql`
   type User {
-        _id : String!
-        email: String!                 
+        _id : String! 
+        email: String!
+        orders : [Order!]!                 
   }  
+  
+  input NewUserInput {
+    email: String!
+    passwort: String!
+  }
 
   extend type Query {
-    getUsers: [User!]!
+    Users: [User!]!
   }
   
   extend type Mutation {
-    authenticate(email: String!, passwort: String!): String!
-    register(email: String!, passwort: String!): User!
+    authenticate(input : NewUserInput): String!
+    register(input : NewUserInput): User!    
   }
 `;

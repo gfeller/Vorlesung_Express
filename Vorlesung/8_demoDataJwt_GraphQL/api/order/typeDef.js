@@ -1,4 +1,5 @@
 import apollo from "apollo-server-express";
+
 const {gql} = apollo;
 
 export const orderTypeDef = gql`
@@ -8,13 +9,18 @@ export const orderTypeDef = gql`
         pizzaName: String
         orderDate: String
         state: String 
+        owner : User
   }  
+  
+  input AddOrderInput{
+    pizzaName : String!
+  } 
 
   extend type Query {
-    getOrders: [Order!]!
+    Orders: [Order!]!    
   }
   
   extend type Mutation {
-    addOrder(pizzaName : String!) : Order!
+    addOrder(input: AddOrderInput) : Order!
   }
 `;

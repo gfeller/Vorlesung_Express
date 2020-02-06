@@ -10,6 +10,7 @@ const verify = util.promisify(jwt.verify);
 import apollo from 'apollo-server-express'
 import {resolvers, typeDefs} from "./api/root";
 import {jwt_secret} from "./config";
+import {AuthDirective} from "./api/schemaDirectives";
 
 
 const {ApolloServer, gql} = apollo;
@@ -24,9 +25,19 @@ const server = new ApolloServer(
         context: async (context) => {
             const header = context.req.header("authorization");
             if(header){
-                context.user = await jwt.verify(header.replace("Bearer ", ""), jwt_secret);
+                try {
+                    context.user = await jwt.verify(header.replace("Bearer ", ""), jwt_secret);
+                }
+                catch (e) {
+                    context.user = null
+                }
             }
             return {req : context.req, res: context.res, user : context.user}
+        },
+        schemaDirectives: {
+            auth: AuthDirective,
+            authorized: AuthDirective,
+            authenticated: AuthDirective
         }
     });
 
@@ -51,7 +62,7 @@ app.use(function (err, req, res, next) {
 });
 
 const hostname = '127.0.0.1';
-const port = 3001;
+const port = 3000;
 app.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 });

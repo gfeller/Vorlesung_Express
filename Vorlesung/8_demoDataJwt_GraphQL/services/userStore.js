@@ -17,6 +17,10 @@ export class UserStore {
         return await this.db.find({});
     }
 
+    async findByEmail(email) {
+        return await this.db.findOne({email});
+    }
+
     async register(email, passwort) {
         if (!(email && passwort)) {
             throw new Error('no user');

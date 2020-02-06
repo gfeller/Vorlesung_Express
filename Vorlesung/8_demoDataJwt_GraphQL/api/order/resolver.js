@@ -1,10 +1,17 @@
 import {orderStore} from "../../services/orderStore";
+import {userStore} from "../../services/userStore";
 
 export const orderResolver = {
     Query: {
-        getOrders: (obj, args, context, info) => orderStore.all(context.user),
+        Orders: (obj, args, context, info) => orderStore.all(context.user.name),
+    },
+
+    Order: {
+        owner: (obj, args, context, info) => {
+            return userStore.findByEmail(obj.orderedBy);
+        }
     },
     Mutation: {
-        addOrder: (obj, args, context, info) => orderStore.add(args.pizzaName, context.user.username)
+        addOrder: (obj, args, context, info) => orderStore.add(args.input.pizzaName, context.user.name)
     }
 };

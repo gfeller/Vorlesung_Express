@@ -28,8 +28,8 @@ export class OrderStore {
         return await this.db.findOne({_id: id, orderedBy : currentUser});
     }
 
-    async all(currentUser) {
-        return await this.db.cfind({orderedBy : currentUser}).sort({ orderDate: -1 }).exec();
+    async all(orderedBy) {
+        return await this.db.cfind({orderedBy}).sort({ orderDate: -1 }).exec();
     }
 }
 
