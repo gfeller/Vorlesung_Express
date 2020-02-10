@@ -7,7 +7,7 @@ export const orderTypeDef = gql`
         _id : String
         orderedBy: String
         pizzaName: String
-        orderDate: String
+        orderDate: Date
         state: String 
         owner : User
   }  
@@ -17,10 +17,12 @@ export const orderTypeDef = gql`
   } 
 
   extend type Query {
-    Orders: [Order!]!    
+    Orders: [Order!]! @auth
+    Order( id : String! ): Order @auth
   }
   
   extend type Mutation {
-    addOrder(input: AddOrderInput) : Order!
+    addOrder(input: AddOrderInput) : Order! @auth(isAdmin: false)
+    deleteOrder(id: String) : Order! @auth(isAdmin: false) 
   }
 `;

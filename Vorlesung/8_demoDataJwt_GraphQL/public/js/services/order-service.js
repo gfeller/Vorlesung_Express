@@ -1,20 +1,49 @@
-import { httpService } from './http-service.js'
+import {httpService} from './http-service.js'
 
-class OrderService {    
+class OrderService {
     async createPizza(pizzeName) {
-        return await httpService.ajax("POST", "/orders/", { name: pizzeName });
+        const query = `mutation{
+                          addOrder(input: {pizzaName: "${pizzeName}"}) {
+                            _id
+                          }
+                        }`;
+        return await httpService.ajax(query);
     }
 
     async getOrders() {
-        return await httpService.ajax("GET", "/orders/", undefined);
+        const query = `{
+                          Orders{
+                            _id,
+                            pizzaName,
+                            orderDate,
+                            state,
+                            owner{
+                              email
+                            }
+                          }
+                        }`;
+        return (await httpService.ajax(query)).Orders;
     }
 
     async getOrder(id) {
-        return await httpService.ajax("GET", `/orders/${id}`, undefined);
+        const query = `query{
+                          Order(id: "${id}"){
+                            _id,
+                            pizzaName,
+                            orderDate,
+                            state
+                          }
+                        }`;
+        return (await httpService.ajax(query)).Order;
     }
 
     async deleteOrder(id) {
-        return await httpService.ajax("DELETE", `/orders/${id}`, undefined);
+        const query = `mutation{
+          deleteOrder(id: "${id}"){
+            _id
+          }
+        }`;
+        return await httpService.ajax(query);
     }
 }
 

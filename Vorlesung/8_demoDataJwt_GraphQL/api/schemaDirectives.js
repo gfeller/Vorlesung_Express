@@ -1,10 +1,13 @@
 import apollo from 'apollo-server-express'
+import {defaultFieldResolver} from "graphql";
+
 const {ApolloServer, gql, SchemaDirectiveVisitor} = apollo;
 
 export class AuthDirective extends SchemaDirectiveVisitor {
     visitObject(type) {
         this.ensureFieldsWrapped(type);
-        type._requiredAuthRole = this.args.requires;
+        type._requiresAuth = true;
+        type._requiresAdmin = this.args.isAdmin;
     }
 
     // Visitor methods for nested types like fields and arguments
@@ -12,7 +15,8 @@ export class AuthDirective extends SchemaDirectiveVisitor {
     // the parent and grandparent types.
     visitFieldDefinition(field, details) {
         this.ensureFieldsWrapped(details.objectType);
-        field._requiredAuthRole = this.args.requires;
+        field._requiresAuth = true;
+        field._requiresAdmin = this.args.isAdmin;
     }
 
     ensureFieldsWrapped(objectType) {
@@ -28,20 +32,24 @@ export class AuthDirective extends SchemaDirectiveVisitor {
             field.resolve = async function (...args) {
                 // Get the required Role from the field first, falling back
                 // to the objectType if no Role is required by the field:
-                const requiredRole =
-                    field._requiredAuthRole ||
-                    objectType._requiredAuthRole;
 
-                if (!requiredRole) {
-                    return resolve.apply(this, args);
+                const requiresAuth = field._requiresAuth || objectType._requiresAuth;
+                const requiredAdmin = field._requiresAdmin || objectType._requiresAdmin;
+
+                const user = args[2].user;
+
+                if (requiresAuth)
+                {
+                    if (!user) {
+                        throw new Error("not authorized");
+                    }
+
+                    if (requiredAdmin) {
+                        if (!user.isAdmin) {
+                            throw new Error("not authorized");
+                        }
+                    }
                 }
-
-                const context = args[2];
-                const user = await getUser(context.headers.authToken);
-                if (!user.hasRole(requiredRole)) {
-                    throw new Error("not authorized");
-                }
-
                 return resolve.apply(this, args);
             };
         });

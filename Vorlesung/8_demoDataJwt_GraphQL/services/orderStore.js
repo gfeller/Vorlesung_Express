@@ -25,11 +25,11 @@ export class OrderStore {
     }
 
     async get(id, currentUser) {
-        return await this.db.findOne({_id: id, orderedBy : currentUser});
+        return await this.db.findOne({_id: id, orderedBy: currentUser});
     }
 
-    async all(orderedBy) {
-        return await this.db.cfind({orderedBy}).sort({ orderDate: -1 }).exec();
+    async all({email, isAdmin}) {
+        return await this.db.cfind(isAdmin ? {} :{orderedBy: email}).sort({orderDate: -1}).exec();
     }
 }
 
