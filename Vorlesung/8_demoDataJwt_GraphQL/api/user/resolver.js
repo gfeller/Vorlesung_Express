@@ -7,8 +7,8 @@ export const userResolver = {
         Users: async (obj, args, context, info) => await userStore.all(),
     },
     User: {
-        orders: (obj, args, context, info) => {
-            return orderStore.all(obj.email);
+        orders: async (obj, args, context, info) => {
+            return orderStore.all(obj);
         }
     },
     Mutation: {
