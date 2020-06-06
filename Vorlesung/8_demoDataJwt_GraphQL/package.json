@@ -11,7 +11,7 @@
   "author": "mgfeller",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^2.9.14",
+    "apollo-server": "^2.14.2",
     "apollo-server-express": "^2.9.14",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
