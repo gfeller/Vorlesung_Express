@@ -3,6 +3,7 @@ const session = require('express-session');
 
 const app = express();
 
+app.use(require("cookie-parser")()); // not required for session middleware. Needed for: console.log(JSON.stringify(req.cookies));
 app.use(session({secret: 'casduichasidbnuwezrfinasdcvjkadfhsuilfuzihfioda', resave: false, saveUninitialized: true}));
 
 app.get("/*", function (req, res) {
