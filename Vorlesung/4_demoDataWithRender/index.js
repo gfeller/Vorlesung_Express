@@ -2,9 +2,9 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import hbs from 'express-hbs';
 import path from 'path';
-import {orderRoutes} from './routes/orderRoutes';
-import {registerHelpers} from './utils/handlebar-util'
-import {overrideMiddleware} from "./utils/method-override";
+import {orderRoutes} from './routes/orderRoutes.js';
+import {registerHelpers} from './utils/handlebar-util.js'
+import {overrideMiddleware} from "./utils/method-override.js";
 
 
 const app = express();

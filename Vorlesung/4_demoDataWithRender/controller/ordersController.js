@@ -1,4 +1,4 @@
-import {orderStore} from '../services/orderStore'
+import {orderStore} from '../services/orderStore.js'
 
 export class OrdersController {
     showIndex(req, res) {

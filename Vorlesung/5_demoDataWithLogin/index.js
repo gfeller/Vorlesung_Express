@@ -3,10 +3,10 @@ import bodyParser from 'body-parser';
 import hbs from 'express-hbs';
 import path from 'path';
 import session from 'express-session';
-import {indexRoutes} from './routes/indexRoutes';
-import {orderRoutes} from './routes/orderRoutes';
-import {registerHelpers} from './utils/handlebar-util'
-import {overrideMiddleware} from "./utils/method-override";
+import {indexRoutes} from './routes/indexRoutes.js';
+import {orderRoutes} from './routes/orderRoutes.js';
+import {registerHelpers} from './utils/handlebar-util.js'
+import {overrideMiddleware} from "./utils/method-override.js";
 
 
 const app = express();

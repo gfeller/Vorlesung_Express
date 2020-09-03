@@ -1,5 +1,5 @@
-import {orderStore} from '../services/orderStore'
-import {SecurityUtil} from '../utils/security'
+import {orderStore} from '../services/orderStore.js'
+import {SecurityUtil} from '../utils/security.js'
 
 export class OrdersController {
     createOrder(req, res) {

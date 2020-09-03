@@ -3,8 +3,8 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import jwt from 'express-jwt';
 
-import {indexRoutes} from './routes/indexRoutes';
-import {orderRoutes} from './routes/orderRoutes';
+import {indexRoutes} from './routes/indexRoutes.js';
+import {orderRoutes} from './routes/orderRoutes.js';
 
 const app = express();
 

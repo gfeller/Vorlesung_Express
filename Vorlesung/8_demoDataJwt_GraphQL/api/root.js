@@ -2,11 +2,12 @@ import apollo from "apollo-server-express";
 
 const {gql} = apollo;
 
-import {orderTypeDef} from "./order/typeDef";
-import {userTypeDefs} from "./user/typeDef";
-import {userResolver} from "./user/resolver";
-import {orderResolver} from "./order/resolver";
-import {GraphQLScalarType} from "graphql";
+import {orderTypeDef} from "./order/typeDef.js";
+import {userTypeDefs} from "./user/typeDef.js";
+import {userResolver} from "./user/resolver.js";
+import {orderResolver} from "./order/resolver.js";
+import graphql from "graphql";
+const {GraphQLScalarType} = graphql;
 
 export const root = gql`
     directive @auth( isAdmin: Boolean = false ) on OBJECT | FIELD_DEFINITION

@@ -8,9 +8,9 @@ const verify = util.promisify(jwt.verify);
 
 
 import apollo from 'apollo-server-express'
-import {resolvers, typeDefs} from "./api/root";
-import {jwt_secret} from "./config";
-import {AuthDirective} from "./api/schemaDirectives";
+import {resolvers, typeDefs} from "./api/root.js";
+import {jwt_secret} from "./config.js";
+import {AuthDirective} from "./api/schemaDirectives.js";
 
 
 const {ApolloServer, gql} = apollo;

@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import {ordersController} from '../controller/ordersController';
+import {ordersController} from '../controller/ordersController.js';
 
 router.get("/", ordersController.getOrders.bind(ordersController));
 router.post("/", ordersController.createPizza.bind(ordersController));

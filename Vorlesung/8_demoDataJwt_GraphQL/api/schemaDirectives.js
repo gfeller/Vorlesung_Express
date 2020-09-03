@@ -1,5 +1,8 @@
 import apollo from 'apollo-server-express'
-import {defaultFieldResolver} from "graphql";
+
+import graphql from "graphql";
+const {defaultFieldResolver} = graphql;
+
 
 const {ApolloServer, gql, SchemaDirectiveVisitor} = apollo;
 

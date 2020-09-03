@@ -1,4 +1,4 @@
-import {userStore} from '../services/userStore';
+import {userStore} from '../services/userStore.js';
 
 export class IndexController {
     async login(req, res) {

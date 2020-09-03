@@ -1,6 +1,6 @@
-import {userStore} from "../../services/userStore";
-import {orderStore} from "../../services/orderStore";
-import {SecurityUtil} from "../../utils/security";
+import {userStore} from "../../services/userStore.js";
+import {orderStore} from "../../services/orderStore.js";
+import {SecurityUtil} from "../../utils/security.js";
 
 export const userResolver = {
     Query: {

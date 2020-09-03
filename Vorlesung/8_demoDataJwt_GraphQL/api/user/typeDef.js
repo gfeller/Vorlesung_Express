@@ -1,5 +1,4 @@
 import apollo from "apollo-server-express";
-import {userStore} from "../../services/userStore";
 
 const {gql} = apollo;
 
