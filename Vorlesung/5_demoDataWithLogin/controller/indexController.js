@@ -1,4 +1,5 @@
 import {userStore} from '../services/userStore.js';
+import {SecurityUtil} from "../utils/security";
 
 export class IndexController {
     async login(req, res) {
@@ -18,7 +19,7 @@ export class IndexController {
     };
 
     index(req, res) {
-        res.render("index", {isLoggedIn: !req.session.name});
+        res.render("index", {isLoggedIn: SecurityUtil.isLoggedIn(req)});
     };
 
     logout(req, res) {
