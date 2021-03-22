@@ -8,7 +8,6 @@ import {orderRoutes} from './routes/orderRoutes.js';
 import {registerHelpers} from './utils/handlebar-util.js'
 import {overrideMiddleware} from "./utils/method-override.js";
 
-
 export const app = express();
 app.engine('hbs', hbs.express4());
 app.set('view engine', 'hbs');

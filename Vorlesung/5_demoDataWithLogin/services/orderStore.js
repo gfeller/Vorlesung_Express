@@ -11,7 +11,8 @@ export class Order {
 
 export class OrderStore {
     constructor(db) {
-        this.db = db || new Datastore({filename: './data/orders.db', autoload: true});
+        const options = process.env.DB_TYPE === "FILE" ? {filename: './data/orders.db', autoload: true} : {}
+        this.db = db || new Datastore(options);
     }
 
     async add(pizzaName, orderedBy) {

@@ -15,6 +15,7 @@
     "chai": "^4.3.4",
     "chai-dom": "^1.9.0",
     "chai-http": "^4.3.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-hbs": "^2.1.2",
     "express-session": "^1.16.1",

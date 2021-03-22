@@ -10,7 +10,8 @@ export class User {
 
 export class UserStore {
     constructor(db) {
-        this.db = db || new Datastore({filename: './data/user.db', autoload: true});
+        const options = process.env.DB_TYPE === "FILE" ? {filename: './data/user.db', autoload: true} : {}
+        this.db = db || new Datastore(options);
     }
 
     async register(email, passwort) {
