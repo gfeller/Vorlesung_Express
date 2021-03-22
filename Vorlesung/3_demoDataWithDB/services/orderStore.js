@@ -1,8 +1,9 @@
-const Datastore = require('nedb');
-const db = new Datastore({ filename: './data/order.db', autoload: true });
+import Datastore from 'nedb';
 
-class Order{
-    constructor(pizzaName, orderedBy){
+const db = new Datastore({filename: './data/order.db', autoload: true});
+
+class Order {
+    constructor(pizzaName, orderedBy) {
         this.orderedBy = orderedBy;
         this.pizzaName = pizzaName;
         this.orderDate = new Date();
@@ -16,13 +17,12 @@ class OrderStore {
 
     }
 
-
     add(pizzaName, orderedBy, callback) {
         console.log("  publicAddOrder start");
         let order = new Order(pizzaName, orderedBy);
-        db.insert(order, function(err, newDoc){
+        db.insert(order, function (err, newDoc) {
             console.log("    insert");
-            if(callback){
+            if (callback) {
                 callback(err, newDoc);
             }
         });
@@ -30,22 +30,22 @@ class OrderStore {
     }
 
     delete(id, callback) {
-        db.update({_id: id}, {$set: {"state": "DELETED"}}, {returnUpdatedDocs:true}, function (err, numDocs, doc) {
+        db.update({_id: id}, {$set: {"state": "DELETED"}}, {returnUpdatedDocs: true}, function (err, numDocs, doc) {
             callback(err, doc);
         });
     }
 
     get(id, callback) {
-        db.findOne({ _id: id }, function (err, doc) {
-            callback( err, doc);
+        db.findOne({_id: id}, function (err, doc) {
+            callback(err, doc);
         });
     }
 
     all(callback) {
         db.find({}, function (err, docs) {
-            callback( err, docs);
+            callback(err, docs);
         });
     }
 }
 
-module.exports = new OrderStore();
+export const orderStore = new OrderStore();

@@ -1,11 +1,11 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const orders = require('../controller/ordersController.js');
+import * as ordersController from '../controller/ordersController.js';
 
-router.get("/", orders.showIndex);
-router.get("/orders", orders.createOrder);
-router.post("/orders", orders.createPizza);
-router.get("/orders/:id/", orders.showOrder);
-router.delete("/orders/:id/", orders.deleteOrder);
+router.get("/", ordersController.showIndex);
+router.get("/orders", ordersController.createOrder);
+router.post("/orders", ordersController.createPizza);
+router.get("/orders/:id/", ordersController.showOrder);
+router.delete("/orders/:id/", ordersController.deleteOrder);
 
-module.exports = router;
+export const orderRoutes = router;

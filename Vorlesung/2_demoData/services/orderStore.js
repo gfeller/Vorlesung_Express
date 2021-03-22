@@ -1,5 +1,5 @@
-class Order{
-    constructor(id, pizzaName, orderedBy){
+class Order {
+    constructor(id, pizzaName, orderedBy) {
         this.id = id;
         this.orderedBy = orderedBy;
         this.pizzaName = pizzaName;
@@ -23,8 +23,7 @@ class OrderStore {
 
     delete(id) {
         let order = this.get(id);
-        if(order)
-        {
+        if (order) {
             order.state = "DELETED";
         }
         return order;
@@ -39,4 +38,4 @@ class OrderStore {
     }
 }
 
-module.exports = new OrderStore();
+export const orderStore = new OrderStore();

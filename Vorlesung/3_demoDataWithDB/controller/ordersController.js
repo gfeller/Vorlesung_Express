@@ -1,6 +1,6 @@
-const store = require("../services/orderStore.js");
+import {orderStore} from "../services/orderStore.js";
 
-module.exports.showIndex = function (req, res) {
+export function showIndex(req, res) {
     res.type('text/html');
     res.write("<html>");
     res.write("<p>Willkommen! Zu der besten Pizzaria auf der Welt!</p>");
@@ -9,7 +9,7 @@ module.exports.showIndex = function (req, res) {
     res.end("</html>");
 };
 
-module.exports.createOrder = function (req, res) {
+export function createOrder(req, res) {
     res.type('text/html');
     res.write("<html>");
     res.write("<p>Was fuer eine Pizze haetten Sie den gerne?</p>");
@@ -17,9 +17,9 @@ module.exports.createOrder = function (req, res) {
     res.end("</html>");
 };
 
-module.exports.createPizza = function (req, res) {
+export function createPizza(req, res) {
     console.log("createPizza start");
-    store.add(req.body.name, "unkown", function (err, order) {
+    orderStore.add(req.body.name, "unkown", function (err, order) {
         console.log("      callback start");
 
         res.type('text/html');
@@ -35,8 +35,8 @@ module.exports.createPizza = function (req, res) {
     console.log("createPizza end");
 };
 
-module.exports.showOrder = function (req, res) {
-    store.get(req.params.id, function (err, order) {
+export function showOrder(req, res) {
+    orderStore.get(req.params.id, function (err, order) {
         res.type('text/html');
         res.write("<html>");
         if (order) {
@@ -51,8 +51,8 @@ module.exports.showOrder = function (req, res) {
     });
 };
 
-module.exports.deleteOrder = function (req, res) {
-    store.delete(req.params.id, function (err, order) {
+export function deleteOrder(req, res) {
+    orderStore.delete(req.params.id, function (err, order) {
         res.type('text/html');
         res.write("<html>");
         res.write("<p>Order-Number: " + order._id + "</p>");
