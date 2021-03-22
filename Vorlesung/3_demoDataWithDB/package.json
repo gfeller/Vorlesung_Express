@@ -1,7 +1,7 @@
 {
   "name": "demo",
   "version": "1.0.0",
-  "description": "CAS FEE Demo",
+  "description": "Express Demo",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
