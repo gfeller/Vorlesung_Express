@@ -1,5 +1,5 @@
 import {userStore} from '../services/userStore.js';
-import {SecurityUtil} from "../utils/security";
+import {SecurityUtil} from "../utils/security.js";
 
 export class IndexController {
     async login(req, res) {
