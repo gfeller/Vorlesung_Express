@@ -21,7 +21,7 @@ export class OrderStore {
 
     async delete(id, currentUser) {
         await this.db.update({_id: id, orderedBy: currentUser}, {$set: {"state": "DELETED"}});
-        return await this.get(id);
+        return await this.get(id, currentUser);
     }
 
     async get(id, currentUser) {
