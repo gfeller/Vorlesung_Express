@@ -9,7 +9,9 @@ import {registerHelpers} from './utils/handlebar-util.js'
 import {overrideMiddleware} from "./utils/method-override.js";
 
 export const app = express();
-app.engine('hbs', hbs.express4());
+app.engine('hbs', hbs.express4({
+    defaultLayout: "views/layout/default.hbs"
+}));
 app.set('view engine', 'hbs');
 app.set('views', path.resolve('views'));
 registerHelpers(hbs);
