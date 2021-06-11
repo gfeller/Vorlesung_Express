@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8"/>
+    <title>Express</title>
+    <link rel="icon" href="../HSR.Template.Exercises/icon-document.png" type="image/png">
+
+    <link rel="stylesheet" type="text/css" href="../HSR.Template.Exercises/documentStyle.css">
+    <script src="../HSR.Template.Exercises/solutions.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    <style>
+        .important-code {
+            font-size: 1.25em;
+            padding: 0.5em 0;
+            display: inline-block;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+<h1>
+    <a class="backlink" href="../index.html">⇦</a>
+    Express
+    <button id="showSolutions">Lösungen anzeigen/ausblenden</button>
+</h1>
+
+
+<h2>Hinweise</h2>
+<p>Die Ausgangslage befindet sich auf GitHub: <a href="https://github.com/gfeller/Vorlesung_Express/">https://github.com/gfeller/Vorlesung_Express</a>
+</p>
+<p>Die Node Module müssen installiert werden um die Demos starten zu können:
+</p>
+<pre class="prettyprint"><code>npm install
+node index.js
+http://localhost:3000/</code></pre>
+
+<h2>Callbacks mit nedb</h2>
+<p>
+    Die <a href="https://github.com/gfeller/Vorlesung_Express/tree/master/Vorlesung/2_demoData">2te Version</a> hält die
+    Daten im Memory: Ihre Aufgabe ist es die Datenquelle auf nedb umzustellen.
+</p>
+<p>
+    Beachten Sie, dass nedb asynchron ist und alle Interaction mit nedb über Callbacks läuft.
+</p>
+<p>Beschreibung von <a href="https://github.com/louischatriot/nedb" target="_blank">nedb</a></p>
+<div class="solution">
+    <p>
+        Die Lösung befindet sich im 3ten Step auf Github: <a
+            href="https://github.com/gfeller/Vorlesung_Express/tree/master/Vorlesung/3_demoDataWithDB">Lösung</a>
+    </p>
+</div>
+</body>
+</html>

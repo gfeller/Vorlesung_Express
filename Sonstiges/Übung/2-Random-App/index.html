@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<title>Express</title>
+		<link rel="icon" href="../HSR.Template.Exercises/icon-document.png" type="image/png">
+
+		<link rel="stylesheet" type="text/css" href="../HSR.Template.Exercises/documentStyle.css">
+		<script src="../HSR.Template.Exercises/solutions.js"></script>
+		<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+		<style>
+			.important-code {
+			 font-size: 1.25em; padding: 0.5em 0; display: inline-block; background: white;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>
+			<a class="backlink" href="../index.html">⇦</a>
+			Express
+			<button id="showSolutions">Lösungen anzeigen/ausblenden</button>
+		</h1>
+
+		<h2>Random App mit Express</h2>
+		<p>Ihre Aufgabe ist es eine Webseite zu schreiben, welche Randomzahlen anhand von Parametern generiert.</p>
+		<p>Das Resultat könnte wie folgt aussehen:</p>
+		<figure>
+			<img src="images/Eingabe.png">
+			<figcaption>Eingabe-Ansicht</figcaption>
+		</figure>
+
+		<figure>
+			<img src="images/Ausgabe.png">
+			<figcaption>Resultat-Ansicht</figcaption>
+		</figure>
+
+
+
+		<p>Implementieren Sie folgende Routen</p>
+		<dl>
+			<dt>GET /</dt>
+			<dd>Ermöglicht die Eingabe von den Input-Parametern (Von, Bis, Anzahl).</dd>
+			<dt>POST /random</dt>
+			<dd>Variante 1: Nimmt die Input-Parameter als Body-Parameter entgegen und rendert diese</dd>
+			<dd>Variante 2: Weiterleitung auf GET /random?from=...</dd>
+			<dt>GET /random?from=10&to=80&quantity=10</dt>
+			<dd>Nimmt die Input-Parameter als Query-Parameter entgegen und rendert diese</dd>
+		</dl>
+
+
+
+		<p>Beachten Sie folgende Punkte</p>
+		<ul>
+			<li>Nutzen Sie die Vorlage (./vorlage).</li>
+			<li>Nutzen Sie Handlebars: <a href="http://handlebarsjs.com/" target="_blank">http://handlebarsjs.com/</a> </li>
+			<li>Der Service für die Berechnung ist vorgegeben.</li>
+			<li>Bei ungültigen Daten soll die Error-Page angezeigt werden z.B. from ist grösser als to</li>
+			<li>Stylen Sie die Webseite</li>
+		</ul>
+
+		<div class="solution">
+			<p>
+				Die Lösung befindet sich im Ordner "solution\random"
+			</p>
+		</div>
+
+	</body>
+</html>

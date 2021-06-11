@@ -1,0 +1,55 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+form > label{
+  display: block;
+  width: 25%;
+}
+
+form > label > input{
+  width: 100%;
+}
+
+.input-container::before{
+  content: 'Input';
+  font-weight: bold;
+  border-bottom: 1px black solid;
+  display: table-caption;
+}
+
+.input-container{
+  display: table;
+  width: 100%;
+}
+
+
+.input-container > .input{
+  display: table-row;
+}
+
+.input-container >  .input > .input-value{
+  display: table-cell;
+  width: 100%;
+}
+
+.input-container >  .input > .input-type{
+  display: table-cell;
+  padding-right: 10px;
+}
+
+.result-container::before{
+  content: 'Result';
+  display: block;
+  font-weight: bold;
+  border-bottom: 1px black solid;
+}
+.result-container{
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+.result:nth-child(2n){
+  background: lightgray;
+}
