@@ -1,24 +1,35 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import {User} from './User.js';
+
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/demo2');
+mongoose.set('useCreateIndex', true);
+mongoose.connect('mongodb://localhost/demo2',
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
 
-const User = require('./User.js');
 
-function createUser(mail, pwd) {
+async function createUser(mail, pwd) {
 
     const u = new User({email: mail, passwordHash: pwd, dummy: "1234"});
-    return u.save().then(() => console.log("Kein Problem")).catch(err => console.log('Problem: ' + err.message));
+    try {
+        await u.save();
+        console.log("Kein Problem")
+    } catch (err) {
+        console.log('Problem: ' + err.message)
+    }
 }
 
-createUser("mgfeller@hsr.ch", "123");
-createUser("mgfeller@hsr.ch", "123456789").then(checkUser, checkUser);
+await createUser("michael.gfeller@ost.ch", "123");
+await createUser("michael.gfeller@ost.ch", "123456789");
+checkUser()
 
 function checkUser() {
-    return User.findByEmailAndPassword("mgfeller@hsr.ch", "123456789", function (err, user) {
+    return User.findByEmailAndPassword("michael.gfeller@ost.ch", "123456789", function (err, user) {
         if (user) {
             console.log(`${user.passwordHash} ${user.email} ${user.dummy}`);
-        }
-        else {
+        } else {
             console.log("wrong user or password");
         }
     });
