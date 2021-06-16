@@ -1,0 +1,22 @@
+<div class="input-container">
+    <div class="input">
+        <span class="input-type">Von</span>
+        <span class="input-value">{{result.from}}</span>
+    </div>
+    <div class="input">
+        <span class="input-type">Bis</span>
+        <span class="input-value">{{result.to}}</span>
+    </div>
+    <div class="input">
+        <span class="input-type">Anzahl</span>
+        <span class="input-value">{{result.quantity}}</span>
+    </div>
+</div>
+
+<ol class="result-container">
+    {{#each result.list}}
+        <li class="result">
+            {{this}}
+        </li>
+    {{/each}}
+</ol>
