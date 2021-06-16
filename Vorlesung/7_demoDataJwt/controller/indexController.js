@@ -1,7 +1,7 @@
 import {SecurityUtil} from '../utils/security.js';
 
 export class IndexController {
-    async login(req, res) {
+    login = async (req, res) => {
 
         SecurityUtil.handleLogin(req, res);
     };

@@ -2,7 +2,7 @@ import {userStore} from '../services/userStore.js';
 import {SecurityUtil} from "../utils/security.js";
 
 export class IndexController {
-    async login(req, res) {
+    login = async (req, res) => {
         if (!req.session.name) {
             let valid = await userStore.authenticate(req.body.email, req.body.pwd);
             if (valid) {
@@ -18,11 +18,11 @@ export class IndexController {
         }
     };
 
-    index(req, res) {
+    index = (req, res) => {
         res.render("index", {isLoggedIn: SecurityUtil.isLoggedIn(req)});
     };
 
-    logout(req, res) {
+    logout = (req, res) => {
         if (req.session.name) {
             req.session.name = null;
             res.redirect("/");

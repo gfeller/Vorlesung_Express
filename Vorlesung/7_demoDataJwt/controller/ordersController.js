@@ -3,19 +3,19 @@ import {SecurityUtil} from '../utils/security.js'
 
 export class OrdersController {
 
-    async getOrders(req, res) {
+    getOrders = async (req, res) => {
         res.json((await orderStore.all(SecurityUtil.currentUser(req)) || []))
     };
 
-    async createPizza(req, res) {
+    createPizza = async (req, res) => {
         res.json(await orderStore.add(req.body.name, SecurityUtil.currentUser(req)));
     };
 
-    async showOrder(req, res) {
+    showOrder = async (req, res) => {
         res.json(await orderStore.get(req.params.id, SecurityUtil.currentUser(req)));
     };
 
-    async deleteOrder(req, res) {
+    deleteOrder = async (req, res) => {
         res.json(await orderStore.delete(req.params.id, SecurityUtil.currentUser(req)));
     };
 }
