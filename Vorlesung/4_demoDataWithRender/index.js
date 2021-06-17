@@ -4,10 +4,14 @@ import path from 'path';
 import {orderRoutes} from './routes/orderRoutes.js';
 import {helpers} from './utils/handlebar-util.js'
 import {overrideMiddleware} from "./utils/method-override.js";
+
+// 1. import express-handlebars
 import exphbs from 'express-handlebars';
 
 
 const app = express();
+
+// 2. configure
 const hbs = exphbs.create({
     extname: '.hbs',
     defaultLayout: "default",
@@ -16,9 +20,11 @@ const hbs = exphbs.create({
     }
 });
 
-
+// 3. set engine and global values
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
+
+// 4. path to views
 app.set('views', path.resolve('views'));
 
 app.use(bodyParser.urlencoded({extended: false}));
