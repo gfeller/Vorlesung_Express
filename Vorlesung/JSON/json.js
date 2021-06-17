@@ -11,14 +11,6 @@ var undef = JSON.stringify({"undef" : undefined});
 console.log(4, undef);
 
 try {
-    var nok1 = JSON.parse('{"a:"1234"}');
-}
-catch(err)
-{
-    console.log(5, err);
-}
-
-try {
     var nok2 = JSON.parse("{'a':'1234'}");
 }
 catch(err)
