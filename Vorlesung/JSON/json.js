@@ -1,7 +1,5 @@
 var myObject = {
-    a: '1234', b: function () {
-        return this.a
-    }, c: 1234, d: new Date(), e: [4, 5, 6, 7]
+    a: '1234', b: function () {return this.a }, c: 1234, d: new Date(), e: [4, 5, 6, 7]
 };
 console.log(1, JSON.stringify(myObject));
 
