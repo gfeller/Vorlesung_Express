@@ -23,8 +23,9 @@ describe('Scenarios', () => {
         await deleteWithSameUser(order);
     });
 
+
     async function createAnonymousOrder() {
-        const response = await chai.request(app).get('/orders');
+        const response = await chai.request(app).post('/orders');
         response.should.have.status(401);
     }
 
