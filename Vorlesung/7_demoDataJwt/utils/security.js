@@ -35,8 +35,9 @@ export class SecurityUtil {
             res.send(true);
         }
         else {
-            if (await userStore.authenticate(req.body.email, req.body.pwd)) {
-                let token = await this.createSessionToken(req.body.email, req.app.get("jwt-secret"), req.app.get("jwt-sign"));
+            const {email, pwd} = req.body;
+            if (await userStore.authenticate(email, pwd)) {
+                let token = await this.createSessionToken(email, req.app.get("jwt-secret"), req.app.get("jwt-sign"));
                 res.json(token);
             }
             else {

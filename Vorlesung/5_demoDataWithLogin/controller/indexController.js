@@ -3,17 +3,17 @@ import {SecurityUtil} from "../utils/security.js";
 
 export class IndexController {
     login = async (req, res) => {
-        if (!req.session.name) {
-            let valid = await userStore.authenticate(req.body.email, req.body.pwd);
+        if (!SecurityUtil.isLoggedIn(req)) {
+            const {email, pwd} = req.body;
+            let valid = await userStore.authenticate(email, pwd);
+
             if (valid) {
-                req.session.name = req.body.email;
-                this._handleBackRef(req, res);
-            }
-            else {
+                SecurityUtil.login(req, email);
+                this.#handleBackRef(req, res);
+            } else {
                 res.render("login", {backref: req.body._backref || (req.method === "GET" && req.originalUrl ? req.originalUrl : "")});
             }
-        }
-        else {
+        } else {
             res.redirect("/");
         }
     };
@@ -23,17 +23,16 @@ export class IndexController {
     };
 
     logout = (req, res) => {
-        if (req.session.name) {
-            req.session.name = null;
+        if (SecurityUtil.isLoggedIn(req)) {
+            SecurityUtil.logout(req);
             res.redirect("/");
         }
     };
 
-    _handleBackRef(req, res) {
+    #handleBackRef(req, res) {
         if (req.body._backref) {
             res.redirect(req.body._backref);
-        }
-        else {
+        } else {
             res.redirect("/");
         }
     }

@@ -25,8 +25,12 @@ app.set('views', path.resolve('views'));
 app.use(express.static(path.resolve('public')));
 
 app.use(session({secret: 'casduichasidbnuwezrfinasdcvjkadfhsuilfuzihfioda', resave: false, saveUninitialized: true}));
+
+app.use((req, res, next) => {
+    console.log(req.session.user || "no user");
+    next();
+});
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
 app.use(overrideMiddleware);
 
 app.use("/orders", orderRoutes);
