@@ -23,5 +23,9 @@ export class SUT {
         response.should.have.status(200);
         return response.body;
     }
+
+    async addToken(request,  token, data) {
+        return request.set('authorization', `Bearer ${token}`).send(data);
+    }
 }
 

@@ -30,9 +30,7 @@ describe('Scenarios', () => {
     }
 
     async function createOrder() {
-        const response = await chai.request(app).post('/orders')
-            .set('authorization', `Bearer ${sut.tokenUser1}`)
-            .send({name: 'Hawaii'});
+        const response = await sut.addToken(chai.request(app).post('/orders'), sut.tokenUser1, {name: 'Hawaii'});
 
         response.should.have.status(200);
         const order = response.body;
@@ -41,18 +39,14 @@ describe('Scenarios', () => {
     }
 
     async function deleteWithDifferentUser(order) {
-        const response = await chai.request(app).delete(`/orders/${order._id}`)
-            .set('authorization', `Bearer ${sut.tokenUser2}`)
-            .send();
+        const response = await sut.addToken(chai.request(app).delete(`/orders/${order._id}`), sut.tokenUser2);
 
         response.should.have.status(200);
         expect(response.body).to.be.null;
     }
 
     async function deleteWithSameUser(order) {
-        const response = await chai.request(app).delete(`/orders/${order._id}`)
-            .set('authorization', `Bearer ${sut.tokenUser1}`)
-            .send();
+        const response = await sut.addToken(chai.request(app).delete(`/orders/${order._id}`), sut.tokenUser1);
 
         response.should.have.status(200);
         expect(response.body).to.be.not.null;
