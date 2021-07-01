@@ -16,7 +16,7 @@ export class OrdersController {
     };
 
     deleteOrder = async (req, res) => {
-        res.json(await orderStore.delete(req.params.id, SecurityUtil.currentUser(req)));
+        res.json(await orderStore.delete(req.params.id, SecurityUtil.currentUser(req))); // TODO should return 402 if not ok
     };
 }
 

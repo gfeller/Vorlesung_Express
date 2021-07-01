@@ -26,7 +26,7 @@ assert.lengthOf(beverages.tea, 3, 'beverages has 3 types of tea');
 
 
 // mocha + chai
-describe('macha + chai', function () {
+describe('mocha + chai', function () {
     it('should return undefined when the value is not present', function () {
         const foo = 'bar';
         const beverages = {tea: ['chai', 'matcha', 'oolong']};
