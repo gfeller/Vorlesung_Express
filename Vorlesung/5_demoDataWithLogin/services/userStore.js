@@ -1,4 +1,4 @@
-import Datastore from 'nedb-promise'
+import Datastore from 'nedb-promises'
 import {CryptoUtil} from '../utils/cryptoUtil.js';
 
 export class User {

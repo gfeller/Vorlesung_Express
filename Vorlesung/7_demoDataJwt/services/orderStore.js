@@ -1,4 +1,4 @@
-import Datastore from 'nedb-promise'
+import Datastore from 'nedb-promises'
 
 export class Order {
     constructor(pizzaName, orderedBy) {
