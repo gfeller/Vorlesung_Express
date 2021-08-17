@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import methodOverride from "method-override"
-import {orderRoutes} from './routes/orderRoutes.js'
+import {orderRoutes} from './routes/order-routes.js'
 
 const app = express();
 

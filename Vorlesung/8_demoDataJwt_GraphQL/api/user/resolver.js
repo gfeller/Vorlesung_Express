@@ -1,5 +1,5 @@
-import {userStore} from "../../services/userStore.js";
-import {orderStore} from "../../services/orderStore.js";
+import {userStore} from "../../services/user-store.js";
+import {orderStore} from "../../services/order-store.js";
 import {SecurityUtil} from "../../utils/security.js";
 
 export const userResolver = {

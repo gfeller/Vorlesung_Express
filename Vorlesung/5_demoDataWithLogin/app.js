@@ -3,8 +3,8 @@ import bodyParser from 'body-parser';
 import exphbs from 'express-handlebars';
 import path from 'path';
 import session from 'express-session';
-import {indexRoutes} from './routes/indexRoutes.js';
-import {orderRoutes} from './routes/orderRoutes.js';
+import {indexRoutes} from './routes/index-routes.js';
+import {orderRoutes} from './routes/order-routes.js';
 import {helpers} from './utils/handlebar-util.js'
 import {overrideMiddleware} from "./utils/method-override.js";
 

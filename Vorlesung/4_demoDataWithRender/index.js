@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
-import {orderRoutes} from './routes/orderRoutes.js';
+import {orderRoutes} from './routes/order-routes.js';
 import {helpers} from './utils/handlebar-util.js'
 import {overrideMiddleware} from "./utils/method-override.js";
 

@@ -3,8 +3,8 @@ import bodyParser from 'body-parser';
 import path, {dirname} from 'path';
 import jwt from 'express-jwt';
 
-import {indexRoutes} from './routes/indexRoutes.js';
-import {orderRoutes} from './routes/orderRoutes.js';
+import {indexRoutes} from './routes/index-routes.js';
+import {orderRoutes} from './routes/order-routes.js';
 import {fileURLToPath} from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));

@@ -1,4 +1,4 @@
-import {userStore} from '../services/userStore.js';
+import {userStore} from '../services/user-store.js';
 import {SecurityUtil} from "../utils/security.js";
 
 export class IndexController {

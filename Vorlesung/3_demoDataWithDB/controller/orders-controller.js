@@ -1,4 +1,4 @@
-import {orderStore} from "../services/orderStore.js";
+import {orderStore} from "../services/order-store.js";
 
 export function showIndex(req, res) {
     res.type('text/html');

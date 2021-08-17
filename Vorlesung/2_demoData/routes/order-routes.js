@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import * as ordersController from '../controller/ordersController.js';
+import * as ordersController from '../controller/orders-controller.js';
 
 router.get("/", ordersController.showIndex);
 router.get("/orders", ordersController.createOrder);

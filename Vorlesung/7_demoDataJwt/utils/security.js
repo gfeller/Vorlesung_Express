@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import {userStore} from '../services/userStore.js';
+import {userStore} from '../services/user-store.js';
 import util from 'util';
 
 const sign = util.promisify(jwt.sign);

@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import {userStore} from '../services/userStore.js';
+import {userStore} from '../services/user-store.js';
 import util from 'util';
 import {jwt_secret, jwt_sign} from "../config.js";
 

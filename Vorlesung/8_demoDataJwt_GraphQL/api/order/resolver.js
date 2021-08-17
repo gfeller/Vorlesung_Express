@@ -1,5 +1,5 @@
-import {orderStore} from "../../services/orderStore.js";
-import {userStore} from "../../services/userStore.js";
+import {orderStore} from "../../services/order-store.js";
+import {userStore} from "../../services/user-store.js";
 
 export const orderResolver = {
     Query: {

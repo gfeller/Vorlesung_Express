@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
 import session from 'express-session';
-import {indexRoutes} from './routes/indexRoutes.js';
+import {indexRoutes} from './routes/index-routes.js';
 import {helpers} from './utils/handlebar-util.js'
 
 

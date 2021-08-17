@@ -1,13 +1,16 @@
-import {orderStore} from '../services/orderStore.js'
-import {SecurityUtil} from '../utils/security.js'
+import {orderStore} from '../services/order-store.js'
 
 export class OrdersController {
+    showIndex = (req, res) => {
+        res.render("index");
+    };
+
     createOrder = (req, res) => {
         res.render("newOrder");
     };
 
     createPizza = async (req, res) => {
-        res.render("succeeded", await orderStore.add(req.body.name, SecurityUtil.currentUser(req)));
+        res.render("succeeded", await orderStore.add(req.body.name, "unkown"));
     };
 
     showOrder = async (req, res) => {
