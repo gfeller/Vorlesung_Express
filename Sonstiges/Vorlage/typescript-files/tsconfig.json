@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS", // https://github.com/wclr/ts-node-dev/issues/265
+    "target": "es2020",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "strict":true
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
