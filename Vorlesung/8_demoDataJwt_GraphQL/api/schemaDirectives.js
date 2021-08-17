@@ -1,10 +1,16 @@
 import apollo from 'apollo-server-express'
 
 import graphql from "graphql";
+
 const {defaultFieldResolver} = graphql;
 
 
-const {ApolloServer, gql, SchemaDirectiveVisitor} = apollo;
+// const {ApolloServer, gql, SchemaDirectiveVisitor} = apollo;
+import * as tools from "@graphql-tools/schema";
+const { SchemaDirectiveVisitor} = tools;
+debugger;
+
+console.log(SchemaDirectiveVisitor)
 
 export class AuthDirective extends SchemaDirectiveVisitor {
     visitObject(type) {
@@ -41,8 +47,7 @@ export class AuthDirective extends SchemaDirectiveVisitor {
 
                 const user = args[2].user;
 
-                if (requiresAuth)
-                {
+                if (requiresAuth) {
                     if (!user) {
                         throw new Error("not authorized");
                     }

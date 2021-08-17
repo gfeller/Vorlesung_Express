@@ -1,5 +1,5 @@
 import qs from 'qs';
-import * as randomService from '../services/randomService.js';
+import * as randomService from '../services/random-service.js';
 
 export function index(req, res) {
     res.render('random', {title: 'Random'});

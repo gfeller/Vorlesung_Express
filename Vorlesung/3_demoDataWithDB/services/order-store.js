@@ -1,5 +1,4 @@
-import Datastore from 'nedb';
-
+import Datastore from '@seald-io/nedb';
 const db = new Datastore({filename: './data/order.db', autoload: true});
 
 class Order {

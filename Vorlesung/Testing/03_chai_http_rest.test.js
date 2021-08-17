@@ -39,8 +39,6 @@ describe('Scenarios', () => {
 
     async function deleteWithDifferentUser(order) {
         const response = await sut.addToken(chai.request(sut.app).delete(`/orders/${order._id}`), sut.tokenUser2);
-
-        response.should.have.status(200);
         expect(response.body).to.be.null;
     }
 
