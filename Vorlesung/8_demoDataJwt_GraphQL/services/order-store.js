@@ -29,7 +29,7 @@ export class OrderStore {
     }
 
     async all({email, isAdmin}) {
-        return await this.db.cfind(isAdmin ? {} :{orderedBy: email}).sort({orderDate: -1}).exec();
+        return await this.db.find(isAdmin ? {} :{orderedBy: email}).sort({orderDate: -1}).exec();
     }
 }
 
