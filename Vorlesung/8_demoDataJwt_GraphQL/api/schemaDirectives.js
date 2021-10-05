@@ -5,9 +5,9 @@ import graphql from "graphql";
 const {defaultFieldResolver} = graphql;
 
 
-// const {ApolloServer, gql, SchemaDirectiveVisitor} = apollo;
-import * as tools from "@graphql-tools/schema";
-const { SchemaDirectiveVisitor} = tools;
+const {ApolloServer, gql, SchemaDirectiveVisitor} = apollo;
+//import * as tools from "@graphql-tools/schema";
+//const { SchemaDirectiveVisitor} = tools;
 debugger;
 
 console.log(SchemaDirectiveVisitor)
