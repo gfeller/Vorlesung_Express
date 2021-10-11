@@ -18,7 +18,7 @@ export class UserStore {
             throw new Error('no user');
         }
         let user = new User(email, passwort);
-        return await this.db.insert(user);
+        return this.db.insert(user);
     }
 
     async authenticate(email, passwort, callback) {

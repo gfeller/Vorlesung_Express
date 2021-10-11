@@ -7,7 +7,7 @@ class OrderService {
                             _id
                           }
                         }`;
-        return await httpService.ajax(query);
+        return httpService.ajax(query);
     }
 
     async getOrders() {
@@ -43,7 +43,7 @@ class OrderService {
             _id
           }
         }`;
-        return await httpService.ajax(query);
+        return httpService.ajax(query);
     }
 }
 

@@ -21,11 +21,11 @@ export class UserStore {
     }
 
     async all() {
-        return await this.db.find({});
+        return this.db.find({});
     }
 
     async findByEmail(email) {
-        return await this.db.findOne({email});
+        return this.db.findOne({email});
     }
 
     async registerAdmin(email, passwort) {
@@ -33,7 +33,7 @@ export class UserStore {
             throw new Error('missing data');
         }
         let user = new User(email, passwort, true);
-        return await this.db.insert(user);
+        return this.db.insert(user);
     }
 
     async register(email, passwort) {
@@ -41,7 +41,7 @@ export class UserStore {
             throw new Error('missing data');
         }
         let user = new User(email, passwort, false);
-        return await this.db.insert(user);
+        return this.db.insert(user);
     }
 
     async authenticate(email, passwort) {

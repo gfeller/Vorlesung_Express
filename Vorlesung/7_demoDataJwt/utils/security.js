@@ -27,7 +27,7 @@ export class SecurityUtil {
         if (!name) {
             return "";
         }
-        return await sign({name}, secret, options);
+        return sign({name}, secret, options);
     }
 
     static async handleLogin(req, res) {

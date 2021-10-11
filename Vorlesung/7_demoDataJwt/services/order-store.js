@@ -17,20 +17,20 @@ export class OrderStore {
 
     async add(pizzaName, orderedBy) {
         let order = new Order(pizzaName, orderedBy);
-        return await this.db.insert(order);
+        return this.db.insert(order);
     }
 
     async delete(id, currentUser) {
         await this.db.update({_id: id, orderedBy: currentUser}, {$set: {"state": "DELETED"}});
-        return await this.get(id, currentUser);
+        return this.get(id, currentUser);
     }
 
     async get(id, currentUser) {
-        return await this.db.findOne({_id: id, orderedBy : currentUser});
+        return this.db.findOne({_id: id, orderedBy : currentUser});
     }
 
     async all(currentUser) {
-        return await this.db.find({orderedBy : currentUser}).sort({ orderDate: -1 }).exec();
+        return this.db.find({orderedBy : currentUser}).sort({ orderDate: -1 }).exec();
     }
 }
 
