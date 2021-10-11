@@ -30,7 +30,7 @@ export class OrderStore {
     }
 
     async all(currentUser) {
-        return await this.db.cfind({orderedBy : currentUser}).sort({ orderDate: -1 }).exec();
+        return await this.db.find({orderedBy : currentUser}).sort({ orderDate: -1 }).exec();
     }
 }
 

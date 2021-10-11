@@ -1,10 +1,5 @@
-<<<<<<< HEAD:Vorlesung/5_demoDataWithLogin/services/user-store.js
-import Datastore from 'nedb-promise'
-import {CryptoUtil} from '../utils/crypto-util.js';
-=======
 import Datastore from 'nedb-promises'
-import {CryptoUtil} from '../utils/cryptoUtil.js';
->>>>>>> ed940f2b8d4319936e2058a6f40f470b905295a8:Vorlesung/5_demoDataWithLogin/services/userStore.js
+import {CryptoUtil} from '../utils/crypto-util.js';
 
 export class User {
     constructor(email, passwort) {
