@@ -1,9 +1,17 @@
-const app = require('express')();
-const http = require('http').createServer(app);
-const io = require('socket.io')(http);
+import express from 'express';
+import http from 'http';
+import socketIO from 'socket.io'
+import {dirname} from "path";
+import {fileURLToPath} from "url";
+
+const app = express();
+const server = http.createServer(app);
+const io = socketIO(server);
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile('/index.html', {root: __dirname});
 });
 
 io.on('connection', function (socket) {
@@ -12,6 +20,6 @@ io.on('connection', function (socket) {
     });
 });
 
-http.listen(3000, function () {
+server.listen(3000, function () {
     console.log('listening on http://localhost:3000');
 });
