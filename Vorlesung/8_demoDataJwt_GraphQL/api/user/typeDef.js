@@ -7,7 +7,7 @@ export const userTypeDefs = gql`
   type User {
         _id : String! 
         email: String!
-        orders : [Order!]! @auth(isAdmin: true)                
+        orders : [Order!]! @auth(requires: ADMIN)                
   }  
   
   input NewUserInput {

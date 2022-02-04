@@ -22,7 +22,7 @@ export const orderTypeDef = gql`
   }
   
   extend type Mutation {
-    addOrder(input: AddOrderInput) : Order! @auth(isAdmin: false)
-    deleteOrder(id: String) : Order! @auth(isAdmin: false) 
+    addOrder(input: AddOrderInput) : Order! @auth(requires: USER)
+    deleteOrder(id: String) : Order! @auth(requires: USER) 
   }
 `;

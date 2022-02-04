@@ -10,15 +10,6 @@ import graphql from "graphql";
 const {GraphQLScalarType} = graphql;
 
 export const root = gql`
-    directive @auth( isAdmin: Boolean = false ) on OBJECT | FIELD_DEFINITION
-    
-    enum Role {
-      ADMIN
-      REVIEWER
-      USER
-      UNKNOWN
-    }  
-    
     scalar Date
 
     

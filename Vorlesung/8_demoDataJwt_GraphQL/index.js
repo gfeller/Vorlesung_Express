@@ -10,18 +10,29 @@ const verify = util.promisify(jwt.verify);
 import apollo from 'apollo-server-express'
 import {resolvers, typeDefs} from "./api/root.js";
 import {jwt_secret} from "./config.js";
-import {AuthDirective} from "./api/schemaDirectives.js";
+import {authDirectiveTransformer, authDirectiveTypeDefs} from "./api/schemaDirectives.js";
+import { makeExecutableSchema } from '@graphql-tools/schema'
+
 
 
 const {ApolloServer, gql} = apollo;
+
+
+let schema = makeExecutableSchema({
+    typeDefs: [
+        authDirectiveTypeDefs,
+        ...typeDefs
+    ],
+    resolvers: resolvers
+})
+schema = authDirectiveTransformer(schema)
 
 
 const app = express();
 const router = express.Router();
 const server = new ApolloServer(
     {
-        typeDefs,
-        resolvers,
+        schema,
         context: async (context) => {
             const header = context.req.header("authorization");
             if(header){
@@ -33,13 +44,10 @@ const server = new ApolloServer(
                 }
             }
             return {req : context.req, res: context.res, user : context.user}
-        },
-        schemaDirectives: {
-            auth: AuthDirective,
-            authorized: AuthDirective,
-            authenticated: AuthDirective
         }
     });
+
+await server.start();
 
 
 app.use(express.static(path.resolve('public/html')));
