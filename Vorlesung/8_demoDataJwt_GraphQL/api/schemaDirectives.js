@@ -4,7 +4,7 @@ import graphql from "graphql";
 
 const {defaultFieldResolver} = graphql;
 import { mapSchema, getDirective, MapperKind } from '@graphql-tools/utils'
- 
+
 function authDirective(directiveName, getUserFn) {
     const typeDirectiveArgumentMaps = {}
     return {
