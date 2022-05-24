@@ -19,11 +19,11 @@ export class Order {
 }
 
 export class OrderStore {
-    private db: Datastore;
+    private db: Datastore<Order>;
 
-    constructor(db?: Datastore) {
+    constructor(db?: Datastore<Order>) {
         const options = process.env.DB_TYPE === "FILE" ? {filename: './data/orders.db', autoload: true} : {}
-        this.db = db || new Datastore(options);
+        this.db = db || Datastore.create(options);
     }
 
     async add(pizzaName: string, orderedBy: string) {
@@ -33,11 +33,12 @@ export class OrderStore {
 
     async delete(id: string) {
         await this.db.update({_id: id}, {$set: {"state": OrderState.DELETED}});
-        return this.get(id);
+        const order = await this.get(id);
+        return order!;
     }
 
     async get(id: string) {
-        return this.db.findOne({_id: id});
+        return this.db.findOne<Order>({_id: id});
     }
 
     async all() {

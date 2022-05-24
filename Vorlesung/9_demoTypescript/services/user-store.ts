@@ -12,18 +12,18 @@ export class User {
 }
 
 export class UserStore {
-    private db: Datastore;
+    private db: Datastore<User>;
 
-    constructor(db?: Datastore) {
+    constructor(db?: Datastore<User>) {
         const options = process.env.DB_TYPE === "FILE" ? {filename: './data/user.db', autoload: true} : {}
-        this.db = db || new Datastore(options);
+        this.db = db || Datastore.create(options);
     }
 
     async register(email: string, passwort: string) {
         if (!(email && passwort)) {
             throw new Error('no user');
         }
-        let user = new User(email, passwort);
+        const user = new User(email, passwort);
         return this.db.insert(user);
     }
 
@@ -31,7 +31,7 @@ export class UserStore {
         if (!(email && passwort)) {
             return false;
         }
-        let user = await this.db.findOne<User>({email: email});
+        const user = await this.db.findOne({email: email});
         if (user == null) {
             await this.register(email, passwort);
             return true;
