@@ -16,9 +16,9 @@ dotenv.config({path: `.env-testing`});
 // load app after env
 const app = (await import('../app.js')).app;
 
-describe('GET /', () => {
-    it('should return index page', async () => {
-        const response = await chai.request(app).get('/');
+describe('INDEX Controller', () => {
+    it('should return login page if not logged in', async () => {
+        const response = await chai.request(app).get('/orders');
         response.should.have.status(200);
 
         const dom = new jsdom.JSDOM(response.text);

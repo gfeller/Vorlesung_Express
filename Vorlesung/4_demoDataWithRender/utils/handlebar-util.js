@@ -1,4 +1,4 @@
-
+//  {{#if_eq state "OK"}}
 export const helpers = {
     'if_eq': function (a, b, opts) {
         if (a === b)
