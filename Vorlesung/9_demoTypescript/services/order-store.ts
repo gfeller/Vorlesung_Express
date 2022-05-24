@@ -1,0 +1,48 @@
+import Datastore from 'nedb-promises'
+
+enum OrderState{
+    OK = "OK",
+    DELETED = "DELETED"
+}
+
+export class Order {
+    orderedBy: string;
+    orderDate: Date;
+    pizzaName: string;
+    state: string;
+    constructor(pizzaName: string, orderedBy: string) {
+        this.orderedBy = orderedBy;
+        this.pizzaName = pizzaName;
+        this.orderDate = new Date();
+        this.state = OrderState.OK;
+    }
+}
+
+export class OrderStore {
+    private db: Datastore;
+
+    constructor(db?: Datastore) {
+        const options = process.env.DB_TYPE === "FILE" ? {filename: './data/orders.db', autoload: true} : {}
+        this.db = db || new Datastore(options);
+    }
+
+    async add(pizzaName: string, orderedBy: string) {
+        const order = new Order(pizzaName, orderedBy);
+        return this.db.insert(order);
+    }
+
+    async delete(id: string) {
+        await this.db.update({_id: id}, {$set: {"state": OrderState.DELETED}});
+        return this.get(id);
+    }
+
+    async get(id: string) {
+        return this.db.findOne({_id: id});
+    }
+
+    async all() {
+        return this.db.find({});
+    }
+}
+
+export const orderStore = new OrderStore();
