@@ -6,7 +6,7 @@ const sign = util.promisify(jwt.sign);
 
 export class SecurityUtil {
     static isLoggedIn(req) {
-        return req.user != null;
+        return req.auth != null;
     }
 
     static authenticated(req, res, next) {
@@ -19,7 +19,7 @@ export class SecurityUtil {
     }
 
     static currentUser(req) {
-        return req.user.name;
+        return req.auth.name;
     }
 
 
