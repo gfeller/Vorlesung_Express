@@ -9,7 +9,7 @@ export class Order {
     orderedBy: string;
     orderDate: Date;
     pizzaName: string;
-    state: string;
+    state: OrderState;
     constructor(pizzaName: string, orderedBy: string) {
         this.orderedBy = orderedBy;
         this.pizzaName = pizzaName;
