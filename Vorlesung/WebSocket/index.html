@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Socket.IO chat</title>
+    <title>Websocket chat</title>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
@@ -19,22 +19,23 @@
       <input id="messageInput" autocomplete="off" /><button>Send</button>
     </form>
 
-    <script src="/socket.io/socket.io.js"></script>
     <script>
-      const socket = io();
       const input = document.getElementById("messageInput")
-
       const messages = document.getElementById("messages")
 
+      const ws = new WebSocket("ws://localhost:3000");
+      ws.onopen = (event) =>  console.log("WEB-SOCKET OPEN");
+      ws.onclose = (event) =>  console.log("WEB-SOCKET CLOSED");
+
+      ws.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+        messages.insertAdjacentHTML('beforeend', `<li>${data.value}</li>`);
+      }
 
       document.querySelector("form").addEventListener("submit", (args) => {
-        socket.emit('chat message', input.value);
+        ws.send(JSON.stringify({event: 'chat message', value: input.value}))
         args.preventDefault();
       })
-
-      socket.on('chat message', function(msg){
-        messages.insertAdjacentHTML('beforeend', `<li>${msg}</li>`);
-      });
     </script>
   </body>
 </html>
