@@ -28,19 +28,15 @@ schema.pre('save', function (next) {
     next();
 });
 
-schema.statics.findByEmailAndPassword = function findByEmailAndPassword(email, password, cb) {
-    this.findOne({email: email}, function (err, user) {
-        if (err) {
-            return cb(err);
-        }
-        if (!user) {
-            return cb();
-        }
-
+schema.statics.findByEmailAndPassword = async function findByEmailAndPassword(email, password, cb) {
+    return this.findOne({email: email}).then(user => {
         let pwdHash = crypto.createHash('md5').update(password).digest('hex'); //besser wenn asynchrone
-
-        return cb(err, pwdHash === user.passwordHash ? user : null)
-    });
+        user = pwdHash === user.passwordHash ? user : null;
+        if(!user){
+            return Promise.reject("ERR_AUTH_0001: WRONG PASSWORD OR USERNAME")
+        }
+        return user;
+    })
 };
 
 export const User = mongoose.model('User', schema);

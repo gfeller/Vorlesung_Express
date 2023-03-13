@@ -2,8 +2,7 @@ import mongoose from 'mongoose';
 import {User} from './User.js';
 
 mongoose.Promise = global.Promise;
-mongoose.set('useCreateIndex', true);
-mongoose.connect('mongodb://localhost/demo2',
+mongoose.connect('mongodb://localhost/demo5',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -17,22 +16,23 @@ async function createUser(mail, pwd) {
         await u.save();
         console.log("Kein Problem")
     } catch (err) {
-        console.log('Problem: ' + err.message)
+        console.log('\x1b[33m', err.message, '\x1b[0m');
     }
 }
 
 await createUser("michael.gfeller@ost.ch", "123");
 await createUser("michael.gfeller@ost.ch", "123456789");
-checkUser()
+await checkUser("michael.gfeller@ost.ch", "123")
+await checkUser("michael.gfeller@ost.ch", "123456789")
 
-function checkUser() {
-    return User.findByEmailAndPassword("michael.gfeller@ost.ch", "123456789", function (err, user) {
-        if (user) {
-            console.log(`${user.passwordHash} ${user.email} ${user.dummy}`);
-        } else {
-            console.log("wrong user or password");
-        }
-    });
+async function checkUser(mail, pwd) {
+    try{
+        const user = await User.findByEmailAndPassword(mail, pwd);
+        console.log(`${user.passwordHash} ${user.email} ${user.dummy}`);
+    }
+    catch( error ) {
+        console.log('\x1b[33m', error, '\x1b[0m');
+    }
 }
 
 
