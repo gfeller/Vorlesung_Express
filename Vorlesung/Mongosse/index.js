@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import {User} from './User.js';
+import {User, Order} from './User.js';
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/demo5',
+mongoose.connect('mongodb://localhost/demo0',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -25,6 +25,8 @@ await createUser("michael.gfeller@ost.ch", "123456789");
 await checkUser("michael.gfeller@ost.ch", "123")
 await checkUser("michael.gfeller@ost.ch", "123456789")
 
+const user = await User.findByEmailAndPassword("michael.gfeller@ost.ch", "123456789");
+
 async function checkUser(mail, pwd) {
     try{
         const user = await User.findByEmailAndPassword(mail, pwd);
@@ -35,5 +37,14 @@ async function checkUser(mail, pwd) {
     }
 }
 
+const order = new Order({order: "Hawaii", orderBy: user._id})
+await order.save()
+const savedOrder = await Order.findById(order._id).populate("orderBy").exec();
+console.log(`${savedOrder.order} ordered by ${savedOrder.orderBy.email}`);
 
-//"C:\Program Files (x86)\MongoDB\Server\3.0\bin\mongod.exe" --dbpath c:\temp\mongodb
+
+await User.deleteOne({_id: user._id})
+const savedOrder2A = await Order.findById(order._id).populate("orderBy").exec();
+console.log(`${savedOrder2A.order} ordered by ${savedOrder2A.orderBy?.email}`);
+const savedOrder2B = await Order.findById(order._id).exec();
+console.log(`${savedOrder2B.order} ordered by ${savedOrder2B.orderBy}`);

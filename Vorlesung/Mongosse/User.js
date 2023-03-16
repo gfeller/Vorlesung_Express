@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import crypto from 'crypto';
+const { Schema } = mongoose;
+
 
 const REQUIRED_PASSWORD_LENGTH = 8;
 
@@ -8,14 +10,16 @@ function validateStringLength(value) {
 }
 
 const schema = mongoose.Schema({
-    email: {type: String, required: true, unique: true}
-    ,
+    email: {type: String, required: true, unique: true},
     passwordHash: {
         type: String,
         required: true,
         validate: [validateStringLength, 'is too short (minimum is ' + REQUIRED_PASSWORD_LENGTH + ' characters']
     }
 });
+
+
+
 
 
 schema.pre('save', function (next) {
@@ -40,3 +44,12 @@ schema.statics.findByEmailAndPassword = async function findByEmailAndPassword(em
 };
 
 export const User = mongoose.model('User', schema);
+
+
+const orderSchema = mongoose.Schema({
+    order: {type: String, required: true},
+    orderBy: { type: Schema.Types.ObjectId, ref: 'User' }
+});
+
+export const Order = mongoose.model('Order', orderSchema);
+
