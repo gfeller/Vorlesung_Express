@@ -48,3 +48,5 @@ const savedOrder2A = await Order.findById(order._id).populate("orderBy").exec();
 console.log(`${savedOrder2A.order} ordered by ${savedOrder2A.orderBy?.email}`);
 const savedOrder2B = await Order.findById(order._id).exec();
 console.log(`${savedOrder2B.order} ordered by ${savedOrder2B.orderBy}`);
+
+await mongoose.disconnect();
