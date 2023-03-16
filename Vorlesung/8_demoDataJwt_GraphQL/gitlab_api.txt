@@ -1,0 +1,16 @@
+{
+  viewer {
+    login
+    repositories(last: 20) {
+      edges {
+        node {
+          name
+          createdAt
+        }
+      }
+    }
+  }
+  repository(name: "NodeJS", owner: "gfeller") {
+    nameWithOwner
+  }
+}
