@@ -7,8 +7,12 @@ app.use(cookieParser("secret"));
 app.get("/cookieDemo/*", function (req, res) {
     console.log(JSON.stringify(req.cookies));
     res.cookie("url", req.url);
+    res.cookie("signedUrl", req.url, {signed: true});
+
     if (req.cookies.url) {
-        res.end("dein letzter besuch: " + req.cookies.url)
+        res.end(`dein letzter besuch: 
+Cookie: ${req.cookies.url}
+SignedCookie: ${req.signedCookies.signedUrl || "---"}`);
     } else {
         res.end("Dein erster besuch?!")
     }
