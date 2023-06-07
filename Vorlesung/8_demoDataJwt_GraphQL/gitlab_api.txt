@@ -14,3 +14,22 @@
     nameWithOwner
   }
 }
+
+
+mutation{
+  authenticate(input: {email: "admin@admin.ch", passwort: "123456"}) {
+    token
+  }
+}
+
+// HEADER
+Authorization Bearer <TOKEN>
+
+query ExampleQuery {
+  Orders {
+    pizzaName,
+    owner {
+      email
+    }
+  }
+}
