@@ -6,14 +6,14 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Todo</title>
-    {{#if dark}}
+    {{#if_eq theme 'dark'}}
         <style>
             body {
                 background: black;
                 color: white;
             }
         </style>
-    {{/if}}
+    {{/if_eq}}
 </head>
 <body>
 {{{body}}}
