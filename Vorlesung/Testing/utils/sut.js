@@ -13,7 +13,7 @@ export class SUT {
     }
 
     async init() {
-        this.app = (await import('../../7_demoDataJwt/app.js')).app;
+        this.app = (await import('../../5_demoDataJwt/app.js')).app;
 
         this.tokenUser1 = await this.createToken("test-user-1@ost.ch")
         this.tokenUser2 = await this.createToken("test-user-2@ost.ch")

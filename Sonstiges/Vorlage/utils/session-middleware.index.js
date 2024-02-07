@@ -1,7 +1,10 @@
 export const sessionUserSettings = (req, res, next) => {
     const userSettings = req.session?.userSettings || {orderBy: 'title', orderDirection: -1, theme: 'dark'};
-    const {orderBy, orderDirection} = req.query;
+    const {orderBy, orderDirection, theme} = req.query;
 
+    if (theme) {
+        userSettings.theme = theme;
+    }
     if (orderBy) {
         userSettings.orderBy = orderBy;
     }

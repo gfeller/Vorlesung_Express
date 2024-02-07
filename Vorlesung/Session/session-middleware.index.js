@@ -4,7 +4,7 @@ import session from 'express-session';
 const app = express();
 
 const sessionUserSettings = (req, res, next) => {
-    // default Wert oder aktueller Wert von der Session lesen
+    // default value or load data from session
     const userSettings = req.session.userSettings || {orderBy: 'default', orderDirection: -1};
     const {orderBy, orderDirection} = req.query;
 
@@ -15,6 +15,7 @@ const sessionUserSettings = (req, res, next) => {
         userSettings.orderDirection = orderDirection;
     }
     req.userSettings = req.session.userSettings = userSettings;
+    res.locals = req.userSettings; // tip: req.locals -> visible within views
 
     next();
 };
