@@ -16,7 +16,9 @@ export class OrderStore {
 
     async add(pizzaName, orderedBy) {
         let order = new Order(pizzaName, orderedBy);
-        return this.db.insert(order);
+        const storedOrder = await this.db.insert(order);
+        console.log(order._id, storedOrder._id);
+        return storedOrder;
     }
 
     async delete(id) {
