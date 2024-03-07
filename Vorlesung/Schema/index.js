@@ -5,6 +5,6 @@ const OrderSchema = z.object({
     customer: z.string().min(10).optional()
 });
 
-const result = OrderSchema.safeParse({ name: "Mi" });
-console.log(result.error);
+const result = OrderSchema.safeParse({ name: "Mi", hobby: "Wandern " });
+console.log(result.data, result.error?.issues);
 
