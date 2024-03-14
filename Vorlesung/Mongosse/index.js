@@ -37,16 +37,18 @@ async function checkUser(mail, pwd) {
     }
 }
 
+console.log("--- ORDERS ---")
 const order = new Order({order: "Hawaii", orderBy: user._id})
 await order.save()
 const savedOrder = await Order.findById(order._id).populate("orderBy").exec();
-console.log(`${savedOrder.order} ordered by ${savedOrder.orderBy.email}`);
+console.log("1", `${savedOrder.order} ordered by ${savedOrder.orderBy.email}`);
 
 
 await User.deleteOne({_id: user._id})
+console.log("--- user deleted ---")
 const savedOrder2A = await Order.findById(order._id).populate("orderBy").exec();
-console.log(`${savedOrder2A.order} ordered by ${savedOrder2A.orderBy?.email}`);
+console.log("2", `${savedOrder2A.order} ordered by ${savedOrder2A.orderBy?.email}`);
 const savedOrder2B = await Order.findById(order._id).exec();
-console.log(`${savedOrder2B.order} ordered by ${savedOrder2B.orderBy}`);
+console.log("3", `${savedOrder2B.order} ordered by ${savedOrder2B.orderBy}`);
 
 await mongoose.disconnect();
