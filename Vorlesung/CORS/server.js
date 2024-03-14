@@ -9,7 +9,7 @@ const allowCrossDomain = function(req, res, next) {
     next();
 };
 
-app.use(allowCrossDomain);
+// app.use(allowCrossDomain);
 
 app.get('/data', function (req, res) {
     res.json({a: "hello", b: "world"});
