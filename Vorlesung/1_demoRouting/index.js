@@ -23,16 +23,16 @@ function methodOverrideFn(req, res) {
     }
 }
 
-function myDummyLogger(options) {
-    options = options ? options : {};
+function myDummyLogger(options = {}) {
+    options = {timestamp: true, ...options};
 
     return function myInnerDummyLogger(req, res, next) {
-        console.log(req.method + ":" + req.url);
+        const timestamp = options.timestamp ? new Date().toISOString() + " " : "";
+        console.log(`${timestamp}${req.method} ${req.url}`)
         next();
     }
 }
 
-//
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(methodOverride(methodOverrideFn));
@@ -94,7 +94,6 @@ function generateError(req, res, next) {
     next(new Error("Hier gibts ein Fehler!"));
 }
 
-router.all("/{*splat}", myDummyLogger());
 router.get("/", showIndex);
 router.get("/error", generateError);
 router.get("/orders", createOrder);
@@ -104,12 +103,11 @@ router.delete("/orders/:id/", deleteOrder);
 
 const hostname = '127.0.0.1';
 const port = 3001;
+
 app.listen(port, hostname, (error) => {
     if(error){
         console.error(error);
     }else{
         console.log(`Server running at http://${hostname}:${port}/`);
     }
-
 });
-
