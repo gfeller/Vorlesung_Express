@@ -7,7 +7,7 @@
   "scripts": {
     "start": "tsx index.ts",
     "test": "mocha",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint"
   },
   "author": "mgfeller",
   "license": "ISC",

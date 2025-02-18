@@ -1,43 +1,27 @@
 {
   "name": "demo",
   "version": "1.0.0",
-  "description": "Express Demo",
+  "type": "module",
+  "description": "Vorlage TypeScript Dependency",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node index.ts",
-    "test": "mocha -r ts-node/register 'tests/**/*.ts'",
+    "start": "tsx index.ts",
     "lint": "eslint . --ext .ts"
   },
   "author": "mgfeller",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "dotenv": "^8.6.0",
-    "express": "^4.17.1",
-    "express-handlebars": "^5.3.2",
-    "express-session": "^1.16.1",
+    "body-parser": "^1.20.3",
+    "express": "^5.0.1",
+    "express-handlebars": "^8.0.1",
+    "express-session": "^1.18.1",
     "nedb-promises": "^6.2.3"
   },
   "devDependencies": {
-    "@types/body-parser": "^1.19.1",
-    "@types/dotenv": "^8.2.0",
-    "@types/express": "^4.17.13",
-    "@types/express-handlebars": "^5.3.1",
-    "@types/express-session": "^1.17.4",
-    "@types/jsdom": "^16.2.13",
-    "@types/chai-dom": "^0.0.10",
-    "@types/mocha": "^9.1.1",
-    "@typescript-eslint/eslint-plugin": "^4.29.1",
-    "@typescript-eslint/parser": "^4.29.1",
-    "eslint": "^7.32.0",
-    "ts-node": "^10.0.0",
-    "typescript": "^4.3.5",
-    "jsdom": "^16.5.1",
-    "mocha": "^9.2.2",
-    "moment": "^2.29.1",
-    "sinon": "^9.2.4",
-    "chai": "^4.3.4",
-    "chai-dom": "^1.9.0",
-    "chai-http": "^4.3.0"
+    "@types/express-handlebars": "^6.0.2",
+    "@types/express-session": "^1.18.1",
+    "typescript-eslint":  "^8.24.1",
+    "typescript": "^5.7.3",
+    "tsx": "^4.19.2"
   }
 }

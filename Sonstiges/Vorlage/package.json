@@ -4,24 +4,16 @@
   "description": "Vorlage",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "mocha tests/*.test.js"
+    "start": "node index.js"
   },
   "type": "module",
   "author": "mgfeller",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "chai": "^4.3.4",
-    "chai-dom": "^1.9.0",
-    "chai-http": "^4.3.0",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
+    "body-parser": "^1.20.3",
+    "express": "^5.0.1",
     "express-handlebars": "^5.3.3",
     "express-session": "^1.17.2",
-    "jsdom": "^17.0.0",
-    "mocha": "^9.0.3",
-    "nedb-promises": "^6.1.0",
-    "sinon": "^11.1.2"
+    "nedb-promises": "^6.2.3"
   }
 }
