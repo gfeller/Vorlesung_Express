@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "module": "CommonJS", // https://github.com/wclr/ts-node-dev/issues/265 | https://github.com/mochajs/mocha-examples/issues/47
-    "target": "es2020",
-    "sourceMap": true,
-    "esModuleInterop": true,
+    "target": "ES2022",
+    "noEmit": true,
+    "module": "ESNext",
     "moduleResolution": "Node",
-    "strict":true
+    "esModuleInterop": true
+
   },
   "exclude": [
     "node_modules"

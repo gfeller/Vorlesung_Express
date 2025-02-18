@@ -1,14 +1,16 @@
-import chai from 'chai';
+import {use} from 'chai';
+
 import chaiHttp from 'chai-http';
 import chaiDom from 'chai-dom';
 import jsdom from 'jsdom';
 import dotenv from "dotenv";
 
-chai.use(chaiHttp);
-chai.use(chaiDom);
+let chai = use(chaiDom)
+    .use(chaiHttp);
 
-const should = chai.should();
-const expect = chai.expect;
+chai.should();
+const {expect} = chai;
+
 
 process.env.NODE_ENV = "testing"
 dotenv.config({path: `.env-testing`});
@@ -18,7 +20,7 @@ import {app} from '../app';
 
 describe('INDEX Controller', () => {
     it('should return login page if not logged in', async () => {
-        const response = await chai.request(app).get('/orders');
+        const response = await chai.request.execute(app).get('/orders');
         response.should.have.status(200);
 
         const dom = new jsdom.JSDOM(response.text);

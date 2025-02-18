@@ -1,4 +1,5 @@
-import chai from 'chai';
+import * as chai from 'chai';
+chai.should();
 
 import {overrideMiddleware} from '../utils/method-override';
 import {Request} from "express";
