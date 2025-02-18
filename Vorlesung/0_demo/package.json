@@ -12,8 +12,6 @@
   "author": "mgfeller",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.20.2",
-    "express": "^4.17.1",
-    "method-override": "^3.0.0"
+
   }
 }
