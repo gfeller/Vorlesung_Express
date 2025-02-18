@@ -5,7 +5,7 @@ import chaiDom from 'chai-dom';
 import jsdom from 'jsdom';
 import dotenv from "dotenv";
 
-let chai = use(chaiDom)
+const chai = use(chaiDom)
     .use(chaiHttp);
 
 chai.should();

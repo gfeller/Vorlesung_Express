@@ -4,7 +4,6 @@ chai.should();
 import {overrideMiddleware} from '../utils/method-override';
 import {Request} from "express";
 
-const should = chai.should();
 const expect = chai.expect;
 
 declare global {
