@@ -27,7 +27,7 @@ export class OrderStore {
     }
 
     async get(id) {
-        return this.db.findOne({_id: id});
+        return this.db.findOne({ _id: id });
     }
 
     async all() {

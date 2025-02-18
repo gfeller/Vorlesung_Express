@@ -1,8 +1,8 @@
-import chai from 'chai';
+import * as chai from 'chai';
+chai.should();
 
 import {overrideMiddleware} from '../utils/method-override.js';
 
-const should = chai.should();
 const expect = chai.expect;
 
 describe('Override Middleware', () => {

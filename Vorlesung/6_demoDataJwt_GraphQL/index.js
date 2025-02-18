@@ -7,15 +7,14 @@ import util from 'util';
 const verify = util.promisify(jwt.verify);
 
 
-import apollo from 'apollo-server-express'
+import {ApolloServer} from '@apollo/server'
 import {resolvers, typeDefs} from "./api/root.js";
 import {jwt_secret} from "./config.js";
 import {authDirectiveTransformer, authDirectiveTypeDefs} from "./api/schemaDirectives.js";
 import { makeExecutableSchema } from '@graphql-tools/schema'
+import { expressMiddleware } from '@apollo/server/express4';
 
 
-
-const {ApolloServer, gql} = apollo;
 
 
 let schema = makeExecutableSchema({
@@ -33,18 +32,7 @@ const router = express.Router();
 const server = new ApolloServer(
     {
         schema,
-        context: async (context) => {
-            const header = context.req.header("authorization");
-            if(header){
-                try {
-                    context.user = await jwt.verify(header.replace("Bearer ", ""), jwt_secret);
-                }
-                catch (e) {
-                    context.user = null
-                }
-            }
-            return {req : context.req, res: context.res, user : context.user}
-        }
+
     });
 
 await server.start();
@@ -59,7 +47,22 @@ app.get("/", function (req, res) {
     res.sendFile("/html/index.html", {root: __dirname + '/public/'});
 });
 
-server.applyMiddleware({app, path: '/graphql'});
+//server.applyMiddleware({app, path: '/graphql'});
+
+app.use('/graphql', expressMiddleware(server, {
+    context: async (context) => {
+        const header = context.req.header("authorization");
+        if(header){
+            try {
+                context.user = await jwt.verify(header.replace("Bearer ", ""), jwt_secret);
+            }
+            catch (e) {
+                context.user = null
+            }
+        }
+        return {req : context.req, res: context.res, user : context.user}
+    }
+}));
 
 app.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {
@@ -71,6 +74,11 @@ app.use(function (err, req, res, next) {
 
 const hostname = '127.0.0.1';
 const port = 3000;
-app.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+
+app.listen(port, hostname, (error) => {
+    if(error){
+        console.error(error);
+    }else{
+        console.log(`Server running at http://${hostname}:${port}/`);
+    }
 });

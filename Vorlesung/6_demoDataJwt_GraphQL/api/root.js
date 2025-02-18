@@ -1,6 +1,4 @@
-import apollo from "apollo-server-express";
-
-const {gql} = apollo;
+import gql from 'graphql-tag';
 
 import {orderTypeDef} from "./order/typeDef.js";
 import {userTypeDefs} from "./user/typeDef.js";

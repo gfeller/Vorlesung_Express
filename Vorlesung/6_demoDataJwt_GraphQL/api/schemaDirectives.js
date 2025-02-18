@@ -1,5 +1,3 @@
-import apollo from 'apollo-server-express'
-
 import graphql from "graphql";
 
 const {defaultFieldResolver} = graphql;

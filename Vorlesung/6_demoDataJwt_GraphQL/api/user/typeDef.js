@@ -1,7 +1,4 @@
-import apollo from "apollo-server-express";
-
-const {gql} = apollo;
-
+import gql from 'graphql-tag';
 
 export const userTypeDefs = gql`  
   type User {
