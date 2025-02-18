@@ -94,7 +94,7 @@ function generateError(req, res, next) {
     next(new Error("Hier gibts ein Fehler!"));
 }
 
-router.all("/*", myDummyLogger());
+router.all("/{*splat}", myDummyLogger());
 router.get("/", showIndex);
 router.get("/error", generateError);
 router.get("/orders", createOrder);
@@ -104,7 +104,12 @@ router.delete("/orders/:id/", deleteOrder);
 
 const hostname = '127.0.0.1';
 const port = 3001;
-app.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(port, hostname, (error) => {
+    if(error){
+        console.error(error);
+    }else{
+        console.log(`Server running at http://${hostname}:${port}/`);
+    }
+
 });
 

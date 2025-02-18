@@ -4,7 +4,7 @@ const router = express.Router();
 import {ordersController} from '../controller/orders-controller.js';
 import {SecurityUtil} from "../utils/security.js";
 
-router.all("/*", SecurityUtil.handleAuthenticate);
+router.all("/{*splat}", SecurityUtil.handleAuthenticate);
 router.get("/", ordersController.createOrder);
 router.post("/", ordersController.createPizza);
 router.get("/:id/", ordersController.showOrder);
