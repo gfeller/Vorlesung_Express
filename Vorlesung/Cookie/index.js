@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser';
 const app = express();
 app.use(cookieParser("secret"));
 
-app.get("/cookieDemo/*", function (req, res) {
+app.get("/cookieDemo/{*splat}", function (req, res) {
     console.log(JSON.stringify(req.cookies));
     console.log(JSON.stringify(req.signedCookies));
     res.cookie("url", req.url);

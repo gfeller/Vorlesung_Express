@@ -4,13 +4,13 @@
   "description": "Express Demo",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "type": "module",
   "author": "mgfeller",
   "license": "ISC",
   "dependencies": {
-    "cookie-parser": "^1.3.5",
-    "express": "^4.12.4"
+    "cookie-parser": "^1.4.7",
+    "express": "^5.0.1"
   }
 }
