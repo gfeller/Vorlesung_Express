@@ -23,7 +23,7 @@ const sessionUserSettings = (req, res, next) => {
 app.use(session({secret: 'casduichasidbnuwezrfinasdcvjkadfhsuilfuzihfioda', resave: false, saveUninitialized: true}));
 app.use(sessionUserSettings);
 
-app.get("/{*splat}", function (req, res) {
+app.get("/*", function (req, res) {
     res.write(`<p><a href="/test">Refresh</a></p>`);
     res.write(`<p><a href="/test?orderBy='a'">Neu: orderBy='a'</a></p>`);
     res.write(`<p><a href="/test?orderBy='b'">Neu: orderBy='b'</a></p>`);
