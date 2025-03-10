@@ -25,8 +25,8 @@ app.use(sessionUserSettings);
 
 app.get("/*", function (req, res) {
     res.write(`<p><a href="/test">Refresh</a></p>`);
-    res.write(`<p><a href="/test?orderBy='a'">Neu: orderBy='a'</a></p>`);
-    res.write(`<p><a href="/test?orderBy='b'">Neu: orderBy='b'</a></p>`);
+    res.write(`<p><a href="/test?orderBy='a'">orderBy='a'</a></p>`);
+    res.write(`<p><a href="/test?orderBy='b'">orderBy='b'</a></p>`);
     res.write(`<p><a href="/test?orderBy='a'&orderDirection='-1">orderBy='a' und orderDirection=-1</a></p>`);
     res.write(`<p><a href="/test?orderBy='c'&orderDirection='1">orderBy='c' und orderDirection=1</a></p>`);
     res.end(`Aktuelle userSettings: ${JSON.stringify(req.userSettings)}`);
