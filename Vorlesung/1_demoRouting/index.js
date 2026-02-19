@@ -28,8 +28,7 @@ function myDummyLogger(options = {}) {
     return function myInnerDummyLogger(req, res, next) {
         const timestamp = options.timestamp ? new Date().toISOString() + " " : "";
         console.log(`${timestamp}${req.method} ${req.url}`)
-        return Promise.reject();
-        //next();
+        next();
     }
 }
 
