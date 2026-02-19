@@ -11,18 +11,17 @@
   "author": "mgfeller",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.20.3",
-    "chai": "^5.2.0",
+    "chai": "^6.2.2",
     "chai-dom": "^1.12.1",
-    "chai-http": "^5.1.1",
-    "dotenv": "^16.4.7",
-    "express": "^5.0.1",
-    "express-handlebars": "^8.0.1",
-    "express-session": "^1.18.1",
-    "jsdom": "^26.0.0",
+    "chai-http": "^5.1.2",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "express-handlebars": "^8.0.6",
+    "express-session": "^1.19.0",
+    "jsdom": "^28.1.0",
     "method-override": "^3.0.0",
-    "mocha": "^11.1.0",
+    "mocha": "^11.7.5",
     "nedb-promises": "^6.2.3",
-    "sinon": "^19.0.2"
+    "sinon": "^21.0.1"
   }
 }

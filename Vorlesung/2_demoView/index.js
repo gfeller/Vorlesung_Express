@@ -26,7 +26,7 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
 // 4. path to views
-app.set('views', PATHS.views);
+app.set('views', [PATHS.views, PATHS.viewsDefault]);
 app.use(express.static(PATHS.public));
 app.use(express.urlencoded({extended: false}));
 app.use(overrideMiddleware);

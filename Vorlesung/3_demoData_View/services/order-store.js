@@ -1,5 +1,5 @@
 import Datastore from '@seald-io/nedb'
-import {PATHS} from "../config.js";
+import {PATHS} from "../../2_demoView/config.js";
 
 export class Order {
     constructor(pizzaName, orderedBy) {
@@ -12,7 +12,7 @@ export class Order {
 
 export class OrderStore {
     constructor(db) {
-        this.db = db || new Datastore({filename: PATHS.data("orders2.db"), autoload: true});
+        this.db = db || new Datastore({filename: PATHS.data("orders.db"), autoload: true});
     }
 
     async add(pizzaName, orderedBy) {
