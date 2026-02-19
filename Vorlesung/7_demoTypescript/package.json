@@ -6,41 +6,32 @@
   "main": "index.ts",
   "scripts": {
     "start": "tsx index.ts",
-    "test": "mocha",
+    "test": "vitest run",
     "lint": "eslint"
   },
   "author": "mgfeller",
   "license": "ISC",
   "dependencies": {
-
-    "body-parser": "^1.20.3",
-    "dotenv": "^16.4.7",
-    "express": "^5.0.1",
-    "express-handlebars": "^8.0.1",
-    "express-session": "^1.18.1",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "express-handlebars": "^8.0.6",
+    "express-session": "^1.19.0",
     "method-override": "^3.0.0",
-    "nedb-promises": "^6.2.3",
-    "tsx": "^4.19.2"
+    "@seald-io/nedb": "^4.1.2",
+    "tsx": "^4.21.0"
   },
   "devDependencies": {
-    "@types/method-override": "^0.0.35",
-    "@types/superagent": "^8.1.9",
-    "@types/body-parser": "^1.19.5",
-    "@types/chai-dom": "^1.11.3",
+    "@types/method-override": "^3.0.0",
+    "@types/supertest": "^6.0.2",
     "@types/express-handlebars": "^6.0.2",
-    "@types/express-session": "^1.18.1",
-    "@types/jsdom": "^21.1.7",
-    "@types/mocha": "^10.0.10",
-    "typescript-eslint":  "^8.24.1",
-    "chai": "^5.2.0",
-    "chai-dom": "^1.12.1",
-    "chai-http": "^5.1.1",
-    "eslint": "^9.20.1",
-    "jsdom": "^26.0.0",
-    "mocha": "^11.1.0",
+    "@types/express-session": "^1.18.2",
+    "@types/jsdom": "^27.0.0",
+    "typescript-eslint": "^8.56.0",
+    "eslint": "^10.0.0",
+    "jsdom": "^28.1.0",
     "moment": "^2.30.1",
-    "sinon": "^19.0.2",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.7.3"
+    "supertest": "^7.0.0",
+    "typescript": "^5.9.3",
+    "vitest": "^3.0.0"
   }
 }

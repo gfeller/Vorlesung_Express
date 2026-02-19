@@ -1,4 +1,4 @@
-import Datastore from 'nedb-promises'
+import Datastore from '@seald-io/nedb'
 
 enum OrderState{
     OK = "OK",
@@ -23,22 +23,22 @@ export class OrderStore {
 
     constructor(db?: Datastore<Order>) {
         const options = process.env.DB_TYPE === "FILE" ? {filename: './data/orders.db', autoload: true} : {}
-        this.db = db || Datastore.create(options);
+        this.db = db || new Datastore(options);
     }
 
     async add(pizzaName: string, orderedBy: string) {
         const order = new Order(pizzaName, orderedBy);
-        return this.db.insert(order);
+        return this.db.insertAsync(order);
     }
 
     async delete(id: string) {
-        await this.db.update({_id: id}, {$set: {"state": OrderState.DELETED}});
+        await this.db.updateAsync({_id: id}, {$set: {"state": OrderState.DELETED}});
         const order = await this.get(id);
         return order!;
     }
 
     async get(id: string) {
-        return this.db.findOne<Order>({_id: id});
+        return this.db.findOneAsync<Order>({_id: id});
     }
 
     async all() {

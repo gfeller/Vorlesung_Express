@@ -1,4 +1,4 @@
-import Datastore from 'nedb-promises'
+import Datastore from '@seald-io/nedb'
 import {CryptoUtil} from '../utils/crypto-util';
 
 export class User {
@@ -16,7 +16,7 @@ export class UserStore {
 
     constructor(db?: Datastore<User>) {
         const options = process.env.DB_TYPE === "FILE" ? {filename: './data/user.db', autoload: true} : {}
-        this.db = db || Datastore.create(options);
+        this.db = db || new Datastore(options);
     }
 
     async register(email: string, passwort: string) {
@@ -24,14 +24,14 @@ export class UserStore {
             throw new Error('no user');
         }
         const user = new User(email, passwort);
-        return this.db.insert(user);
+        return this.db.insertAsync(user);
     }
 
     async authenticate(email: string, passwort: string) {
         if (!(email && passwort)) {
             return false;
         }
-        const user = await this.db.findOne({email: email});
+        const user = await this.db.findOneAsync({email: email});
         if (user == null) {
             await this.register(email, passwort);
             return true;

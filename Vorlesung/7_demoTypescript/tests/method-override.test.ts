@@ -1,10 +1,6 @@
-import * as chai from 'chai';
-chai.should();
-
-import {overrideMiddleware} from '../utils/method-override';
-import {Request} from "express";
-
-const expect = chai.expect;
+import { describe, it, expect } from 'vitest';
+import { overrideMiddleware } from '../utils/method-override';
+import { Request } from 'express';
 
 declare global {
     namespace Express {
@@ -17,15 +13,14 @@ declare global {
 describe('Override Middleware', () => {
     it('replace method', () => {
         const request = {
-            body: {_method: "PUT", name: "michael"},
-            method: "POST"
-        } as Request
+            body: { _method: 'PUT', name: 'michael' },
+            method: 'POST'
+        } as Request;
 
         overrideMiddleware(request, {} as any, () => null);
 
-        request.method.should.be.eq("PUT");
-
-        request.originalMethod.should.be.eq("POST");
-        expect(request.body._method).to.be.undefined
+        expect(request.method).toBe('PUT');
+        expect(request.originalMethod).toBe('POST');
+        expect(request.body._method).toBeUndefined();
     });
 });

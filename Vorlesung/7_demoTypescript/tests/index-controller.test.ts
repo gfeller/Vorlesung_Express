@@ -1,39 +1,35 @@
-import {use} from 'chai';
-
-import chaiHttp from 'chai-http';
-import chaiDom from 'chai-dom';
-import jsdom from 'jsdom';
-import dotenv from "dotenv";
-
-const chai = use(chaiDom)
-    .use(chaiHttp);
-
-chai.should();
-const {expect} = chai;
-
-
-process.env.NODE_ENV = "testing"
-dotenv.config({path: `.env-testing`});
-
-// load app after env
-import {app} from '../app';
+import { describe, it, expect } from 'vitest';
+import request from 'supertest';
+import { JSDOM } from 'jsdom';
+import { app } from '../app';
 
 describe('INDEX Controller', () => {
     it('should return login page if not logged in', async () => {
-        const response = await chai.request.execute(app).get('/orders');
-        response.should.have.status(200);
+        const response = await request(app).get('/orders');
+        expect(response.status).toBe(200);
 
-        const dom = new jsdom.JSDOM(response.text);
-        dom.window.document.querySelector("form")!.should.have.attribute('action', '/login')
-        expect(dom.window.document.querySelector("form")).have.attribute('action', '/login')
+        const dom = new JSDOM(response.text);
+        const form = dom.window.document.querySelector('form');
+        expect(form?.getAttribute('action')).toBe('/login');
     });
 
     it('login', async () => {
-        const server = chai.request.agent(app);
-        const response = await server.post('/login').type('form').send({email: 'michael.gfeller@ost.ch', pwd: '1234'});
-        const dom = new jsdom.JSDOM(response.text);
+        const agent = request.agent(app);
 
-        dom.window.document.querySelector("form[action='/orders']")!.should.not.be.null;
-        server.close();
+        const loginResponse = await agent
+            .post('/login')
+            .type('form')
+            .send({ email: 'michael.gfeller@ost.ch', pwd: '1234' });
+
+        expect(loginResponse.status).toBe(302);
+        expect(loginResponse.headers.location).toBe('/');
+
+        const redirectResponse = await agent.get(loginResponse.headers.location);
+        expect(redirectResponse.status).toBe(200);
+
+        const dom = new JSDOM(redirectResponse.text);
+        const form = dom.window.document.querySelector("form[action='/orders']");
+        expect(form).not.toBeNull();
+
     });
 });
