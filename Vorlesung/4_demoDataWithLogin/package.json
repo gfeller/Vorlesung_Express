@@ -12,15 +12,12 @@
   "license": "ISC",
   "dependencies": {
     "@seald-io/nedb": "^4.1.2",
-    "chai": "^6.2.2",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "express-handlebars": "^8.0.6",
     "express-session": "^1.19.0",
     "jsdom": "^28.1.0",
-    "method-override": "^3.0.0",
-    "mocha": "^11.7.5",
-    "sinon": "^21.0.1"
+    "method-override": "^3.0.0"
   },
   "devDependencies": {
     "vitest": "^3.0.0",
