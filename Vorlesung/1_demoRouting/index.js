@@ -1,5 +1,4 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import methodOverride from "method-override"
 
 const app = express();
@@ -8,7 +7,7 @@ const router = express.Router();
 // middlewares
 function notFound(req, res, next) {
     res.setHeader("Content-Type", 'text/html');
-    res.send(404, "Confound it all!  We could not find ye's page! ")
+    res.status(404).send("Confound it all!  We could not find ye's page!")
 }
 
 function errorHandler(err, req, res, next) {
@@ -29,12 +28,15 @@ function myDummyLogger(options = {}) {
     return function myInnerDummyLogger(req, res, next) {
         const timestamp = options.timestamp ? new Date().toISOString() + " " : "";
         console.log(`${timestamp}${req.method} ${req.url}`)
-        next();
+        return Promise.reject();
+        //next();
     }
 }
 
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+
+
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 app.use(methodOverride(methodOverrideFn));
 app.use(myDummyLogger());
 app.use(router);
