@@ -1,4 +1,5 @@
-import Datastore from 'nedb-promises'
+import Datastore from '@seald-io/nedb'
+import {PATHS} from "../config.js";
 
 export class Order {
     constructor(pizzaName, orderedBy) {
@@ -11,27 +12,27 @@ export class Order {
 
 export class OrderStore {
     constructor(db) {
-        this.db = db || new Datastore({filename: './data/orders.db', autoload: true});
+        this.db = db || new Datastore({filename: PATHS.data("orders2.db"), autoload: true});
     }
 
     async add(pizzaName, orderedBy) {
         let order = new Order(pizzaName, orderedBy);
-        const storedOrder = await this.db.insert(order);
+        const storedOrder = await this.db.insertAsync(order);
         console.log(order._id, storedOrder._id);
         return storedOrder;
     }
 
     async delete(id) {
-        await this.db.update({_id: id}, {$set: {"state": "DELETED"}});
+        await this.db.updateAsync({_id: id}, {$set: {"state": "DELETED"}});
         return this.get(id);
     }
 
     async get(id) {
-        return this.db.findOne({ _id: id });
+        return this.db.findOneAsync({ _id: id });
     }
 
     async all() {
-        return this.db.find({});
+        return this.db.findAsync({});
     }
 }
 

@@ -4,6 +4,7 @@ import path from 'path';
 import {orderRoutes} from './routes/order-routes.js';
 import {helpers} from './utils/handlebar-util.js'
 import {overrideMiddleware} from "./utils/method-override.js";
+import {PATHS} from "./config.js";
 
 // 1. import express-handlebars
 import exphbs from 'express-handlebars';
@@ -25,13 +26,12 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
 // 4. path to views
-app.set('views', path.resolve('views'));
-
-app.use(app.urlencoded({extended: false}));
-app.use(app.json());
+app.set('views', PATHS.views);
+app.use(express.static(PATHS.public));
+app.use(express.urlencoded({extended: false}));
 app.use(overrideMiddleware);
 app.use(orderRoutes);
-app.use(express.static(path.resolve('public')));
+
 
 const hostname = '127.0.0.1';
 const port = 3001;

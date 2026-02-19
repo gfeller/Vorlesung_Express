@@ -35,7 +35,6 @@ function myDummyLogger(options = {}) {
 
 
 app.use(express.urlencoded({extended: false}));
-app.use(express.json());
 app.use(methodOverride(methodOverrideFn));
 app.use(myDummyLogger());
 app.use(router);
