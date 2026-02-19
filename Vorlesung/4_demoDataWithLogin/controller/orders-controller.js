@@ -1,4 +1,4 @@
-import {orderStore} from '../services/order-store.js'
+import {orderStore} from '../../3_demoData_View/services/order-store.js'
 import {SecurityUtil} from '../utils/security.js'
 
 export class OrdersController {

@@ -9,6 +9,7 @@ export const PATHS = {
     root: ROOT,
     data: (dbName) => path.join(ROOT, 'data', dbName),
     public: path.join(ROOT, 'public'),
+    publicDefault: path.join(ConfigRoot, 'public'),
     views: path.join(ROOT, 'views'),
     viewsDefault: path.join(ConfigRoot, 'views'),
 };

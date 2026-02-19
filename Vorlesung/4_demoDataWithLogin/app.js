@@ -5,8 +5,10 @@ import path from 'path';
 import session from 'express-session';
 import {indexRoutes} from './routes/index-routes.js';
 import {orderRoutes} from './routes/order-routes.js';
-import {helpers} from './utils/handlebar-util.js'
-import {overrideMiddleware} from "./utils/method-override.js";
+import {helpers} from '../2_demoView/utils/handlebar-util.js'
+import {overrideMiddleware} from "../2_demoView/utils/method-override.js";
+
+import {PATHS} from "../2_demoView/config.js";
 
 export const app = express();
 const hbs = exphbs.create({
@@ -21,6 +23,8 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', path.resolve('views'));
 
+app.set('views', [PATHS.views, PATHS.viewsDefault]);
+app.use(express.static(PATHS.publicDefault));
 
 app.use(express.static(path.resolve('public')));
 
