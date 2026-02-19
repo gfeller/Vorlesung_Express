@@ -2,7 +2,7 @@ import path from 'path';
 
 const __dirname = import.meta.dirname;
 
-export const ROOT = path.resolve(path.dirname(process.argv[1]));
+export const ROOT = path.resolve("");
 export const ConfigRoot = path.resolve(__dirname);
 
 export const PATHS = {
