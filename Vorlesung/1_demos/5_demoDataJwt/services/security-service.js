@@ -1,4 +1,4 @@
-import {userStore, CryptoUtil} from "../../shared.js"
+import {userStore, CryptoUtil, CONFIG} from "../../shared.js"
 
 export class SecurityService {
     isLoggedIn(req) {
@@ -11,7 +11,7 @@ export class SecurityService {
     }
 
 
-    async createJWT(email, secret, options) {
+    async createJWT(email, secret = CONFIG.jwt_secret, options =  CONFIG.jwt_sign) {
         const user = await userStore.findByEmail(email);
         if (user) {
             return CryptoUtil.createJWT({email: user.email, isAdmin: user.isAdmin}, secret, options);

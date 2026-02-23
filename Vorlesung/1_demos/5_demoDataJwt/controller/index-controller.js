@@ -1,5 +1,5 @@
 import {securityService} from '../services/security-service.js';
-import {userStore} from "../../shared.js";
+import {userStore, CONFIG} from "../../shared.js";
 
 
 
@@ -11,7 +11,7 @@ export class IndexController {
         else {
             const {email, pwd} = req.body;
             if (await userStore.authenticate(email, pwd)) {
-                let token = await securityService.createJWT(email, req.app.get("jwt-secret"), req.app.get("jwt-sign"));
+                let token = await securityService.createJWT(email);
                 res.json(token);
             }
             else {

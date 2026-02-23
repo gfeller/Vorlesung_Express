@@ -1,6 +1,7 @@
 import Datastore from '@seald-io/nedb'
 
 import {CryptoUtil} from '../utils/crypto-util.js';
+import {CONFIG} from "../../2_demoView/config.js";
 
 export class User {
     constructor(email, passwort, isAdmin = false) {
@@ -13,7 +14,7 @@ export class User {
 
 export class UserStore {
     constructor(db) {
-        const options = process.env.DB_TYPE === "FILE" ? {filename: './data/user.db', autoload: true} : {}
+        const options = process.env.DB_TYPE === "FILE" ? {filename: CONFIG.data("user.db"), autoload: true} : {}
         this.db = db || new Datastore(options);
     }
 
@@ -45,7 +46,7 @@ export class UserStore {
     }
 
     async findByEmail(email) {
-        return this.db.findOneAsync({email});
+        return  await this.db.findOneAsync({email});
     }
 
 

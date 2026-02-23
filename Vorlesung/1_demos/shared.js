@@ -16,3 +16,7 @@ export {userStore}
 
 import {CryptoUtil} from "./4_demoDataWithLogin/utils/crypto-util.js"
 export {CryptoUtil}
+
+
+import {securityService} from "./5_demoDataJwt/services/security-service.js"
+export {securityService}

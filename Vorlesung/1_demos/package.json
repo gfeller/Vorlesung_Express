@@ -15,18 +15,19 @@
   "author": "mgfeller",
   "license": "ISC",
   "dependencies": {
-    "@apollo/server": "^4.11.3",
-    "@graphql-tools/schema": "^10.0.18",
-    "@graphql-tools/utils": "^10.8.1",
     "@seald-io/nedb": "^4.1.2",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "express-handlebars": "^8.0.6",
     "express-jwt": "^8.5.1",
     "express-session": "^1.19.0",
-    "graphql-tag": "^2.12.6",
     "jsonwebtoken": "^9.0.2",
-    "method-override": "^3.0.0"
+    "method-override": "^3.0.0",
+    "@apollo/server": "^5.4.0",
+    "@as-integrations/express5": "^1.1.2",
+    "@graphql-tools/schema": "^10.0.31",
+    "@graphql-tools/utils": "^11.0.0",
+    "graphql-tag": "^2.12.6"
   },
   "devDependencies": {
     "supertest": "^7.2.2",

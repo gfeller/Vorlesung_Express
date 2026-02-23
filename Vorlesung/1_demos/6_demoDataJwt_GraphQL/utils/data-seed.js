@@ -9,6 +9,6 @@ async function initData() {
     }
 }
 
-if(process.env.DB_DUMMY_DATA === "true"){
+if(process.env.DB_DUMMY_DATA === "TRUE"){
     initData();
 }

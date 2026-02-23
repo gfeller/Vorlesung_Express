@@ -1,6 +1,7 @@
-import {orderStore} from "../../../3_demoData_View/services/order-store.js";
-import {userStore} from "../../../4_demoDataWithLogin/services/user-store.js";
-import {SecurityUtil} from "../../utils/security.js";
+import {orderStore, securityService} from "../../../shared.js";
+import {userStore} from "../../../shared.js";
+import {CryptoUtil} from "../../../shared.js";
+
 
 export const userResolver = {
     Query: {
@@ -14,11 +15,12 @@ export const userResolver = {
     Mutation: {
         register: async (obj, args, context, info) => await userStore.register(args.input.email, args.input.passwort),
         authenticate: async (obj, args, context, info) => {
-            const token = await SecurityUtil.createAuthResponse(args.input.email, args.input.passwort);
-            if (token) {
-                const user = await userStore.findByEmail(args.input.email);
-                return {token, isAdmin: user.isAdmin }
-            } else {
+
+            if (await userStore.authenticate(args.input.email, args.input.passwort)) {
+                let token = await securityService.createJWT(args.input.email);
+                return {token}
+            }
+            else {
                 context.res.status(403);
                 return null
             }

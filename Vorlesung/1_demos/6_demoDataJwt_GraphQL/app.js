@@ -2,16 +2,16 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
 import jwt from 'jsonwebtoken';
-import util from 'util';
 
 import {ApolloServer} from '@apollo/server'
 import {resolvers, typeDefs} from "./api/root.js";
 import {jwt_secret} from "./config.js";
 import {authDirectiveTransformer, authDirectiveTypeDefs} from "./api/schemaDirectives.js";
 import { makeExecutableSchema } from '@graphql-tools/schema'
-import { expressMiddleware } from '@apollo/server/express4';
-import './utils/data-seed.js'
+import { expressMiddleware } from '@as-integrations/express5';
 
+// load init data
+import './utils/data-seed.js'
 
 
 let schema = makeExecutableSchema({
@@ -43,7 +43,6 @@ app.get("/", function (req, res) {
     res.sendFile("/html/index.html", {root: __dirname + '/public/'});
 });
 
-//server.applyMiddleware({app, path: '/graphql'});
 
 app.use('/graphql', expressMiddleware(server, {
     context: async (context) => {
