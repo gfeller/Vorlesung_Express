@@ -25,7 +25,9 @@ app.set("jwt-validate", {secret: jwtSecret, audience: "self", issuer: "pizza", a
 app.get("/", function (req, res) {
     res.sendFile("/html/index.html", {root: __dirname + '/public/'});
 });
+
 app.use(expressjwt(app.get("jwt-validate")).unless({path: [/\/login*/]})); //after this middleware a token is required!
+
 app.use((req, res, next) => {
     console.log(req.auth || "no user");
     next();

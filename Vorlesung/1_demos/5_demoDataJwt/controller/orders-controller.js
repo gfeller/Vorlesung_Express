@@ -1,22 +1,22 @@
 import {orderStore} from '../../shared.js'
-import {SecurityUtil} from '../utils/security.js'
+import {securityService} from '../services/security-service.js'
 
 export class OrdersController {
 
     getOrders = async (req, res) => {
-        res.json((await orderStore.all(SecurityUtil.currentUser(req)) || []))
+        res.json((await orderStore.all(securityService.currentUser(req)) || []))
     };
 
     createPizza = async (req, res) => {
-        res.json(await orderStore.add(req.body.name, SecurityUtil.currentUser(req)));
+        res.json(await orderStore.add(req.body.name, securityService.currentUser(req)));
     };
 
     showOrder = async (req, res) => {
-        res.json(await orderStore.get(req.params.id, SecurityUtil.currentUser(req)));
+        res.json(await orderStore.get(req.params.id, securityService.currentUser(req)));
     };
 
     deleteOrder = async (req, res) => {
-        res.json(await orderStore.delete(req.params.id, SecurityUtil.currentUser(req))); // TODO should return 402 if not ok
+        res.json(await orderStore.delete(req.params.id, securityService.currentUser(req))); // TODO should return 402 if not ok
     };
 }
 

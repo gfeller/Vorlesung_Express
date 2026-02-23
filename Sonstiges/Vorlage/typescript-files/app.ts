@@ -4,11 +4,11 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import session from 'express-session';
 import {indexRoutes} from './routes/index-routes';
-import {helpers} from './utils/handlebar-util'
+import {helpers} from './services/handlebar-util'
 
 
 import exphbs from 'express-handlebars';
-import {sessionUserSettings, Settings} from "./utils/session-middleware";
+import {sessionUserSettings, Settings} from "./services/session-middleware";
 
 declare module 'express-session' {
     interface SessionData {
