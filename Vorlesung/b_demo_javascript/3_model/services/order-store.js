@@ -22,7 +22,7 @@ export class OrderStore {
         return storedOrder;
     }
 
-    async delete(id) {
+    async delete(id, deletedBy) {
         await this.db.updateAsync({_id: id}, {$set: {"state": "DELETED"}});
         return this.get(id);
     }

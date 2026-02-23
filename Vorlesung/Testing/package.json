@@ -5,16 +5,16 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "mocha *.test.js"
+    "test": "vitest run"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chai": "^4.3.4",
-    "chai-http": "^4.3.0",
     "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "mocha": "^10.0.0",
-    "sinon": "^14.0.0"
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "supertest": "^7.0.0",
+    "vitest": "^3.0.0"
   }
 }
