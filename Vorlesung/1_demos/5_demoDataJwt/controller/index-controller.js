@@ -5,10 +5,8 @@ import {userStore} from "../../shared.js";
 
 export class IndexController {
     login = async (req, res) => {
-        await securityService.handleLogin(req, res);
-
         if (securityService.isLoggedIn(req)) {
-            res.send(true);
+            res.status(204).send();
         }
         else {
             const {email, pwd} = req.body;

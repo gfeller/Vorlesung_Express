@@ -7,16 +7,16 @@ export class SecurityService {
 
 
     currentUser(req) {
-        return req.auth.name;
+        return req.auth.email;
     }
 
 
     async createJWT(email, secret, options) {
         const user = await userStore.findByEmail(email);
         if (user) {
-            throw new Error();
+            return CryptoUtil.createJWT({email: user.email, isAdmin: user.isAdmin}, secret, options);
         }
-        return CryptoUtil.createJWT({email: user.email, isAdmin: iuser.isAdmin}, secret, options);
+        throw new Error();
     }
 }
 
