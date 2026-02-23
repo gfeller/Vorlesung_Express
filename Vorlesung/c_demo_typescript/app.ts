@@ -7,17 +7,6 @@ import {orderRoutes} from './routes/order-routes';
 import {helpers} from './utils/handlebar-util'
 import {overrideMiddleware} from "./utils/method-override";
 
-interface UserDto{
-    name: string,
-    isAdmin: boolean;
-}
-
-declare module 'express-session' {
-    interface SessionData {
-        user?: UserDto;
-    }
-}
-
 export const app = express();
 const hbs = exphbs.create({
     extname: '.hbs',
@@ -30,7 +19,6 @@ const hbs = exphbs.create({
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', path.resolve('views'));
-
 
 app.use(express.static(path.resolve('public')));
 

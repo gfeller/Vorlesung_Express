@@ -19,11 +19,12 @@ export class UserStore {
         this.db = db || new Datastore(options);
     }
 
+
     async register(email: string, passwort: string) {
         if (!(email && passwort)) {
-            throw new Error('no user');
+            throw new Error('missing data');
         }
-        const user = new User(email, passwort);
+        let user = new User(email, passwort);
         return this.db.insertAsync(user);
     }
 
@@ -31,14 +32,23 @@ export class UserStore {
         if (!(email && passwort)) {
             return false;
         }
-        const user = await this.db.findOneAsync({email: email});
+        let user = await this.findByEmail(email);
+
         if (user == null) {
+            // NOTE: in real application the register should be a separated.
             await this.register(email, passwort);
             return true;
-        }
-        else {
+        } else {
             return user.passwortHash === CryptoUtil.hashPwd(passwort)
         }
+    }
+
+    async all() {
+        return this.db.find({});
+    }
+
+    async findByEmail(email: string) {
+        return this.db.findOneAsync({email});
     }
 }
 export const userStore = new UserStore();

@@ -6,7 +6,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "tsx index.ts",
-    "tsc": "tsc index.ts",
+    "typecheck": "tsc --noEmit --watch --pretty",
     "test": "vitest run",
     "lint": "eslint"
   },

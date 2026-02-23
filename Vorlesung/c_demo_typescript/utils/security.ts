@@ -9,8 +9,8 @@ export class SecurityUtil {
         req.session.user = undefined;
     }
 
-    static login(req:Request, name: string) {
-        req.session.user = {name, isAdmin: false};
+    static login(req:Request, email: string) {
+        req.session.user = {email: email};
     }
 
     static handleAuthenticate(req: Request, res: Response, next: NextFunction ) {
@@ -21,9 +21,9 @@ export class SecurityUtil {
         }
     }
 
-    static currentUser(req: Request) {
+    static currentUser(req: Request): string {
         if(req.session.user){
-            return req.session.user.name
+            return req.session.user.email
         }
         throw Error();
     }

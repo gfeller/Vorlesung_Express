@@ -1,13 +1,17 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "noEmit": true,
+    "noEmit": false,
     "module": "ESNext",
-    "moduleResolution": "Node",
-    "esModuleInterop": true
-
+    "moduleResolution": "Bundler",
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "strict": true
   },
+  "include": ["**/*.ts"],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist",
+    "tests"
   ]
 }

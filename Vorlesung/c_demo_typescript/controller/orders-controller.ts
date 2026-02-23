@@ -12,7 +12,7 @@ export class OrdersController {
     };
 
     showOrder = async (req: Request, res: Response) => {
-        res.render("showorder", {} );
+        res.render("showorder", await orderStore.get(req.params.id));
     };
 
     deleteOrder = async (req: Request, res: Response) => {
