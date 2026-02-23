@@ -1,0 +1,36 @@
+{
+  "name": "vorlesung-express-demos",
+  "version": "1.0.0",
+  "description": "Express Demo Collection",
+  "type": "module",
+  "scripts": {
+    "start:1": "node 1_demoRouting/index.js",
+    "start:2": "node 2_demoView/index.js",
+    "start:3": "node 3_demoData_View/index.js",
+    "start:4": "cd 4_demoDataWithLogin && node index.js",
+    "start:5": "node 5_demoDataJwt/index.js",
+    "start:6": "node 6_demoDataJwt_GraphQL/app.js",
+    "test": "vitest run"
+  },
+  "author": "mgfeller",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.11.3",
+    "@graphql-tools/schema": "^10.0.18",
+    "@graphql-tools/utils": "^10.8.1",
+    "@seald-io/nedb": "^4.1.2",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "express-handlebars": "^8.0.6",
+    "express-jwt": "^8.5.1",
+    "express-session": "^1.19.0",
+    "graphql-tag": "^2.12.6",
+    "jsonwebtoken": "^9.0.2",
+    "method-override": "^3.0.0"
+  },
+  "devDependencies": {
+    "supertest": "^7.2.2",
+    "vitest": "^3.0.0",
+    "jsdom": "^28.1.0"
+  }
+}
