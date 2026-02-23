@@ -1,6 +1,5 @@
 /*
 import express from 'express';
-import bodyParser from 'body-parser';
 import path from 'path';
 import session from 'express-session';
 import {indexRoutes} from './routes/index-routes';
@@ -41,8 +40,8 @@ app.use(express.static(path.resolve('public')));
 app.use(session({secret: 'casduichasidbnuwezrfinasdcvjkadfhsuilfuzihfioda', resave: false, saveUninitialized: true}));
 
 app.use(sessionUserSettings)
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 
 app.use("/", indexRoutes);
 */
