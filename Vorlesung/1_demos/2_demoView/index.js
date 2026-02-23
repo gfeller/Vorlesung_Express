@@ -3,7 +3,7 @@ import express from 'express';
 import {orderRoutes} from './routes/order-routes.js';
 import {handlebarHelpers} from './utils/handlebar-util.js'
 import {overrideMiddleware} from "./utils/method-override.js";
-import {PATHS} from "./config.js";
+import {CONFIG} from "./config.js";
 
 // 1. import express-handlebars
 import exphbs from 'express-handlebars';
@@ -24,8 +24,8 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
 // 4. path to views
-app.set('views', [PATHS.views, PATHS.viewsDefault]);
-app.use(express.static(PATHS.public));
+app.set('views', [CONFIG.views, CONFIG.viewsDefault]);
+app.use(express.static(CONFIG.public));
 app.use(express.urlencoded({extended: false}));
 app.use(overrideMiddleware);
 app.use(orderRoutes);

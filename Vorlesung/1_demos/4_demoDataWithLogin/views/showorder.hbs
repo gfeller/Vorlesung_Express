@@ -4,6 +4,7 @@
     <p>Bestellt am: {{orderDate}}</p>
     <p>Ihre Nummer: {{_id}}</p>
     <p>State: {{state}}</p>
+    <p>Order By: {{orderedBy}}</p>
     {{#if_eq state "OK"}}
         <form action='/orders/{{_id}}' method='post'><input type='hidden' name='_method' value='delete'><input
                 type='submit' value='Delete order'></form>

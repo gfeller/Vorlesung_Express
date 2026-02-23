@@ -5,7 +5,7 @@ const __dirname = import.meta.dirname;
 export const ROOT = path.resolve("");
 export const ConfigRoot = path.resolve(__dirname);
 
-export const PATHS = {
+export const CONFIG = {
     root: ROOT,
     data: (dbName) => path.join(ROOT, 'data', dbName),
     public: path.join(ROOT, 'public'),

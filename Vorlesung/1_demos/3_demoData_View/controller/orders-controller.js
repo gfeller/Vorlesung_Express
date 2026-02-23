@@ -1,4 +1,4 @@
-import {orderStore} from '../../shared.js'
+import {orderStore} from '../services/order-store.js'
 
 export class OrdersController {
     showIndex = (req, res) => {

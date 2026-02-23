@@ -6,7 +6,7 @@ import {overrideMiddleware} from "../2_demoView/utils/method-override.js";
 
 // 1. import express-handlebars
 import exphbs from 'express-handlebars';
-import {PATHS} from "../2_demoView/config.js";
+import {CONFIG} from "../2_demoView/config.js";
 
 const app = express();
 
@@ -24,8 +24,8 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
 // 4. path to views
-app.set('views', [PATHS.views, PATHS.viewsDefault]);
-app.use(express.static(PATHS.publicDefault));
+app.set('views', [CONFIG.views, CONFIG.viewsDefault]);
+app.use(express.static(CONFIG.publicDefault));
 app.use(express.urlencoded({extended: false}));
 app.use(overrideMiddleware);
 app.use(orderRoutes);

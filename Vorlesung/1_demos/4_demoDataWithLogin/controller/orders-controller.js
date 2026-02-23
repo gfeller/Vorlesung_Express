@@ -1,5 +1,4 @@
 import {orderStore} from '../../shared.js'
-import {SecurityUtil} from '../utils/security.js'
 
 export class OrdersController {
     createOrder = (req, res) => {
@@ -7,7 +6,7 @@ export class OrdersController {
     };
 
     createPizza = async (req, res) => {
-        res.render("succeeded", await orderStore.add(req.body.name, SecurityUtil.currentUser(req)));
+        res.render("succeeded", await orderStore.add(req.body.name, req.user.email));
     };
 
     showOrder = async (req, res) => {

@@ -30,7 +30,9 @@ export class UserStore {
             return false;
         }
         let user = await this.db.findOneAsync({email: email});
+
         if (user == null) {
+            // NOTE: in real application the register should be a separated.
             await this.register(email, passwort);
             return true;
         } else {
