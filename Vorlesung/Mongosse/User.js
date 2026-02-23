@@ -22,14 +22,12 @@ const schema = mongoose.Schema({
 
 
 
-schema.pre('save', function (next) {
+schema.pre('save', async function () {
     let self = this;
 
-    if (!self.isModified('passwordHash')) {
-        return next();
+    if (self.isModified('passwordHash')) {
+        self.passwordHash = crypto.createHash('md5').update(self.passwordHash).digest('hex'); //besser wenn asynchrone
     }
-    self.passwordHash = crypto.createHash('md5').update(self.passwordHash).digest('hex'); //besser wenn asynchrone
-    next();
 });
 
 schema.statics.findByEmailAndPassword = async function findByEmailAndPassword(email, password, cb) {

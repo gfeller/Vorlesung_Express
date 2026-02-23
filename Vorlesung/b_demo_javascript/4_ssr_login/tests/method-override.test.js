@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { overrideMiddleware } from '../../2_demoView/utils/method-override.js';
+import { overrideMiddleware } from '../../2_view/utils/method-override.js';
 
 describe('Override Middleware', () => {
     it('replace method', () => {

@@ -1,7 +1,7 @@
 import Datastore from '@seald-io/nedb'
 
 import {CryptoUtil} from '../utils/crypto-util.js';
-import {CONFIG} from "../../2_demoView/config.js";
+import {CONFIG} from "../../2_view/config.js";
 
 export class User {
     constructor(email, passwort, isAdmin = false) {

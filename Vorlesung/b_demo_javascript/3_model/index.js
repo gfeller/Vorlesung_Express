@@ -1,12 +1,12 @@
 import express from 'express';
 import {orderRoutes} from './routes/order-routes.js';
-import {handlebarHelpers} from '../2_demoView/utils/handlebar-util.js'
-import {overrideMiddleware} from "../2_demoView/utils/method-override.js";
+import {handlebarHelpers} from '../2_view/utils/handlebar-util.js'
+import {overrideMiddleware} from "../2_view/utils/method-override.js";
 
 
 // 1. import express-handlebars
 import exphbs from 'express-handlebars';
-import {CONFIG} from "../2_demoView/config.js";
+import {CONFIG} from "../2_view/config.js";
 
 const app = express();
 

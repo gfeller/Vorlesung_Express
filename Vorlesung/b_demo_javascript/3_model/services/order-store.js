@@ -1,5 +1,5 @@
 import Datastore from '@seald-io/nedb'
-import {CONFIG} from "../../2_demoView/config.js";
+import {CONFIG} from "../../2_view/config.js";
 
 export class Order {
     constructor(pizzaName, orderedBy) {

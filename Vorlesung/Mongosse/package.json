@@ -10,7 +10,7 @@
   "type": "module",
   "license": "ISC",
   "dependencies": {
-    "express": "latest",
+    "express": "5.2.1",
     "mongoose": "latest"
   }
 }

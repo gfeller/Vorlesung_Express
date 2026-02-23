@@ -15,7 +15,7 @@ export class IndexController {
                 res.json(token);
             }
             else {
-                res.status("401").json(false);
+                res.status(401).json(false);
             }
         }
     };

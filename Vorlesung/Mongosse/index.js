@@ -2,11 +2,7 @@ import mongoose from 'mongoose';
 import {User, Order} from './User.js';
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/demo0',
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    });
+mongoose.connect('mongodb://localhost/demo0');
 
 
 async function createUser(mail, pwd) {
