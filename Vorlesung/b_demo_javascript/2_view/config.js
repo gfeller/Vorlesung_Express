@@ -10,6 +10,7 @@ export const CONFIG = {
     root: ROOT,
     data: (dbName) => path.join(ROOT, 'data', dbName),
     public: path.join(ROOT, 'public'),
+    publicCombined: (dbName) => path.join(ROOT, 'data', dbName),
     publicDefault: path.join(ConfigRoot, 'public'),
     views: path.join(ROOT, 'views'),
     viewsDefault: path.join(ConfigRoot, 'views'),

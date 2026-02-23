@@ -6,7 +6,8 @@ import { WebSocketServer } from 'ws';
 
 const app = express();
 const server = http.createServer(app);
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = import.meta.dirname;
+
 const wss = new WebSocketServer({server});
 
 wss.on('connection', function connection(ws) {

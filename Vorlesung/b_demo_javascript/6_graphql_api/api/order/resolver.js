@@ -1,5 +1,5 @@
-import {orderStore} from "../../../3_demoData_View/services/order-store.js";
-import {userStore} from "../../../4_ssr_login/services/user-store.js";
+import {orderStore} from "../../../shared.js";
+import {userStore} from "../../../shared.js";
 
 export const orderResolver = {
     Query: {

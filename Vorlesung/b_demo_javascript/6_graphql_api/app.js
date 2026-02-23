@@ -1,6 +1,4 @@
 import express from 'express';
-import bodyParser from 'body-parser';
-import path from 'path';
 import jwt from 'jsonwebtoken';
 
 import {ApolloServer} from '@apollo/server'
@@ -9,9 +7,11 @@ import {jwt_secret} from "./config.js";
 import {authDirectiveTransformer, authDirectiveTypeDefs} from "./api/schemaDirectives.js";
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import { expressMiddleware } from '@as-integrations/express5';
+import {CONFIG} from "../shared.js";
 
 // load init data
 import './utils/data-seed.js'
+
 
 
 let schema = makeExecutableSchema({
@@ -34,13 +34,12 @@ const server = new ApolloServer(
 await server.start();
 
 
-app.use(express.static(path.resolve('public/html')));
-app.use(express.static(path.resolve('public')));
+app.use(express.static(CONFIG.public));
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.get("/", function (req, res) {
-    res.sendFile("/html/index.html", {root: __dirname + '/public/'});
+    res.sendFile("/html/index.html", {root: CONFIG.public});
 });
 
 

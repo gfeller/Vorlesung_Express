@@ -1,5 +1,4 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import exphbs from 'express-handlebars';
 import path from 'path';
 import session from 'express-session';
@@ -41,7 +40,7 @@ app.use((req, res, next) => {
     console.log(req.session.user || "no user");
     next();
 });
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: false}));
 app.use(overrideMiddleware);
 
 app.use("/orders", orderRoutes);

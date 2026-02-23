@@ -1,7 +1,5 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import exphbs from 'express-handlebars';
-import path from 'path';
 import session from 'express-session';
 import {indexRoutes} from './routes/index-routes.js';
 import {orderRoutes} from './routes/order-routes.js';
@@ -21,13 +19,10 @@ const hbs = exphbs.create({
 
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
-app.set('views', path.resolve('views'));
-
 app.set('views', [CONFIG.views, CONFIG.viewsDefault]);
 app.use(express.static(CONFIG.publicDefault));
 
-
-app.use(express.static(path.resolve('public')));
+app.use(express.static(CONFIG.public));
 app.use(session({secret: 'casduichasidbnuwezrfinasdcvjkadfhsuilfuzihfioda', resave: false, saveUninitialized: true}));
 
 app.use(securityService.handleAuthenticate)
@@ -37,9 +32,9 @@ app.use((req, res, next) => {
     console.log(req.user || "no user in app");
     next();
 });
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(overrideMiddleware);
 
+app.use(express.urlencoded({extended: false}));
+app.use(overrideMiddleware);
 
 app.use("/", indexRoutes);
 app.use("/{*splat}", securityService.ensureAuthenticated);
