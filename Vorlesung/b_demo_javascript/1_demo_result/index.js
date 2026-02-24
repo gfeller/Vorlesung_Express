@@ -5,13 +5,13 @@ const app = express();
 const router = express.Router();
 
 // middlewares
-function notFound(req, res, next) {
+async function notFound(req, res, next) {
     res.setHeader("Content-Type", 'text/html');
     res.status(404).send("Confound it all!  We could not find ye's page!")
 }
 
 function errorHandler(err, req, res, next) {
-    res.status(500).end(err.message);
+    res.status(500).end(`Error-Middleware: ${err.message}`);
 }
 
 function methodOverrideFn(req, res) {
@@ -31,8 +31,6 @@ function myDummyLogger(options = {}) {
         next();
     }
 }
-
-
 
 app.use(express.urlencoded({extended: false}));
 app.use(methodOverride(methodOverrideFn));
@@ -91,7 +89,7 @@ function deleteOrder(req, res) {
 }
 
 function generateError(req, res, next) {
-    next(new Error("Hier gibts ein Fehler!"));
+    throw new Error("Hier gibts ein Fehler!");
 }
 
 router.get("/", showIndex);
