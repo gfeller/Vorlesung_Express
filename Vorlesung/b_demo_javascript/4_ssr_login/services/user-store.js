@@ -30,7 +30,7 @@ export class UserStore {
         if (!(email && passwort)) {
             return false;
         }
-        let user = await this.db.findOneAsync({email: email});
+        let user = await this.findByEmail(email);
 
         if (user == null) {
             // NOTE: in real application the register should be a separated.
@@ -46,7 +46,7 @@ export class UserStore {
     }
 
     async findByEmail(email) {
-        return  await this.db.findOneAsync({email});
+        return  this.db.findOneAsync({email});
     }
 
 

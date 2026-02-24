@@ -6,10 +6,10 @@
   "scripts": {
     "start:1": "cd 1_demo_result && node index.js",
     "start:2": "cd 2_view && node index.js",
-    "start:3": "cd 3_demoData_View && node index.js",
+    "start:3": "cd 3_model && node index.js",
     "start:4": "cd 4_ssr_login && node index.js",
-    "start:5": "cd 5_demoDataJwt && node index.js",
-    "start:6": "cd 6_demoDataJwt_GraphQL && node app.js",
+    "start:5": "cd 5_rest_api && node index.js",
+    "start:6": "cd 6_graphql_api && node app.js",
     "test": "vitest run"
   },
   "author": "mgfeller",
