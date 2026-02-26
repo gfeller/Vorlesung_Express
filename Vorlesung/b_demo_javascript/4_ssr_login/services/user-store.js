@@ -42,7 +42,7 @@ export class UserStore {
     }
 
     async all() {
-        return this.db.find({});
+        return this.db.findAsync({}, {multi: true});
     }
 
     async findByEmail(email) {

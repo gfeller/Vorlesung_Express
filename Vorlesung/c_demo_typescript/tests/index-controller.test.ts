@@ -1,10 +1,18 @@
-import { describe, it, expect } from 'vitest';
 import request from 'supertest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { app } from '../app';
 import { CryptoUtil } from '../utils/crypto-util';
+import { userStore } from '../services/user-store';
 
 describe('INDEX Controller', () => {
     describe('POST /login', () => {
+
+        beforeEach(async () => {
+            if((await userStore.all()).length == 0) {
+                await userStore.register({email: 'existing@test.com', pwd: 'correctpassword'});
+                await userStore.register({email: 'emptypwd@test.com', pwd: 'somepassword'});
+            }
+        });
 
         it('should return 204 when already logged in (valid JWT provided)', async () => {
             const token = await CryptoUtil.createJWT({ email: 'loggedin@test.com' });

@@ -1,13 +1,8 @@
 import {Request, Response} from "express";
-import {z} from "zod";
+
 
 import {securityService} from '../services/security-service';
-import {userStore} from "../services/user-store";
-
-const loginBodySchema = z.object({
-    email: z.email(),
-    pwd: z.string(),
-});
+import {LoginSchema, userStore} from "../services/user-store";
 
 
 export class IndexController {
@@ -16,10 +11,10 @@ export class IndexController {
             res.status(204).send();
             return;
         }
-        const {error, data} = loginBodySchema.safeParse(req.body);
+        const {error, data} = LoginSchema.safeParse(req.body);
 
         if (data) {
-            if (await userStore.authenticate(data.email, data.pwd)) {
+            if (await userStore.authenticate(data)) {
                 let token = await securityService.createJWT(data.email);
                 res.json(token);
             } else {
