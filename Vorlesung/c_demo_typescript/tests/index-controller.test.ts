@@ -1,35 +1,69 @@
 import { describe, it, expect } from 'vitest';
 import request from 'supertest';
-import { JSDOM } from 'jsdom';
 import { app } from '../app';
+import { CryptoUtil } from '../utils/crypto-util';
 
 describe('INDEX Controller', () => {
-    it('should return login page if not logged in', async () => {
-        const response = await request(app).get('/orders');
-        expect(response.status).toBe(200);
+    describe('POST /login', () => {
 
-        const dom = new JSDOM(response.text);
-        const form = dom.window.document.querySelector('form');
-        expect(form?.getAttribute('action')).toBe('/login');
-    });
+        it('should return 204 when already logged in (valid JWT provided)', async () => {
+            const token = await CryptoUtil.createJWT({ email: 'loggedin@test.com' });
+            const res = await request(app).post('/login')
+                .set('Authorization', `Bearer ${token}`)
+                .send({ email: 'loggedin@test.com', pwd: 'somepassword' });
 
-    it('login', async () => {
-        const agent = request.agent(app);
+            expect(res.status).toBe(204);
+        });
 
-        const loginResponse = await agent
-            .post('/login')
-            .type('form')
-            .send({ email: 'michael.gfeller@ost.ch', pwd: '1234' });
+        it('should auto-register new user and return a JWT token', async () => {
+            const res = await request(app)
+                .post('/login')
+                .send({ email: 'newuser@test.com', pwd: 'password123' });
 
-        expect(loginResponse.status).toBe(302);
-        expect(loginResponse.headers.location).toBe('/');
+            expect(res.status).toBe(200);
+            expect(res.body.split(".").length).toBe(3);
+        });
 
-        const redirectResponse = await agent.get(loginResponse.headers.location);
-        expect(redirectResponse.status).toBe(200);
+        it('should return 401 for wrong password', async () => {
+            await request(app).post('/login').send({ email: 'existing@test.com', pwd: 'correctpassword' });
 
-        const dom = new JSDOM(redirectResponse.text);
-        const form = dom.window.document.querySelector("form[action='/orders']");
-        expect(form).not.toBeNull();
+            const res = await request(app)
+                .post('/login')
+                .send({ email: 'existing@test.com', pwd: 'wrongpassword' });
 
+            expect(res.status).toBe(401);
+        });
+
+        it('should return 400 when email is not a valid email address', async () => {
+            const res = await request(app)
+                .post('/login')
+                .send({ email: 'notanemail', pwd: 'password123' });
+            expect(res.status).toBe(400);
+        });
+
+        it('should return 400 when email is missing', async () => {
+            const res = await request(app)
+                .post('/login')
+                .send({ pwd: 'password123' });
+            expect(res.status).toBe(400);
+        });
+
+        it('should return 400 when pwd is missing', async () => {
+            const res = await request(app)
+                .post('/login')
+                .send({ email: 'user@test.com' });
+            expect(res.status).toBe(400);
+        });
+
+        it('should return 401 when pwd is empty', async () => {
+            await request(app)
+                .post('/login')
+                .send({ email: 'emptypwd@test.com', pwd: 'somepassword' });
+
+            const res = await request(app)
+                .post('/login')
+                .send({ email: 'emptypwd@test.com', pwd: '' });
+            expect(res.status).toBe(401);
+        });
     });
 });

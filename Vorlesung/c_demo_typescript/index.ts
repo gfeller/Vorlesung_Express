@@ -9,7 +9,7 @@ dotenv.config({ path: `.env${process.env.NODE_ENV ? `-${process.env.NODE_ENV}` :
     const hostname = '127.0.0.1';
     const port = 3001;
 
-    app.listen(port, hostname, (error) => { // TODO
+    app.listen(port, hostname, (error: any) => { // TODO
         if(error){
             console.error(error);
         }else{

@@ -1,35 +1,33 @@
-import express from 'express';
-import exphbs from 'express-handlebars';
+import express, {NextFunction, Request, Response} from "express";
 import path from 'path';
-import session from 'express-session';
+import cors from 'cors';
+import {expressjwt} from "express-jwt";
+
 import {indexRoutes} from './routes/index-routes';
 import {orderRoutes} from './routes/order-routes';
-import {helpers} from './utils/handlebar-util'
-import {overrideMiddleware} from "./utils/method-override";
+
+import {CONFIG} from "./config";
+
 
 export const app = express();
-const hbs = exphbs.create({
-    extname: '.hbs',
-    defaultLayout: "default",
-    helpers: {
-        ...helpers
-    }
-});
 
-app.engine('hbs', hbs.engine);
-app.set('view engine', 'hbs');
-app.set('views', path.resolve('views'));
-
+app.use(cors());
 app.use(express.static(path.resolve('public')));
 
-app.use(session({secret: 'casduichasidbnuwezrfinasdcvjkadfhsuilfuzihfioda', resave: false, saveUninitialized: true}));
-
-app.use((req, res, next) => {
-    console.log(req.session.user || "no user");
-    next();
+app.get("/", function (req, res) {
+    res.sendFile("/html/index.html", {root: path.resolve('public')});
 });
-app.use(express.urlencoded({extended: false}));
-app.use(overrideMiddleware);
+app.use(express.json());
 
-app.use("/orders", orderRoutes);
+app.use(expressjwt(CONFIG.jwt_validate).unless({path: [/\/login*/]}));
 app.use("/", indexRoutes);
+app.use("/orders", orderRoutes);
+
+
+app.use(function (err: Error, req: Request, res:Response, next: NextFunction) {
+    if (err.name === 'UnauthorizedError') {
+        res.status(401).send('No token / Invalid token provided');
+    } else {
+        next(err);
+    }
+});

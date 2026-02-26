@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Bestellung</title>
+        
+    <script src="../libs/handlebars-v4.0.5.js" defer></script>
+    <script src="../js/utils/handlebars-helpers.js" defer></script>    
+    <script src="../js/controllers/order-controller.js" type="module" defer></script>
+</head>
+<body>
+
+    <div id="orderContainer"></div>
+
+    <script id="order-template" type="text/x-handlebars-template">
+        <dl>
+            <dt>ID</dt>
+            <dd>
+                {{_id}}
+            </dd>
+            <dt>Pizza-Name</dt>
+            <dd>
+                {{pizzaName}}
+            </dd>
+            <dt>State</dt>
+            <dd>
+                {{state}}
+            </dd>
+        </dl>
+
+        {{#ifCond  state '===' 'OK'}}
+            <button  data-id="{{_id}}" class="js-delete">Löschen</button>
+        {{/ifCond}}
+        <a href="index.html">Zurück</a>
+    </script>
+</body>
+</html>

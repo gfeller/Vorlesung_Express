@@ -1,40 +1,33 @@
-import {userStore} from '../services/user-store';
-import {SecurityUtil} from "../utils/security";
 import {Request, Response} from "express";
+import {z} from "zod";
+
+import {securityService} from '../services/security-service';
+import {userStore} from "../services/user-store";
+
+const loginBodySchema = z.object({
+    email: z.email(),
+    pwd: z.string(),
+});
+
 
 export class IndexController {
     login = async (req: Request, res: Response) => {
-        if (!SecurityUtil.isLoggedIn(req)) {
-            const {email, pwd} = req.body;
-            const valid = await userStore.authenticate(email, pwd);
+        if (securityService.isLoggedIn(req)) {
+            res.status(204).send();
+            return;
+        }
+        const {error, data} = loginBodySchema.safeParse(req.body);
 
-            if (valid) {
-                SecurityUtil.login(req, email);
-                this.#handleBackRef(req, res);
+        if (data) {
+            if (await userStore.authenticate(data.email, data.pwd)) {
+                let token = await securityService.createJWT(data.email);
+                res.json(token);
             } else {
-                res.render("login", {backref: req.body._backref || (req.method === "GET" && req.originalUrl ? req.originalUrl : "")});
+                res.status(401).json(false);
             }
         } else {
-            res.redirect("/");
-        }
-    };
-
-    index = (req: Request, res: Response) => {
-        res.render("index", {isLoggedIn: SecurityUtil.isLoggedIn(req)});
-    };
-
-    logout = (req: Request, res: Response) => {
-        if (SecurityUtil.isLoggedIn(req)) {
-            SecurityUtil.logout(req);
-            res.redirect("/");
-        }
-    };
-
-    #handleBackRef(req: Request, res: Response) {
-        if (req.body._backref) {
-            res.redirect(req.body._backref);
-        } else {
-            res.redirect("/");
+            res.status(400).send({error: error});
+            return;
         }
     }
 }

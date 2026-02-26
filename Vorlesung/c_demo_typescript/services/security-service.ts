@@ -1,46 +1,26 @@
-import {Request, Response, NextFunction} from "express";
-import {userStore} from "./user-store.js"
+import {Request} from "express";
+import {CONFIG} from "../config";
+import {CryptoUtil} from "../utils/crypto-util";
+import {userStore} from "./user-store";
+
 
 export class SecurityService {
-    private getAuthUser(req: Request) {
-        return req.session.user;
+    isLoggedIn(req: Request) {
+        return req.auth != null;
     }
 
-    handleAuthenticate = (req: Request, res: Response, next: NextFunction) => {
-        const user = this.getAuthUser(req);
-        if (user) {
-            req.user = user;
-        }
-        next();
+
+    currentUser(req: Request) {
+        return req.auth.email;
     }
 
-    ensureAuthenticated = (req: Request, res: Response, next: NextFunction) => {
-        if (req.user) {
-            next();
-        } else {
-            res.render("login", {backref: req.originalUrl});
-        }
-    }
 
-    logout = (req: Request) => {
-        req.session.user = undefined;
-        req.user = undefined;
-        req.session.destroy(() => {});
-    }
-
-    isLoggedIn = (req: Request) => {
-        return req.user != null;
-    }
-
-    login = async (req: Request, email: string) => {
-        await userStore.findByEmail(email);
-        req.session.user = {email: email};
-    }
-
-    currentUser = async (req: Request) => {
-        const email = req.session.user!.email;
+    async createJWT(email: string) {
         const user = await userStore.findByEmail(email);
-        return user;
+        if (user) {
+            return CryptoUtil.createJWT({email: user.email});
+        }
+        throw new Error();
     }
 }
 
