@@ -25,6 +25,8 @@ app.set('view engine', 'hbs');
 
 // 4. path to views
 app.set('views', [CONFIG.views, CONFIG.viewsDefault]);
+
+
 app.use(express.static(CONFIG.public));
 app.use(express.urlencoded({extended: false}));
 app.use(overrideMiddleware);
