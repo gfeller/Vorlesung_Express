@@ -7,6 +7,7 @@ import {indexRoutes} from './routes/index-routes';
 import {orderRoutes} from './routes/order-routes';
 
 import {CONFIG} from "./config";
+import {HttpError} from "./utils/http-error";
 
 
 export const app = express();
@@ -24,9 +25,12 @@ app.use("/", indexRoutes);
 app.use("/orders", orderRoutes);
 
 
-app.use(function (err: Error, req: Request, res:Response, next: NextFunction) {
+app.use(function (err: Error, req: Request, res: Response, next: NextFunction) {
     if (err.name === 'UnauthorizedError') {
         res.status(401).send('No token / Invalid token provided');
+    } else if (err instanceof HttpError) {
+        res.status(err.status || 500);
+        res.json({data: err.data, message: err.message});
     } else {
         next(err);
     }
