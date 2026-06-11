@@ -25,8 +25,8 @@ export class IndexController {
             res.status(400).send({error: error});
             return;
         }
- /*
-      
+        /*
+        Variante 2: mit error handling
         const data = SchemaUtil.parseOrThrow(LoginSchema, req.body)
 
         if (await userStore.authenticate(data)) {
@@ -34,7 +34,7 @@ export class IndexController {
             res.json(token);
         } else {
             res.status(401).json(false);
-        }*/ 
+        }*/
     }
 }
 
