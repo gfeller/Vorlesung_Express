@@ -25,8 +25,14 @@ export class IndexController {
             res.status(400).send({error: error});
             return;
         }
-        /*
-        Variante 2: mit error handling
+    }
+
+    loginV2 = async (req: Request, res: Response) => {
+        if (securityService.isLoggedIn(req)) {
+            res.status(204).send();
+            return;
+        }
+
         const data = SchemaUtil.parseOrThrow(LoginSchema, req.body)
 
         if (await userStore.authenticate(data)) {
@@ -34,7 +40,7 @@ export class IndexController {
             res.json(token);
         } else {
             res.status(401).json(false);
-        }*/
+        }
     }
 }
 
